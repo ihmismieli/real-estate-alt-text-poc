@@ -1,7 +1,6 @@
 'use client';
 
 import { Card, Image, Text } from '@mantine/core';
-import Link from 'next/link';
 
 type CardProps = {
   id: string;
