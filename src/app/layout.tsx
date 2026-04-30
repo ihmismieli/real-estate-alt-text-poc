@@ -3,9 +3,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
-
+import Navigation from './components/navigation/navigation';
 import { MantineProvider, mantineHtmlProps } from '@mantine/core';
-
 //TODO: define font
 // {const geistSans = Geist({
 //   variable: '--font-geist-sans',
@@ -25,7 +24,10 @@ export default function RootLayout({
   return (
     <html lang="fi" {...mantineHtmlProps}>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineProvider>
+          <Navigation />
+          {children}
+        </MantineProvider>
       </body>
     </html>
   );
