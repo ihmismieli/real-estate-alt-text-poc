@@ -12,8 +12,9 @@ import { MantineProvider, mantineHtmlProps } from '@mantine/core';
 // });}
 
 export const metadata: Metadata = {
-  title: 'Real estate alt text POC',
-  description: 'A proof of concept for alt text in real estate listings.',
+  title: 'Tekstivastineet myyntikuville',
+  description:
+    'Tällä toteutuksella testataan, miten hyvin tekoäly pystyy tuottamaan tekstivastineita myyntikuville.',
 };
 
 export default function RootLayout({
