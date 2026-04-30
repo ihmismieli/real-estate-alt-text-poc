@@ -1,0 +1,35 @@
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import styles from './navigation.module.css';
+
+type NavItem = {
+  href: string;
+  label: string;
+};
+
+export default function NavLinks({ items }: { items: NavItem[] }) {
+  const pathname = usePathname();
+
+  return (
+    <div className={styles.links}>
+      {items.map((item) => {
+        const isActive =
+          item.href === '/'
+            ? pathname === item.href
+            : pathname.startsWith(item.href);
+
+        const className = isActive
+          ? `${styles.link} ${styles.active}`
+          : styles.link;
+
+        return (
+          <Link key={item.href} href={item.href} className={className}>
+            {item.label}
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
