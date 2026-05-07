@@ -24,6 +24,13 @@
   padding: 16px 0;
 }
 
+.navHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .brand {
   color: #111827;
   font-size: 1.1rem;
@@ -68,4 +75,56 @@
   transition:
     background-color 0.15s ease,
     color 0.15s ease;
+}
+
+.menuButton {
+  display: none;
+  border: none;
+  background: transparent;
+  color: #111827;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 6px;
+}
+
+@media (--tablet) {
+  .inner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 0;
+  }
+
+  .brand {
+    flex: 1;
+    min-width: 0;
+    font-size: 1rem;
+  }
+
+  .menuButton {
+    display: block;
+  }
+
+  .right {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    padding-top: 12px;
+  }
+
+  .open {
+    display: flex;
+  }
+
+  .links {
+    flex-direction: column;
+  }
+
+  .link {
+    text-align: center;
+  }
+
+  .signOutButton {
+    width: 100%;
+  }
 }

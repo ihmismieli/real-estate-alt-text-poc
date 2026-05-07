@@ -2,6 +2,7 @@ import { auth, signOut } from '@/auth';
 import NavLinks from './nav-links';
 import navigationStyles from './navigation.module.css';
 import Link from 'next/link';
+import NavigationMenu from './nav-menu';
 
 export default async function Navigation() {
   const session = await auth();
@@ -10,21 +11,22 @@ export default async function Navigation() {
   const navItems = [{ href: '/', label: 'Kohteet' }];
 
   if (isAdmin) {
-    navItems.push({ href: '/admin', label: 'Admin' });
+    navItems.push({ href: '/admin', label: 'Hallinnoi' });
   } else {
     navItems.push({ href: '/login', label: 'Kirjaudu' });
   }
 
   return (
     <nav className={navigationStyles.nav} aria-label="Navigaatio">
-      <div className={navigationStyles.inner}>
-        <Link href="/" className={navigationStyles.brand}>
-          Tekstivastineet myyntikuville
-        </Link>
-
-        <div className={navigationStyles.right}>
-          <NavLinks items={navItems} />
-          {isAdmin && (
+      <NavigationMenu
+        brand={
+          <Link href="/" className={navigationStyles.brand}>
+            Tekstivastineet myyntikuville
+          </Link>
+        }
+        links={<NavLinks items={navItems} />}
+        actions={
+          isAdmin ? (
             <form
               action={async () => {
                 'use server';
@@ -35,9 +37,9 @@ export default async function Navigation() {
                 Kirjaudu ulos
               </button>
             </form>
-          )}
-        </div>
-      </div>
+          ) : null
+        }
+      />
     </nav>
   );
 }

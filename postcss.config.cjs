@@ -10,6 +10,9 @@ module.exports = {
                 'mantine-breakpoint-xl': '88em',
             },
         },
+        '@csstools/postcss-global-data': {
+            files: ['./src/app/styles/breakpoints.css'],
+        },
         'postcss-custom-media': {},
     },
 };
