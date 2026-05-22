@@ -1,8 +1,12 @@
 export async function createListing(data: {
-    title: string;
-    description: string;
-    price: string;
-    address: string;
+    address?: string;
+    postalCode?: string;
+    district?: string;
+    municipality?: string;
+    price?: string;
+    description?: string;
+    apartmentType?: string;
+    rooms?: string;
 }) {
     const res = await fetch('/api/admin/listings', {
         method: 'POST',
@@ -10,10 +14,14 @@ export async function createListing(data: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            title: data.title,
+            address: data.address,
+            postalCode: data.postalCode,
+            district: data.district,
+            municipality: data.municipality,
             description: data.description,
             price: data.price ? parseInt(data.price, 10) : null,
-            address: data.address,
+            apartmentType: data.apartmentType,
+            rooms: data.rooms,
         }),
     });
 
@@ -28,10 +36,14 @@ export async function createListing(data: {
 export async function updateListing(
     id: string,
     data: {
-        title: string;
-        description: string;
-        price: string;
-        address: string;
+        address?: string;
+        postalCode?: string;
+        district?: string;
+        municipality?: string;
+        price?: string;
+        description?: string;
+        apartmentType?: string;
+        rooms?: string;
     }
 ) {
     const res = await fetch(`/api/admin/listings/${id}`, {
@@ -40,10 +52,14 @@ export async function updateListing(
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            title: data.title,
+            address: data.address,
+            postalCode: data.postalCode,
+            district: data.district,
+            municipality: data.municipality,
             description: data.description,
             price: data.price ? parseInt(data.price, 10) : null,
-            address: data.address,
+            apartmentType: data.apartmentType,
+            rooms: data.rooms,
         }),
     });
 

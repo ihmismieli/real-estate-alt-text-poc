@@ -54,10 +54,14 @@ export default function EditListingPage() {
   }
 
   const formData: ListingFormData = {
-    title: listing.title,
-    description: listing.description || '',
-    price: listing.price?.toString() || '',
     address: listing.address || '',
+    postalCode: listing.postalCode || '',
+    district: listing.district || '',
+    municipality: listing.municipality || '',
+    price: listing.price?.toString() || '',
+    description: listing.description || '',
+    apartmentType: listing.apartmentType || '',
+    rooms: listing.rooms || '',
   };
 
   return (

@@ -4,33 +4,47 @@ import { Card, Image, Text } from '@mantine/core';
 
 type CardProps = {
   id: string;
-  title: string;
-  price: string;
+  address?: string | null;
+  municipality?: string | null;
+  price?: number | null;
   image: string;
 };
 
-export default function CardComponent({ id, title, price, image }: CardProps) {
+export default function CardComponent({
+  id,
+  address,
+  municipality,
+  price,
+  image,
+}: CardProps) {
   return (
     <Card
       shadow="sm"
       padding="xl"
       component="a"
       href={`/kohde/${id}`}
-      target="_blank"
       w="100%"
       maw={500}
     >
       <Card.Section>
-        <Image src={image} h={160} alt={title} />
+        <Image src={image} h={160} alt={address || 'Kohde'} />
       </Card.Section>
 
       <Text fw={500} size="lg" mt="md">
-        {title}
+        {address || 'Kohde'}
       </Text>
 
-      <Text mt="xs" c="dimmed" size="sm">
-        {price}
-      </Text>
+      {municipality && (
+        <Text mt="xs" c="dimmed" size="sm">
+          {municipality}
+        </Text>
+      )}
+
+      {price && (
+        <Text mt="xs" fw={600}>
+          {price.toLocaleString('fi-FI')} €
+        </Text>
+      )}
     </Card>
   );
 }

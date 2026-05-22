@@ -594,11 +594,16 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const ListingScalarFieldEnum = {
   id: 'id',
-  title: 'title',
   address: 'address',
+  postalCode: 'postalCode',
+  district: 'district',
+  municipality: 'municipality',
   price: 'price',
   description: 'description',
-  createdAt: 'createdAt'
+  apartmentType: 'apartmentType',
+  rooms: 'rooms',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ListingScalarFieldEnum = (typeof ListingScalarFieldEnum)[keyof typeof ListingScalarFieldEnum]
@@ -610,6 +615,7 @@ export const ImageScalarFieldEnum = {
   altText: 'altText',
   roomType: 'roomType',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   listingId: 'listingId'
 } as const
 

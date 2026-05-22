@@ -1,20 +1,20 @@
-export const listings = [
+import { Listing } from '@/app/types/listing';
+
+export const listings: Listing[] = [
     {
         id: "1",
-        title: "Kaksio keskustassa",
-        price: "249 000 €",
-        images: [
-            "/1_bedroom.jpg",
-            "/1_bathroom.jpg",
-        ],
+        address: "Kaksio keskustassa",
+        municipality: "Helsinki",
+        price: 249000,
+        createdAt: new Date(),
+        updatedAt: new Date(),
     },
     {
         id: "2",
-        title: "Kolmio meren lähellä",
-        price: "329 000 €",
-        images: [
-            "/1_bedroom.jpg",
-            "/1_bathroom.jpg",
-        ],
+        address: "Kolmio meren lähellä",
+        municipality: "Espoo",
+        price: 329000,
+        createdAt: new Date(),
+        updatedAt: new Date(),
     },
 ];

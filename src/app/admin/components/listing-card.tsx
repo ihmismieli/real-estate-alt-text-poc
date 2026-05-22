@@ -16,22 +16,25 @@ export default function ListingCard({ listing, onDelete }: ListingCardProps) {
         <Image
           src="/listing-image-placeholder.png"
           height={220}
-          alt={listing.title}
+          alt={listing.address || 'Kohde'}
         />
       </Card.Section>
 
       <Stack mt="md" gap="xs">
         <Group justify="space-between">
-          <Text fw={600}>{listing.title}</Text>
-
+          <Text fw={600} style={{ flex: 1, minWidth: 0 }}>
+            {listing.address
+              ? `${listing.address}${listing.district ? ', ' + listing.district : ''}${listing.municipality ? ', ' + listing.municipality : ''}`
+              : 'Kohde'}
+          </Text>
           {listing.price && (
             <Badge size="lg">{listing.price.toLocaleString('fi-FI')} €</Badge>
           )}
         </Group>
 
-        {listing.address && (
+        {listing.rooms && (
           <Text c="dimmed" size="sm">
-            {listing.address}
+            {listing.rooms}
           </Text>
         )}
 
