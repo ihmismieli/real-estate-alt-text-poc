@@ -17,6 +17,7 @@ export default function CardComponent({ id, title, price, image }: CardProps) {
       component="a"
       href={`/kohde/${id}`}
       target="_blank"
+      w="100%"
       maw={500}
     >
       <Card.Section>

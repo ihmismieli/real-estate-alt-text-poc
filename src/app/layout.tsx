@@ -3,13 +3,26 @@ import type { Metadata } from 'next';
 import './globals.css';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
+import '@mantine/notifications/styles.css';
 import Navigation from './components/navigation/navigation';
-import { MantineProvider, mantineHtmlProps } from '@mantine/core';
+import { MantineProvider, mantineHtmlProps, createTheme } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
+
 //TODO: define font
 // {const geistSans = Geist({
 //   variable: '--font-geist-sans',
 //   subsets: ['latin'],
 // });}
+
+const theme = createTheme({
+  components: {
+    Badge: {
+      defaultProps: {
+        color: '#666',
+      },
+    },
+  },
+});
 
 export const metadata: Metadata = {
   title: 'Tekstivastineet myyntikuville',
@@ -25,7 +38,8 @@ export default function RootLayout({
   return (
     <html lang="fi" {...mantineHtmlProps}>
       <body>
-        <MantineProvider>
+        <MantineProvider theme={theme}>
+          <Notifications />
           <Navigation />
           {children}
         </MantineProvider>

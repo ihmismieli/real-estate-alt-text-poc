@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:18
+    container_name: real-estate-poc-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: real_estate_alt_text_poc_db
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql
+volumes:
+  postgres_data:
