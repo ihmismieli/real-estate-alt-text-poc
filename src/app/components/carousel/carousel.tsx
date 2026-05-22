@@ -12,6 +12,7 @@ const images = [
 ];
 
 import { Carousel } from '@mantine/carousel';
+
 export default function CarouselComponent() {
   const slides = images.map((url) => (
     <Carousel.Slide key={url}>

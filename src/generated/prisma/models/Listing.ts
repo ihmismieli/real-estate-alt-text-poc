@@ -36,29 +36,44 @@ export type ListingSumAggregateOutputType = {
 
 export type ListingMinAggregateOutputType = {
   id: string | null
-  title: string | null
   address: string | null
+  postalCode: string | null
+  district: string | null
+  municipality: string | null
   price: number | null
   description: string | null
+  apartmentType: string | null
+  rooms: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ListingMaxAggregateOutputType = {
   id: string | null
-  title: string | null
   address: string | null
+  postalCode: string | null
+  district: string | null
+  municipality: string | null
   price: number | null
   description: string | null
+  apartmentType: string | null
+  rooms: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ListingCountAggregateOutputType = {
   id: number
-  title: number
   address: number
+  postalCode: number
+  district: number
+  municipality: number
   price: number
   description: number
+  apartmentType: number
+  rooms: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -73,29 +88,44 @@ export type ListingSumAggregateInputType = {
 
 export type ListingMinAggregateInputType = {
   id?: true
-  title?: true
   address?: true
+  postalCode?: true
+  district?: true
+  municipality?: true
   price?: true
   description?: true
+  apartmentType?: true
+  rooms?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type ListingMaxAggregateInputType = {
   id?: true
-  title?: true
   address?: true
+  postalCode?: true
+  district?: true
+  municipality?: true
   price?: true
   description?: true
+  apartmentType?: true
+  rooms?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type ListingCountAggregateInputType = {
   id?: true
-  title?: true
   address?: true
+  postalCode?: true
+  district?: true
+  municipality?: true
   price?: true
   description?: true
+  apartmentType?: true
+  rooms?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -187,11 +217,16 @@ export type ListingGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type ListingGroupByOutputType = {
   id: string
-  title: string
   address: string | null
+  postalCode: string | null
+  district: string | null
+  municipality: string | null
   price: number | null
   description: string | null
+  apartmentType: string | null
+  rooms: string | null
   createdAt: Date
+  updatedAt: Date
   _count: ListingCountAggregateOutputType | null
   _avg: ListingAvgAggregateOutputType | null
   _sum: ListingSumAggregateOutputType | null
@@ -219,21 +254,31 @@ export type ListingWhereInput = {
   OR?: Prisma.ListingWhereInput[]
   NOT?: Prisma.ListingWhereInput | Prisma.ListingWhereInput[]
   id?: Prisma.StringFilter<"Listing"> | string
-  title?: Prisma.StringFilter<"Listing"> | string
   address?: Prisma.StringNullableFilter<"Listing"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"Listing"> | string | null
+  district?: Prisma.StringNullableFilter<"Listing"> | string | null
+  municipality?: Prisma.StringNullableFilter<"Listing"> | string | null
   price?: Prisma.IntNullableFilter<"Listing"> | number | null
   description?: Prisma.StringNullableFilter<"Listing"> | string | null
+  apartmentType?: Prisma.StringNullableFilter<"Listing"> | string | null
+  rooms?: Prisma.StringNullableFilter<"Listing"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
   images?: Prisma.ImageListRelationFilter
 }
 
 export type ListingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  district?: Prisma.SortOrderInput | Prisma.SortOrder
+  municipality?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  apartmentType?: Prisma.SortOrderInput | Prisma.SortOrder
+  rooms?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   images?: Prisma.ImageOrderByRelationAggregateInput
 }
 
@@ -242,21 +287,31 @@ export type ListingWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ListingWhereInput | Prisma.ListingWhereInput[]
   OR?: Prisma.ListingWhereInput[]
   NOT?: Prisma.ListingWhereInput | Prisma.ListingWhereInput[]
-  title?: Prisma.StringFilter<"Listing"> | string
   address?: Prisma.StringNullableFilter<"Listing"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"Listing"> | string | null
+  district?: Prisma.StringNullableFilter<"Listing"> | string | null
+  municipality?: Prisma.StringNullableFilter<"Listing"> | string | null
   price?: Prisma.IntNullableFilter<"Listing"> | number | null
   description?: Prisma.StringNullableFilter<"Listing"> | string | null
+  apartmentType?: Prisma.StringNullableFilter<"Listing"> | string | null
+  rooms?: Prisma.StringNullableFilter<"Listing"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
   images?: Prisma.ImageListRelationFilter
 }, "id">
 
 export type ListingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  district?: Prisma.SortOrderInput | Prisma.SortOrder
+  municipality?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  apartmentType?: Prisma.SortOrderInput | Prisma.SortOrder
+  rooms?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.ListingCountOrderByAggregateInput
   _avg?: Prisma.ListingAvgOrderByAggregateInput
   _max?: Prisma.ListingMaxOrderByAggregateInput
@@ -269,87 +324,132 @@ export type ListingScalarWhereWithAggregatesInput = {
   OR?: Prisma.ListingScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ListingScalarWhereWithAggregatesInput | Prisma.ListingScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Listing"> | string
-  title?: Prisma.StringWithAggregatesFilter<"Listing"> | string
   address?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
+  postalCode?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
+  district?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
+  municipality?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
   price?: Prisma.IntNullableWithAggregatesFilter<"Listing"> | number | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
+  apartmentType?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
+  rooms?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Listing"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Listing"> | Date | string
 }
 
 export type ListingCreateInput = {
   id?: string
-  title: string
   address?: string | null
+  postalCode?: string | null
+  district?: string | null
+  municipality?: string | null
   price?: number | null
   description?: string | null
+  apartmentType?: string | null
+  rooms?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   images?: Prisma.ImageCreateNestedManyWithoutListingInput
 }
 
 export type ListingUncheckedCreateInput = {
   id?: string
-  title: string
   address?: string | null
+  postalCode?: string | null
+  district?: string | null
+  municipality?: string | null
   price?: number | null
   description?: string | null
+  apartmentType?: string | null
+  rooms?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   images?: Prisma.ImageUncheckedCreateNestedManyWithoutListingInput
 }
 
 export type ListingUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  apartmentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rooms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUpdateManyWithoutListingNestedInput
 }
 
 export type ListingUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  apartmentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rooms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUncheckedUpdateManyWithoutListingNestedInput
 }
 
 export type ListingCreateManyInput = {
   id?: string
-  title: string
   address?: string | null
+  postalCode?: string | null
+  district?: string | null
+  municipality?: string | null
   price?: number | null
   description?: string | null
+  apartmentType?: string | null
+  rooms?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ListingUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  apartmentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rooms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ListingUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  apartmentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rooms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ListingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  district?: Prisma.SortOrder
+  municipality?: Prisma.SortOrder
   price?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  apartmentType?: Prisma.SortOrder
+  rooms?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ListingAvgOrderByAggregateInput = {
@@ -358,20 +458,30 @@ export type ListingAvgOrderByAggregateInput = {
 
 export type ListingMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  district?: Prisma.SortOrder
+  municipality?: Prisma.SortOrder
   price?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  apartmentType?: Prisma.SortOrder
+  rooms?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ListingMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  district?: Prisma.SortOrder
+  municipality?: Prisma.SortOrder
   price?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  apartmentType?: Prisma.SortOrder
+  rooms?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ListingSumOrderByAggregateInput = {
@@ -419,20 +529,30 @@ export type ListingUpdateOneRequiredWithoutImagesNestedInput = {
 
 export type ListingCreateWithoutImagesInput = {
   id?: string
-  title: string
   address?: string | null
+  postalCode?: string | null
+  district?: string | null
+  municipality?: string | null
   price?: number | null
   description?: string | null
+  apartmentType?: string | null
+  rooms?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ListingUncheckedCreateWithoutImagesInput = {
   id?: string
-  title: string
   address?: string | null
+  postalCode?: string | null
+  district?: string | null
+  municipality?: string | null
   price?: number | null
   description?: string | null
+  apartmentType?: string | null
+  rooms?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ListingCreateOrConnectWithoutImagesInput = {
@@ -453,20 +573,30 @@ export type ListingUpdateToOneWithWhereWithoutImagesInput = {
 
 export type ListingUpdateWithoutImagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  apartmentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rooms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ListingUncheckedUpdateWithoutImagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  municipality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  apartmentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rooms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -502,43 +632,63 @@ export type ListingCountOutputTypeCountImagesArgs<ExtArgs extends runtime.Types.
 
 export type ListingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
   address?: boolean
+  postalCode?: boolean
+  district?: boolean
+  municipality?: boolean
   price?: boolean
   description?: boolean
+  apartmentType?: boolean
+  rooms?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   images?: boolean | Prisma.Listing$imagesArgs<ExtArgs>
   _count?: boolean | Prisma.ListingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["listing"]>
 
 export type ListingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
   address?: boolean
+  postalCode?: boolean
+  district?: boolean
+  municipality?: boolean
   price?: boolean
   description?: boolean
+  apartmentType?: boolean
+  rooms?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["listing"]>
 
 export type ListingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  title?: boolean
   address?: boolean
+  postalCode?: boolean
+  district?: boolean
+  municipality?: boolean
   price?: boolean
   description?: boolean
+  apartmentType?: boolean
+  rooms?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["listing"]>
 
 export type ListingSelectScalar = {
   id?: boolean
-  title?: boolean
   address?: boolean
+  postalCode?: boolean
+  district?: boolean
+  municipality?: boolean
   price?: boolean
   description?: boolean
+  apartmentType?: boolean
+  rooms?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type ListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "address" | "price" | "description" | "createdAt", ExtArgs["result"]["listing"]>
+export type ListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "address" | "postalCode" | "district" | "municipality" | "price" | "description" | "apartmentType" | "rooms" | "createdAt" | "updatedAt", ExtArgs["result"]["listing"]>
 export type ListingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | Prisma.Listing$imagesArgs<ExtArgs>
   _count?: boolean | Prisma.ListingCountOutputTypeDefaultArgs<ExtArgs>
@@ -553,11 +703,16 @@ export type $ListingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    title: string
     address: string | null
+    postalCode: string | null
+    district: string | null
+    municipality: string | null
     price: number | null
     description: string | null
+    apartmentType: string | null
+    rooms: string | null
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["listing"]>
   composites: {}
 }
@@ -983,11 +1138,16 @@ export interface Prisma__ListingClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface ListingFieldRefs {
   readonly id: Prisma.FieldRef<"Listing", 'String'>
-  readonly title: Prisma.FieldRef<"Listing", 'String'>
   readonly address: Prisma.FieldRef<"Listing", 'String'>
+  readonly postalCode: Prisma.FieldRef<"Listing", 'String'>
+  readonly district: Prisma.FieldRef<"Listing", 'String'>
+  readonly municipality: Prisma.FieldRef<"Listing", 'String'>
   readonly price: Prisma.FieldRef<"Listing", 'Int'>
   readonly description: Prisma.FieldRef<"Listing", 'String'>
+  readonly apartmentType: Prisma.FieldRef<"Listing", 'String'>
+  readonly rooms: Prisma.FieldRef<"Listing", 'String'>
   readonly createdAt: Prisma.FieldRef<"Listing", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Listing", 'DateTime'>
 }
     
 

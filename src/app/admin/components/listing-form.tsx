@@ -4,10 +4,14 @@ import { Textarea, TextInput, Button, Group } from '@mantine/core';
 import { useForm } from '@mantine/form';
 
 export type ListingFormData = {
-  title: string;
-  description: string;
-  price: string;
-  address: string;
+  address?: string;
+  postalCode?: string;
+  district?: string;
+  municipality?: string;
+  price?: string;
+  description?: string;
+  apartmentType?: string;
+  rooms?: string;
 };
 
 type ListingFormProps = {
@@ -20,10 +24,14 @@ type ListingFormProps = {
 };
 
 const emptyFormData: ListingFormData = {
-  title: '',
-  description: '',
-  price: '',
   address: '',
+  postalCode: '',
+  district: '',
+  municipality: '',
+  price: '',
+  description: '',
+  apartmentType: '',
+  rooms: '',
 };
 
 export default function ListingForm({
@@ -37,10 +45,7 @@ export default function ListingForm({
   const form = useForm<ListingFormData>({
     mode: 'uncontrolled',
     initialValues: initialData,
-    validate: {
-      title: (value) =>
-        value.trim().length === 0 ? 'Otsikko on pakollinen' : null,
-    },
+    validate: {},
   });
 
   const handleSubmit = async (values: ListingFormData) => {
@@ -56,22 +61,57 @@ export default function ListingForm({
       style={{ width: '100%', maxWidth: '800px' }}
     >
       <TextInput
-        label="Otsikko"
-        placeholder="Otsikko"
-        required
-        mb="md"
-        disabled={isLoading}
-        key={form.key('title')}
-        {...form.getInputProps('title')}
-      />
-
-      <TextInput
         label="Osoite"
         placeholder="Osoite"
         mb="md"
         disabled={isLoading}
         key={form.key('address')}
         {...form.getInputProps('address')}
+      />
+
+      <TextInput
+        label="Postinumero"
+        placeholder="Postinumero"
+        mb="md"
+        disabled={isLoading}
+        key={form.key('postalCode')}
+        {...form.getInputProps('postalCode')}
+      />
+
+      <TextInput
+        label="Kaupunginosa"
+        placeholder="Kaupunginosa"
+        mb="md"
+        disabled={isLoading}
+        key={form.key('district')}
+        {...form.getInputProps('district')}
+      />
+
+      <TextInput
+        label="Kunta"
+        placeholder="Kunta/Kaupunki"
+        mb="md"
+        disabled={isLoading}
+        key={form.key('municipality')}
+        {...form.getInputProps('municipality')}
+      />
+
+      <TextInput
+        label="Huoneiden lukumäärä"
+        placeholder="3h + k"
+        mb="md"
+        disabled={isLoading}
+        key={form.key('rooms')}
+        {...form.getInputProps('rooms')}
+      />
+
+      <TextInput
+        label="Asunnon tyyppi"
+        placeholder="Kerrostalo"
+        mb="md"
+        disabled={isLoading}
+        key={form.key('apartmentType')}
+        {...form.getInputProps('apartmentType')}
       />
 
       <TextInput

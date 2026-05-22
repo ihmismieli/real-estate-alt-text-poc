@@ -29,24 +29,21 @@ export async function PUT(
 ) {
     try {
         const { id } = await params;
-        const { title, description, price, address } = await request.json();
-
-        if (!title || typeof title !== "string") {
-            return NextResponse.json(
-                { error: "Title field is required" },
-                { status: 400 }
-            );
-        }
+        const { description, price, address, postalCode, district, municipality, apartmentType, rooms } = await request.json();
 
         const listing = await prisma.listing.update({
             where: {
                 id,
             },
             data: {
-                title,
-                address,
-                description,
-                price,
+                address: address && address.trim() ? address : null,
+                postalCode: postalCode && postalCode.trim() ? postalCode : null,
+                district: district && district.trim() ? district : null,
+                municipality: municipality && municipality.trim() ? municipality : null,
+                description: description && description.trim() ? description : null,
+                apartmentType: apartmentType && apartmentType.trim() ? apartmentType : null,
+                rooms: rooms && rooms.trim() ? rooms : null,
+                price: price ? parseInt(String(price), 10) : null,
             },
         });
         return NextResponse.json(listing);

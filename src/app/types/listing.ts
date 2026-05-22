@@ -1,8 +1,13 @@
 export type Listing = {
     id: string;
-    title: string;
-    description?: string;
-    price?: number;
-    address?: string;
-    images?: string[];
+    address?: string | null;
+    postalCode?: string | null;
+    district?: string | null;
+    municipality?: string | null;
+    price?: number | null;
+    description?: string | null;
+    apartmentType?: string | null;
+    rooms?: string | null;
+    createdAt: Date;
+    updatedAt: Date;
 };

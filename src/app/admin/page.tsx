@@ -66,10 +66,14 @@ export default function AdminPage() {
         <h2>Luo uusi kohde</h2>
         <ListingForm
           initialData={{
-            title: '',
-            description: '',
-            price: '',
             address: '',
+            postalCode: '',
+            district: '',
+            municipality: '',
+            price: '',
+            description: '',
+            apartmentType: '',
+            rooms: '',
           }}
           onSubmit={handleCreateListing}
           onCancel={() => {}}
