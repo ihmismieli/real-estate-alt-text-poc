@@ -14,10 +14,11 @@ export default async function Home() {
           <CardComponent
             key={listing.id}
             id={listing.id}
+            publicId={listing.publicId}
             address={listing.address}
             municipality={listing.municipality}
             price={listing.price}
-            image="/1_bedroom.jpg"
+            image={listing.images?.[0]?.url ?? '/listing-image-placeholder.png'}
           />
         ))}
       </div>

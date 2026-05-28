@@ -1,3 +1,16 @@
+type DateValue = Date | string;
+
+export type ListingImage = {
+    id: string;
+    publicId: number;
+    url: string;
+    altText?: string | null;
+    roomType?: string | null;
+    createdAt: DateValue;
+    updatedAt: DateValue;
+    listingId: string;
+};
+
 export type Listing = {
     id: string;
     address?: string | null;
@@ -8,6 +21,7 @@ export type Listing = {
     description?: string | null;
     apartmentType?: string | null;
     rooms?: string | null;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: DateValue;
+    updatedAt: DateValue;
+    images?: ListingImage[];
 };

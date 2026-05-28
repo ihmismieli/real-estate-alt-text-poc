@@ -1,7 +1,10 @@
 'use client';
 
-import { Textarea, TextInput, Button, Group } from '@mantine/core';
+import { Text, Textarea, TextInput, Button, Group } from '@mantine/core';
+import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
+import { FiImage, FiUploadCloud, FiX } from 'react-icons/fi';
 import { useForm } from '@mantine/form';
+import { useState } from 'react';
 
 export type ListingFormData = {
   address?: string;
@@ -12,6 +15,7 @@ export type ListingFormData = {
   description?: string;
   apartmentType?: string;
   rooms?: string;
+  images?: File[];
 };
 
 type ListingFormProps = {
@@ -32,7 +36,23 @@ const emptyFormData: ListingFormData = {
   description: '',
   apartmentType: '',
   rooms: '',
+  images: [],
 };
+
+function mergeFiles(previous: File[], next: File[]) {
+  const merged = [...previous, ...next];
+
+  return merged.filter(
+    (file, index, self) =>
+      index ===
+      self.findIndex(
+        (candidate) =>
+          candidate.name === file.name &&
+          candidate.size === file.size &&
+          candidate.lastModified === file.lastModified
+      )
+  );
+}
 
 export default function ListingForm({
   initialData = emptyFormData,
@@ -48,10 +68,21 @@ export default function ListingForm({
     validate: {},
   });
 
+  const [selectedImages, setSelectedImages] = useState<File[]>(
+    initialData.images ?? []
+  );
+  const [fileInputKey, setFileInputKey] = useState(0);
+
   const handleSubmit = async (values: ListingFormData) => {
-    await onSubmit(values);
+    await onSubmit({
+      ...values,
+      images: selectedImages,
+    });
+
     if (resetAfterSubmit) {
       form.reset();
+      setSelectedImages([]);
+      setFileInputKey((current) => current + 1);
     }
   };
 
@@ -135,6 +166,76 @@ export default function ListingForm({
         {...form.getInputProps('description')}
       />
 
+      <div style={{ marginBottom: '1rem' }}>
+        <Text size="sm" fw={500} mb="xs">
+          Kuvat
+        </Text>
+
+        <Dropzone
+          key={fileInputKey}
+          onDrop={(files) => {
+            setSelectedImages((previous) => mergeFiles(previous, files));
+          }}
+          onReject={(files) => {
+            console.log('Rejected files', files);
+          }}
+          maxSize={5 * 1024 ** 2}
+          accept={IMAGE_MIME_TYPE}
+          multiple
+          disabled={isLoading}
+          styles={{
+            root: {
+              border: '2px dashed var(--mantine-color-gray-4)',
+              borderRadius: '12px',
+            },
+          }}
+        >
+          <Group
+            justify="center"
+            gap="xl"
+            mih={180}
+            style={{ pointerEvents: 'none' }}
+          >
+            <Dropzone.Accept>
+              <FiUploadCloud size={48} color="var(--mantine-color-blue-6)" />
+            </Dropzone.Accept>
+
+            <Dropzone.Reject>
+              <FiX size={48} color="var(--mantine-color-red-6)" />
+            </Dropzone.Reject>
+
+            <Dropzone.Idle>
+              <FiImage size={48} color="var(--mantine-color-gray-6)" />
+            </Dropzone.Idle>
+
+            <div>
+              <Text size="lg">Raahaa kuvat tähän tai klikkaa valitaksesi</Text>
+              <Text size="sm" c="dimmed" mt={7}>
+                Voit lisätä useita kuvia kerralla tai useassa erässä. Yhden
+                kuvan maksimikoko on 5 MB.
+              </Text>
+            </div>
+          </Group>
+        </Dropzone>
+
+        {selectedImages.length > 0 && (
+          <div style={{ marginTop: '0.75rem' }}>
+            <Text size="sm" fw={500}>
+              {selectedImages.length} valittua kuvaa
+            </Text>
+
+            {selectedImages.map((file) => (
+              <Text
+                key={`${file.name}-${file.lastModified}`}
+                size="sm"
+                c="dimmed"
+              >
+                {file.name}
+              </Text>
+            ))}
+          </div>
+        )}
+      </div>
       <Group justify="center" gap="md" mt="lg">
         <Button
           type="submit"

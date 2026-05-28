@@ -27,15 +27,18 @@ export type AggregateListing = {
 }
 
 export type ListingAvgAggregateOutputType = {
+  publicId: number | null
   price: number | null
 }
 
 export type ListingSumAggregateOutputType = {
+  publicId: number | null
   price: number | null
 }
 
 export type ListingMinAggregateOutputType = {
   id: string | null
+  publicId: number | null
   address: string | null
   postalCode: string | null
   district: string | null
@@ -50,6 +53,7 @@ export type ListingMinAggregateOutputType = {
 
 export type ListingMaxAggregateOutputType = {
   id: string | null
+  publicId: number | null
   address: string | null
   postalCode: string | null
   district: string | null
@@ -64,6 +68,7 @@ export type ListingMaxAggregateOutputType = {
 
 export type ListingCountAggregateOutputType = {
   id: number
+  publicId: number
   address: number
   postalCode: number
   district: number
@@ -79,15 +84,18 @@ export type ListingCountAggregateOutputType = {
 
 
 export type ListingAvgAggregateInputType = {
+  publicId?: true
   price?: true
 }
 
 export type ListingSumAggregateInputType = {
+  publicId?: true
   price?: true
 }
 
 export type ListingMinAggregateInputType = {
   id?: true
+  publicId?: true
   address?: true
   postalCode?: true
   district?: true
@@ -102,6 +110,7 @@ export type ListingMinAggregateInputType = {
 
 export type ListingMaxAggregateInputType = {
   id?: true
+  publicId?: true
   address?: true
   postalCode?: true
   district?: true
@@ -116,6 +125,7 @@ export type ListingMaxAggregateInputType = {
 
 export type ListingCountAggregateInputType = {
   id?: true
+  publicId?: true
   address?: true
   postalCode?: true
   district?: true
@@ -217,6 +227,7 @@ export type ListingGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type ListingGroupByOutputType = {
   id: string
+  publicId: number
   address: string | null
   postalCode: string | null
   district: string | null
@@ -254,6 +265,7 @@ export type ListingWhereInput = {
   OR?: Prisma.ListingWhereInput[]
   NOT?: Prisma.ListingWhereInput | Prisma.ListingWhereInput[]
   id?: Prisma.StringFilter<"Listing"> | string
+  publicId?: Prisma.IntFilter<"Listing"> | number
   address?: Prisma.StringNullableFilter<"Listing"> | string | null
   postalCode?: Prisma.StringNullableFilter<"Listing"> | string | null
   district?: Prisma.StringNullableFilter<"Listing"> | string | null
@@ -269,6 +281,7 @@ export type ListingWhereInput = {
 
 export type ListingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  publicId?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -284,6 +297,7 @@ export type ListingOrderByWithRelationInput = {
 
 export type ListingWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  publicId?: number
   AND?: Prisma.ListingWhereInput | Prisma.ListingWhereInput[]
   OR?: Prisma.ListingWhereInput[]
   NOT?: Prisma.ListingWhereInput | Prisma.ListingWhereInput[]
@@ -298,10 +312,11 @@ export type ListingWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
   images?: Prisma.ImageListRelationFilter
-}, "id">
+}, "id" | "publicId">
 
 export type ListingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  publicId?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -324,6 +339,7 @@ export type ListingScalarWhereWithAggregatesInput = {
   OR?: Prisma.ListingScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ListingScalarWhereWithAggregatesInput | Prisma.ListingScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Listing"> | string
+  publicId?: Prisma.IntWithAggregatesFilter<"Listing"> | number
   address?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
   postalCode?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
   district?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
@@ -338,6 +354,7 @@ export type ListingScalarWhereWithAggregatesInput = {
 
 export type ListingCreateInput = {
   id?: string
+  publicId?: number
   address?: string | null
   postalCode?: string | null
   district?: string | null
@@ -353,6 +370,7 @@ export type ListingCreateInput = {
 
 export type ListingUncheckedCreateInput = {
   id?: string
+  publicId?: number
   address?: string | null
   postalCode?: string | null
   district?: string | null
@@ -383,6 +401,7 @@ export type ListingUpdateInput = {
 
 export type ListingUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.IntFieldUpdateOperationsInput | number
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -398,6 +417,7 @@ export type ListingUncheckedUpdateInput = {
 
 export type ListingCreateManyInput = {
   id?: string
+  publicId?: number
   address?: string | null
   postalCode?: string | null
   district?: string | null
@@ -426,6 +446,7 @@ export type ListingUpdateManyMutationInput = {
 
 export type ListingUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.IntFieldUpdateOperationsInput | number
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -440,6 +461,7 @@ export type ListingUncheckedUpdateManyInput = {
 
 export type ListingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  publicId?: Prisma.SortOrder
   address?: Prisma.SortOrder
   postalCode?: Prisma.SortOrder
   district?: Prisma.SortOrder
@@ -453,11 +475,13 @@ export type ListingCountOrderByAggregateInput = {
 }
 
 export type ListingAvgOrderByAggregateInput = {
+  publicId?: Prisma.SortOrder
   price?: Prisma.SortOrder
 }
 
 export type ListingMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  publicId?: Prisma.SortOrder
   address?: Prisma.SortOrder
   postalCode?: Prisma.SortOrder
   district?: Prisma.SortOrder
@@ -472,6 +496,7 @@ export type ListingMaxOrderByAggregateInput = {
 
 export type ListingMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  publicId?: Prisma.SortOrder
   address?: Prisma.SortOrder
   postalCode?: Prisma.SortOrder
   district?: Prisma.SortOrder
@@ -485,6 +510,7 @@ export type ListingMinOrderByAggregateInput = {
 }
 
 export type ListingSumOrderByAggregateInput = {
+  publicId?: Prisma.SortOrder
   price?: Prisma.SortOrder
 }
 
@@ -513,6 +539,14 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type ListingCreateNestedOneWithoutImagesInput = {
   create?: Prisma.XOR<Prisma.ListingCreateWithoutImagesInput, Prisma.ListingUncheckedCreateWithoutImagesInput>
   connectOrCreate?: Prisma.ListingCreateOrConnectWithoutImagesInput
@@ -529,6 +563,7 @@ export type ListingUpdateOneRequiredWithoutImagesNestedInput = {
 
 export type ListingCreateWithoutImagesInput = {
   id?: string
+  publicId?: number
   address?: string | null
   postalCode?: string | null
   district?: string | null
@@ -543,6 +578,7 @@ export type ListingCreateWithoutImagesInput = {
 
 export type ListingUncheckedCreateWithoutImagesInput = {
   id?: string
+  publicId?: number
   address?: string | null
   postalCode?: string | null
   district?: string | null
@@ -587,6 +623,7 @@ export type ListingUpdateWithoutImagesInput = {
 
 export type ListingUncheckedUpdateWithoutImagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.IntFieldUpdateOperationsInput | number
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -632,6 +669,7 @@ export type ListingCountOutputTypeCountImagesArgs<ExtArgs extends runtime.Types.
 
 export type ListingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  publicId?: boolean
   address?: boolean
   postalCode?: boolean
   district?: boolean
@@ -648,6 +686,7 @@ export type ListingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 
 export type ListingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  publicId?: boolean
   address?: boolean
   postalCode?: boolean
   district?: boolean
@@ -662,6 +701,7 @@ export type ListingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type ListingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  publicId?: boolean
   address?: boolean
   postalCode?: boolean
   district?: boolean
@@ -676,6 +716,7 @@ export type ListingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 
 export type ListingSelectScalar = {
   id?: boolean
+  publicId?: boolean
   address?: boolean
   postalCode?: boolean
   district?: boolean
@@ -688,7 +729,7 @@ export type ListingSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "address" | "postalCode" | "district" | "municipality" | "price" | "description" | "apartmentType" | "rooms" | "createdAt" | "updatedAt", ExtArgs["result"]["listing"]>
+export type ListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "publicId" | "address" | "postalCode" | "district" | "municipality" | "price" | "description" | "apartmentType" | "rooms" | "createdAt" | "updatedAt", ExtArgs["result"]["listing"]>
 export type ListingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | Prisma.Listing$imagesArgs<ExtArgs>
   _count?: boolean | Prisma.ListingCountOutputTypeDefaultArgs<ExtArgs>
@@ -703,6 +744,7 @@ export type $ListingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    publicId: number
     address: string | null
     postalCode: string | null
     district: string | null
@@ -1138,6 +1180,7 @@ export interface Prisma__ListingClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface ListingFieldRefs {
   readonly id: Prisma.FieldRef<"Listing", 'String'>
+  readonly publicId: Prisma.FieldRef<"Listing", 'Int'>
   readonly address: Prisma.FieldRef<"Listing", 'String'>
   readonly postalCode: Prisma.FieldRef<"Listing", 'String'>
   readonly district: Prisma.FieldRef<"Listing", 'String'>

@@ -14,6 +14,7 @@ datasource db {
 
 model Listing {
   id          String   @id @default(cuid())
+  publicId      Int      @unique @default(autoincrement())
   address     String?
   postalCode  String?
   district    String?

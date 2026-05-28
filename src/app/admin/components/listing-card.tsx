@@ -14,9 +14,9 @@ export default function ListingCard({ listing, onDelete }: ListingCardProps) {
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Card.Section>
         <Image
-          src="/listing-image-placeholder.png"
+          src={listing.images?.[0]?.url ?? '/listing-image-placeholder.png'}
           height={220}
-          alt={listing.address || 'Kohde'}
+          alt={listing.images?.[0]?.altText ?? listing.address ?? 'Kohde'}
         />
       </Card.Section>
 

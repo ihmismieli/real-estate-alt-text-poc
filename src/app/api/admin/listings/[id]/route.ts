@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { deleteListingUploadDirectory } from '@/lib/local-image-storage';
 
 export async function GET(
     request: Request,
@@ -10,6 +11,9 @@ export async function GET(
         const listing = await prisma.listing.findUnique({
             where: {
                 id,
+            },
+            include: {
+                images: true,
             },
         });
         if (!listing) {
@@ -64,6 +68,9 @@ export async function DELETE(
             where: {
                 id,
             },
+        });
+        await deleteListingUploadDirectory(id).catch((error) => {
+            console.error('Error deleting upload directory:', error);
         });
         return NextResponse.json({ success: true, message: "Kohde poistettu" });
     } catch (error) {

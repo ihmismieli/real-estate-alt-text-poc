@@ -4,6 +4,7 @@ import { Card, Image, Text } from '@mantine/core';
 
 type CardProps = {
   id: string;
+  publicId: number;
   address?: string | null;
   municipality?: string | null;
   price?: number | null;
@@ -11,7 +12,7 @@ type CardProps = {
 };
 
 export default function CardComponent({
-  id,
+  publicId,
   address,
   municipality,
   price,
@@ -22,7 +23,7 @@ export default function CardComponent({
       shadow="sm"
       padding="xl"
       component="a"
-      href={`/kohde/${id}`}
+      href={`/kohde/${publicId}`}
       w="100%"
       maw={500}
     >

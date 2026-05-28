@@ -33,6 +33,30 @@ export async function createListing(data: {
     return res.json();
 }
 
+export async function uploadListingImages(listingId: string, images: File[]) {
+    if (images.length === 0) {
+        return [];
+    }
+
+    const formData = new FormData();
+
+    for (const image of images) {
+        formData.append('images', image);
+    }
+
+    const res = await fetch(`/api/admin/listings/${listingId}/images`, {
+        method: 'POST',
+        body: formData,
+    });
+
+    if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || 'Kuvien lataus epäonnistui');
+    }
+
+    return res.json();
+}
+
 export async function updateListing(
     id: string,
     data: {

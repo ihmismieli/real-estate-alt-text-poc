@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import PageContainer from '../../../components/page-container/page-container';
 import ListingForm, { ListingFormData } from '../../components/listing-form';
-import { updateListing } from '../../utils/listing-api';
+import { updateListing, uploadListingImages } from '../../utils/listing-api';
 import { useListing } from '../../hooks/use-listing';
 import LoadingIndicator from '@/app/components/loading/loading';
 import { notifications } from '@mantine/notifications';
@@ -20,6 +20,11 @@ export default function EditListingPage() {
 
     try {
       await updateListing(id, data);
+
+      if (data.images && data.images.length > 0) {
+        await uploadListingImages(id, data.images);
+      }
+
       notifications.show({
         message: 'Kohde päivitetty onnistuneesti',
         color: 'green',
