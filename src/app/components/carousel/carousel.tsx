@@ -2,21 +2,31 @@
 
 import '@mantine/carousel/styles.css';
 import { Image } from '@mantine/core';
-
-const images = [
-  'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-1.png',
-  'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-2.png',
-  'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-3.png',
-  'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-4.png',
-  'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-5.png',
-];
-
 import { Carousel } from '@mantine/carousel';
 
-export default function CarouselComponent() {
-  const slides = images.map((url) => (
-    <Carousel.Slide key={url}>
-      <Image src={url} alt="Kohteen kuva" />
+type CarouselImage = {
+  id: string;
+  url: string;
+  altText?: string | null;
+};
+
+type CarouselComponentProps = {
+  images: CarouselImage[];
+};
+
+export default function CarouselComponent({ images }: CarouselComponentProps) {
+  if (images.length === 0) {
+    return (
+      <Image
+        src="/listing-image-placeholder.png"
+        alt="Kohteella ei ole kuvia"
+        h={400}
+      />
+    );
+  }
+  const slides = images.map((image) => (
+    <Carousel.Slide key={image.id}>
+      <Image src={image.url} alt={image.altText ?? ''} h={400} fit="contain" />
     </Carousel.Slide>
   ));
 

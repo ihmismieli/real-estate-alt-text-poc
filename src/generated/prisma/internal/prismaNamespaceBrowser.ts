@@ -73,6 +73,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const ListingScalarFieldEnum = {
   id: 'id',
+  publicId: 'publicId',
   address: 'address',
   postalCode: 'postalCode',
   district: 'district',

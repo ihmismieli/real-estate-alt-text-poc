@@ -5,7 +5,11 @@ import { useState } from 'react';
 import styles from './page.module.css';
 import ListingForm, { ListingFormData } from './components/listing-form';
 import ListingGrid from './components/listing-grid';
-import { createListing, deleteListing } from './utils/listing-api';
+import {
+  createListing,
+  deleteListing,
+  uploadListingImages,
+} from './utils/listing-api';
 import { useListings } from './hooks/use-listings';
 import LoadingIndicator from '../components/loading/loading';
 import { notifications } from '@mantine/notifications';
@@ -18,7 +22,12 @@ export default function AdminPage() {
     setIsCreating(true);
 
     try {
-      await createListing(formData);
+      const listing = await createListing(formData);
+
+      if (formData.images && formData.images.length > 0) {
+        await uploadListingImages(listing.id, formData.images);
+      }
+
       await mutate();
       notifications.show({
         message: 'Kohde luotu onnistuneesti',
