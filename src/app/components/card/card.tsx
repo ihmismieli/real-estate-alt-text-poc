@@ -1,23 +1,31 @@
 'use client';
 
-import { Card, Image, Text } from '@mantine/core';
+import { Card, Group, Image, Text } from '@mantine/core';
 
 type CardProps = {
-  id: string;
   publicId: number;
   address?: string | null;
   municipality?: string | null;
-  price?: number | null;
+  district?: string | null;
+  rooms?: string | null;
+  price: number | null;
+  livingArea?: number | null;
   image: string;
 };
 
 export default function CardComponent({
   publicId,
   address,
+  district,
   municipality,
   price,
   image,
+  rooms,
+  livingArea,
 }: CardProps) {
+  const locationLabel =
+    [address, district, municipality].filter(Boolean).join(', ') || 'Kohde';
+
   return (
     <Card
       shadow="sm"
@@ -25,27 +33,34 @@ export default function CardComponent({
       component="a"
       href={`/kohde/${publicId}`}
       w="100%"
-      maw={500}
     >
       <Card.Section>
-        <Image src={image} h={160} alt={address || 'Kohde'} />
+        <Image src={image} h={160} alt={'Kuva kohteesta'} />
       </Card.Section>
 
-      <Text fw={500} size="lg" mt="md">
-        {address || 'Kohde'}
+      <Text size="md" mt="md">
+        {locationLabel}
       </Text>
 
-      {municipality && (
-        <Text mt="xs" c="dimmed" size="sm">
-          {municipality}
-        </Text>
-      )}
+      <Group justify="space-between" mt="xs" w="100%">
+        {rooms && (
+          <Text fw="lighter" c="dimmed">
+            {rooms}
+          </Text>
+        )}
 
-      {price && (
-        <Text mt="xs" fw={600}>
-          {price.toLocaleString('fi-FI')} €
-        </Text>
-      )}
+        {livingArea && (
+          <Text fw="lighter" c="dimmed">
+            {livingArea} m²
+          </Text>
+        )}
+
+        {price && (
+          <Text fw="lighter" c="dimmed">
+            {price.toLocaleString('fi-FI')} €
+          </Text>
+        )}
+      </Group>
     </Card>
   );
 }

@@ -8,11 +8,12 @@ import { updateListing, uploadListingImages } from '../../utils/listing-api';
 import { useListing } from '../../hooks/use-listing';
 import LoadingIndicator from '@/app/components/loading/loading';
 import { notifications } from '@mantine/notifications';
+import ExistingImages from '../../components/existing-images';
 
 export default function EditListingPage() {
   const router = useRouter();
   const { id } = useParams<{ id: string }>();
-  const { listing, error, isLoading } = useListing(id);
+  const { listing, error, isLoading, mutate } = useListing(id);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (data: ListingFormData) => {
@@ -67,6 +68,7 @@ export default function EditListingPage() {
     description: listing.description || '',
     apartmentType: listing.apartmentType || '',
     rooms: listing.rooms || '',
+    livingArea: listing.livingArea?.toString() || '',
   };
 
   return (
@@ -78,6 +80,15 @@ export default function EditListingPage() {
         onCancel={() => router.push('/admin')}
         submitLabel="Tallenna muutokset"
         isLoading={isSubmitting}
+      />
+      <h2>Tallennetut kuvat</h2>
+
+      <ExistingImages
+        listingId={id}
+        images={listing.images ?? []}
+        onImagesChange={async () => {
+          await mutate();
+        }}
       />
     </PageContainer>
   );

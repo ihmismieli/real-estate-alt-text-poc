@@ -8,20 +8,31 @@ export default async function Home() {
 
   return (
     <PageContainer>
-      <h1>Myytävät kohteet</h1>
-      <div className={styles.cards}>
-        {listings.map((listing) => (
-          <CardComponent
-            key={listing.id}
-            id={listing.id}
-            publicId={listing.publicId}
-            address={listing.address}
-            municipality={listing.municipality}
-            price={listing.price}
-            image={listing.images?.[0]?.url ?? '/listing-image-placeholder.png'}
-          />
-        ))}
-      </div>
+      <section aria-labelledby="listings-heading">
+        <h1 id="listings-heading">Myytävät kohteet</h1>
+
+        <ul
+          className={styles.cards}
+          aria-label={`Kohdelista, ${listings.length} kohdetta`}
+        >
+          {listings.map((listing) => (
+            <li key={listing.id}>
+              <CardComponent
+                publicId={listing.publicId}
+                address={listing.address}
+                municipality={listing.municipality}
+                price={listing.price}
+                district={listing.district}
+                rooms={listing.rooms}
+                livingArea={listing.livingArea?.toNumber() ?? null}
+                image={
+                  listing.images?.[0]?.url ?? '/listing-image-placeholder.png'
+                }
+              />
+            </li>
+          ))}
+        </ul>
+      </section>
     </PageContainer>
   );
 }

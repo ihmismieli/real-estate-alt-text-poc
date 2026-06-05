@@ -4,12 +4,18 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './navigation.module.css';
 
-type NavItem = {
+export type NavItemType = {
   href: string;
   label: string;
 };
 
-export default function NavLinks({ items }: { items: NavItem[] }) {
+export default function NavLinks({
+  items,
+  onNavigate,
+}: {
+  items: NavItemType[];
+  onNavigate?: () => void;
+}) {
   const pathname = usePathname();
 
   return (
@@ -25,7 +31,12 @@ export default function NavLinks({ items }: { items: NavItem[] }) {
           : styles.link;
 
         return (
-          <Link key={item.href} href={item.href} className={className}>
+          <Link
+            key={item.href}
+            href={item.href}
+            className={className}
+            onClick={onNavigate}
+          >
             {item.label}
           </Link>
         );

@@ -13,19 +13,20 @@ datasource db {
 }
 
 model Listing {
-  id          String   @id @default(cuid())
+  id            String   @id @default(cuid())
   publicId      Int      @unique @default(autoincrement())
-  address     String?
-  postalCode  String?
-  district    String?
+  address       String?
+  postalCode    String?
+  district      String?
   municipality  String?
-  price       Int?
-  description String?
-  apartmentType  String?
-  rooms   String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  images      Image[]
+  price         Int?
+  description   String?
+  apartmentType String?
+  rooms         String?
+  livingArea    Decimal?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  images        Image[]
 }
 
 model Image {
@@ -34,8 +35,8 @@ model Image {
   altText   String?
   roomType  String?
   createdAt DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 
   listingId String
-  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }

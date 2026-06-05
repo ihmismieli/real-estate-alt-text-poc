@@ -29,11 +29,13 @@ export type AggregateListing = {
 export type ListingAvgAggregateOutputType = {
   publicId: number | null
   price: number | null
+  livingArea: runtime.Decimal | null
 }
 
 export type ListingSumAggregateOutputType = {
   publicId: number | null
   price: number | null
+  livingArea: runtime.Decimal | null
 }
 
 export type ListingMinAggregateOutputType = {
@@ -47,6 +49,7 @@ export type ListingMinAggregateOutputType = {
   description: string | null
   apartmentType: string | null
   rooms: string | null
+  livingArea: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -62,6 +65,7 @@ export type ListingMaxAggregateOutputType = {
   description: string | null
   apartmentType: string | null
   rooms: string | null
+  livingArea: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -77,6 +81,7 @@ export type ListingCountAggregateOutputType = {
   description: number
   apartmentType: number
   rooms: number
+  livingArea: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -86,11 +91,13 @@ export type ListingCountAggregateOutputType = {
 export type ListingAvgAggregateInputType = {
   publicId?: true
   price?: true
+  livingArea?: true
 }
 
 export type ListingSumAggregateInputType = {
   publicId?: true
   price?: true
+  livingArea?: true
 }
 
 export type ListingMinAggregateInputType = {
@@ -104,6 +111,7 @@ export type ListingMinAggregateInputType = {
   description?: true
   apartmentType?: true
   rooms?: true
+  livingArea?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -119,6 +127,7 @@ export type ListingMaxAggregateInputType = {
   description?: true
   apartmentType?: true
   rooms?: true
+  livingArea?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -134,6 +143,7 @@ export type ListingCountAggregateInputType = {
   description?: true
   apartmentType?: true
   rooms?: true
+  livingArea?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -236,6 +246,7 @@ export type ListingGroupByOutputType = {
   description: string | null
   apartmentType: string | null
   rooms: string | null
+  livingArea: runtime.Decimal | null
   createdAt: Date
   updatedAt: Date
   _count: ListingCountAggregateOutputType | null
@@ -274,6 +285,7 @@ export type ListingWhereInput = {
   description?: Prisma.StringNullableFilter<"Listing"> | string | null
   apartmentType?: Prisma.StringNullableFilter<"Listing"> | string | null
   rooms?: Prisma.StringNullableFilter<"Listing"> | string | null
+  livingArea?: Prisma.DecimalNullableFilter<"Listing"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
   images?: Prisma.ImageListRelationFilter
@@ -290,6 +302,7 @@ export type ListingOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   apartmentType?: Prisma.SortOrderInput | Prisma.SortOrder
   rooms?: Prisma.SortOrderInput | Prisma.SortOrder
+  livingArea?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   images?: Prisma.ImageOrderByRelationAggregateInput
@@ -309,6 +322,7 @@ export type ListingWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Listing"> | string | null
   apartmentType?: Prisma.StringNullableFilter<"Listing"> | string | null
   rooms?: Prisma.StringNullableFilter<"Listing"> | string | null
+  livingArea?: Prisma.DecimalNullableFilter<"Listing"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Listing"> | Date | string
   images?: Prisma.ImageListRelationFilter
@@ -325,6 +339,7 @@ export type ListingOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   apartmentType?: Prisma.SortOrderInput | Prisma.SortOrder
   rooms?: Prisma.SortOrderInput | Prisma.SortOrder
+  livingArea?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ListingCountOrderByAggregateInput
@@ -348,6 +363,7 @@ export type ListingScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
   apartmentType?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
   rooms?: Prisma.StringNullableWithAggregatesFilter<"Listing"> | string | null
+  livingArea?: Prisma.DecimalNullableWithAggregatesFilter<"Listing"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Listing"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Listing"> | Date | string
 }
@@ -363,6 +379,7 @@ export type ListingCreateInput = {
   description?: string | null
   apartmentType?: string | null
   rooms?: string | null
+  livingArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageCreateNestedManyWithoutListingInput
@@ -379,6 +396,7 @@ export type ListingUncheckedCreateInput = {
   description?: string | null
   apartmentType?: string | null
   rooms?: string | null
+  livingArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageUncheckedCreateNestedManyWithoutListingInput
@@ -394,6 +412,7 @@ export type ListingUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   apartmentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  livingArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUpdateManyWithoutListingNestedInput
@@ -410,6 +429,7 @@ export type ListingUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   apartmentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  livingArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUncheckedUpdateManyWithoutListingNestedInput
@@ -426,6 +446,7 @@ export type ListingCreateManyInput = {
   description?: string | null
   apartmentType?: string | null
   rooms?: string | null
+  livingArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -440,6 +461,7 @@ export type ListingUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   apartmentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  livingArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -455,6 +477,7 @@ export type ListingUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   apartmentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  livingArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -470,6 +493,7 @@ export type ListingCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   apartmentType?: Prisma.SortOrder
   rooms?: Prisma.SortOrder
+  livingArea?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -477,6 +501,7 @@ export type ListingCountOrderByAggregateInput = {
 export type ListingAvgOrderByAggregateInput = {
   publicId?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  livingArea?: Prisma.SortOrder
 }
 
 export type ListingMaxOrderByAggregateInput = {
@@ -490,6 +515,7 @@ export type ListingMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   apartmentType?: Prisma.SortOrder
   rooms?: Prisma.SortOrder
+  livingArea?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -505,6 +531,7 @@ export type ListingMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   apartmentType?: Prisma.SortOrder
   rooms?: Prisma.SortOrder
+  livingArea?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -512,6 +539,7 @@ export type ListingMinOrderByAggregateInput = {
 export type ListingSumOrderByAggregateInput = {
   publicId?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  livingArea?: Prisma.SortOrder
 }
 
 export type ListingScalarRelationFilter = {
@@ -533,6 +561,14 @@ export type NullableIntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -572,6 +608,7 @@ export type ListingCreateWithoutImagesInput = {
   description?: string | null
   apartmentType?: string | null
   rooms?: string | null
+  livingArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -587,6 +624,7 @@ export type ListingUncheckedCreateWithoutImagesInput = {
   description?: string | null
   apartmentType?: string | null
   rooms?: string | null
+  livingArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -617,6 +655,7 @@ export type ListingUpdateWithoutImagesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   apartmentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  livingArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -632,6 +671,7 @@ export type ListingUncheckedUpdateWithoutImagesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   apartmentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  livingArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -678,6 +718,7 @@ export type ListingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   description?: boolean
   apartmentType?: boolean
   rooms?: boolean
+  livingArea?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   images?: boolean | Prisma.Listing$imagesArgs<ExtArgs>
@@ -695,6 +736,7 @@ export type ListingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   description?: boolean
   apartmentType?: boolean
   rooms?: boolean
+  livingArea?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["listing"]>
@@ -710,6 +752,7 @@ export type ListingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   description?: boolean
   apartmentType?: boolean
   rooms?: boolean
+  livingArea?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["listing"]>
@@ -725,11 +768,12 @@ export type ListingSelectScalar = {
   description?: boolean
   apartmentType?: boolean
   rooms?: boolean
+  livingArea?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "publicId" | "address" | "postalCode" | "district" | "municipality" | "price" | "description" | "apartmentType" | "rooms" | "createdAt" | "updatedAt", ExtArgs["result"]["listing"]>
+export type ListingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "publicId" | "address" | "postalCode" | "district" | "municipality" | "price" | "description" | "apartmentType" | "rooms" | "livingArea" | "createdAt" | "updatedAt", ExtArgs["result"]["listing"]>
 export type ListingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | Prisma.Listing$imagesArgs<ExtArgs>
   _count?: boolean | Prisma.ListingCountOutputTypeDefaultArgs<ExtArgs>
@@ -753,6 +797,7 @@ export type $ListingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     description: string | null
     apartmentType: string | null
     rooms: string | null
+    livingArea: runtime.Decimal | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["listing"]>
@@ -1189,6 +1234,7 @@ export interface ListingFieldRefs {
   readonly description: Prisma.FieldRef<"Listing", 'String'>
   readonly apartmentType: Prisma.FieldRef<"Listing", 'String'>
   readonly rooms: Prisma.FieldRef<"Listing", 'String'>
+  readonly livingArea: Prisma.FieldRef<"Listing", 'Decimal'>
   readonly createdAt: Prisma.FieldRef<"Listing", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Listing", 'DateTime'>
 }

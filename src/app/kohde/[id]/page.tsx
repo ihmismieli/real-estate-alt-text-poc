@@ -27,13 +27,17 @@ export default async function ProtertyPage({
 
   return (
     <PageContainer>
-      <CarouselComponent images={listing.images ?? []} />
-      <div>
-        <h2>{location}</h2>
+      <section aria-label="Kohteen kuvat">
+        <CarouselComponent images={listing.images ?? []} />
+      </section>
+
+      <section aria-labelledby="listing-details-heading">
+        <h1 id="listing-details-heading">{location}</h1>
+
         {listing.price && <p>{listing.price.toLocaleString('fi-FI')} €</p>}
         {listing.rooms && <p>{listing.rooms}</p>}
         {listing.description && <p>{listing.description}</p>}
-      </div>
+      </section>
     </PageContainer>
   );
 }
