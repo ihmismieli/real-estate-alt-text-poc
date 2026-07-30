@@ -1,0 +1,42 @@
+.footer {
+  width: 100%;
+  margin-top: 80px;
+  padding: 40px 20px;
+  background: #111827;
+  color: #f9fafb;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  width: min(1100px, 100%);
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+  }
+}
+
+.brand {
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.description,
+.copyright {
+  margin: 0;
+  color: #d1d5db;
+}
+
+.navigation {
+  margin-top: 20px;
+}
+
+.link {
+  color: white;
+  font-weight: 400;
+  text-underline-offset: 0.25em;
+  cursor: pointer;
+}

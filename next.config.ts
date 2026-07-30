@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
         pathname: '/listing-image-placeholder.png',
         search: '',
       },
+      {
+        pathname: '/hero.png',
+        search: '',
+      },
     ],
   }
 }

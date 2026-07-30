@@ -15,3 +15,34 @@
     grid-template-columns: repeat(3, minmax(340px, 1fr));
   }
 }
+
+.hero {
+  position: relative;
+  width: 100%;
+  /* aspect-ratio: 16 / 9; */
+  min-height: clamp(320px, 80.25vw, 620px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+.heroButton {
+  position: relative;
+  z-index: 1;
+  padding: 14px 24px;
+  border: 2px solid white;
+  background: white;
+  color: #111827;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
