@@ -1,6 +1,5 @@
 'use client';
 
-import '@mantine/carousel/styles.css';
 import { Image } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 
