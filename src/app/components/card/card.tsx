@@ -1,6 +1,7 @@
 'use client';
 
-import { Card, Group, Image, Text } from '@mantine/core';
+import { Card, Group, Text } from '@mantine/core';
+import Image from 'next/image';
 
 type CardProps = {
   publicId: number;
@@ -35,7 +36,18 @@ export default function CardComponent({
       w="100%"
     >
       <Card.Section>
-        <Image src={image} h={160} alt={'Kuva kohteesta'} />
+        <Image
+          src={image}
+          alt={'Kuva kohteesta'}
+          width={768}
+          height={512}
+          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 340px"
+          style={{
+            width: '100%',
+            height: '160px',
+            objectFit: 'cover',
+          }}
+        />
       </Card.Section>
 
       <Text size="md" mt="md">
