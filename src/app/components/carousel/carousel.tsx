@@ -11,9 +11,13 @@ type CarouselImage = {
 
 type CarouselComponentProps = {
   images: CarouselImage[];
+  labelledBy: string;
 };
 
-export default function CarouselComponent({ images }: CarouselComponentProps) {
+export default function CarouselComponent({
+  images,
+  labelledBy,
+}: CarouselComponentProps) {
   if (images.length === 0) {
     return (
       <Image
@@ -34,7 +38,7 @@ export default function CarouselComponent({ images }: CarouselComponentProps) {
       withIndicators
       height={400}
       emblaOptions={{ loop: true, align: 'start' }}
-      aria-label="Kohteen kuvat"
+      aria-labelledby={labelledBy}
       nextControlProps={{ 'aria-label': 'Seuraava kuva' }}
       previousControlProps={{ 'aria-label': 'Edellinen kuva' }}
     >

@@ -11,9 +11,6 @@ export default function Footer() {
             Proof of concept saavutettavista myyntikuvien tekstivastineista,
             jotka ovat luotu tekoälyn avulla.
           </p>
-          {/* <p className={styles.copyright}>
-            © {new Date().getFullYear()} Heidi Ahlgren
-          </p> */}
           <nav
             aria-label="Alatunnisteen navigaatio"
             className={styles.navigation}
