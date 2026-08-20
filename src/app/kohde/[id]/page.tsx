@@ -2,6 +2,7 @@ import CarouselComponent from '@/app/components/carousel/carousel';
 import PageContainer from '@/app/components/page-container/page-container';
 import { getListingByPublicId } from '@/lib/listings';
 import { notFound } from 'next/navigation';
+import { VisuallyHidden } from '@mantine/core';
 
 export default async function ProtertyPage({
   params,
@@ -27,13 +28,24 @@ export default async function ProtertyPage({
 
   return (
     <PageContainer>
-      <CarouselComponent images={listing.images ?? []} />
-      <div>
-        <h2>{location}</h2>
+      <section>
+        <VisuallyHidden component="h2" id="listing-images-heading">
+          Kohteen kuvat
+        </VisuallyHidden>
+
+        <CarouselComponent
+          images={listing.images ?? []}
+          labelledBy="listing-images-heading"
+        />
+      </section>
+
+      <section aria-labelledby="listing-details-heading">
+        <h1 id="listing-details-heading">{location}</h1>
+
         {listing.price && <p>{listing.price.toLocaleString('fi-FI')} €</p>}
         {listing.rooms && <p>{listing.rooms}</p>}
         {listing.description && <p>{listing.description}</p>}
-      </div>
+      </section>
     </PageContainer>
   );
 }

@@ -82,6 +82,7 @@ export const ListingScalarFieldEnum = {
   description: 'description',
   apartmentType: 'apartmentType',
   rooms: 'rooms',
+  livingArea: 'livingArea',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

@@ -83,6 +83,7 @@ export default function AdminPage() {
             description: '',
             apartmentType: '',
             rooms: '',
+            livingArea: '',
           }}
           onSubmit={handleCreateListing}
           onCancel={() => {}}

@@ -9,7 +9,7 @@ export default async function AdminLayout({
   const session = await auth();
 
   if (session?.user?.email !== process.env.ADMIN_EMAIL) {
-    redirect('/login');
+    redirect('/?login=1');
   }
 
   return <>{children}</>;

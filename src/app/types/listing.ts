@@ -21,6 +21,7 @@ export type Listing = {
     description?: string | null;
     apartmentType?: string | null;
     rooms?: string | null;
+    livingArea?: number | null;
     createdAt: DateValue;
     updatedAt: DateValue;
     images?: ListingImage[];

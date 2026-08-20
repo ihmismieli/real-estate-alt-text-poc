@@ -5,7 +5,22 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },
-
-};
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    localPatterns: [
+      {
+        pathname: '/uploads/listings/**',
+      },
+      {
+        pathname: '/listing-image-placeholder.png',
+        search: '',
+      },
+      {
+        pathname: '/hero.png',
+        search: '',
+      },
+    ],
+  }
+}
 
 export default nextConfig;

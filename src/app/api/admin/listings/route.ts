@@ -22,7 +22,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
     try {
-        const { description, price, address, postalCode, district, municipality, apartmentType, rooms } = await request.json();
+        const { description, price, address, postalCode, district, municipality, apartmentType, rooms, livingArea, } = await request.json();
 
         const listing = await prisma.listing.create({
             data: {
@@ -34,6 +34,7 @@ export async function POST(request: Request) {
                 apartmentType: apartmentType && apartmentType.trim() ? apartmentType : null,
                 rooms: rooms && rooms.trim() ? rooms : null,
                 price: price ? parseInt(String(price), 10) : null,
+                livingArea: livingArea ? parseInt(String(livingArea), 10) : null,
             },
         });
         return NextResponse.json(listing, { status: 201 });

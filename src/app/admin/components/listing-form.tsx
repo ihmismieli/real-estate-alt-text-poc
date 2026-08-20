@@ -14,6 +14,7 @@ export type ListingFormData = {
   price?: string;
   description?: string;
   apartmentType?: string;
+  livingArea?: string;
   rooms?: string;
   images?: File[];
 };
@@ -35,6 +36,7 @@ const emptyFormData: ListingFormData = {
   price: '',
   description: '',
   apartmentType: '',
+  livingArea: '',
   rooms: '',
   images: [],
 };
@@ -146,6 +148,16 @@ export default function ListingForm({
       />
 
       <TextInput
+        label="Asuinpinta-ala"
+        type="number"
+        placeholder="m²"
+        mb="md"
+        disabled={isLoading}
+        key={form.key('livingArea')}
+        {...form.getInputProps('livingArea')}
+      />
+
+      <TextInput
         label="Hinta"
         type="number"
         placeholder="€"
@@ -187,6 +199,7 @@ export default function ListingForm({
             root: {
               border: '2px dashed var(--mantine-color-gray-4)',
               borderRadius: '12px',
+              padding: '10px',
             },
           }}
         >

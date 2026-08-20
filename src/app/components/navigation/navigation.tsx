@@ -1,8 +1,8 @@
 import { auth, signOut } from '@/auth';
-import NavLinks from './nav-links';
 import navigationStyles from './navigation.module.css';
 import Link from 'next/link';
 import NavigationMenu from './nav-menu';
+import LoginModal from './login-modal';
 
 export default async function Navigation() {
   const session = await auth();
@@ -12,8 +12,6 @@ export default async function Navigation() {
 
   if (isAdmin) {
     navItems.push({ href: '/admin', label: 'Hallinnoi' });
-  } else {
-    navItems.push({ href: '/login', label: 'Kirjaudu' });
   }
 
   return (
@@ -24,7 +22,9 @@ export default async function Navigation() {
             Tekstivastineet myyntikuville
           </Link>
         }
-        links={<NavLinks items={navItems} />}
+        navItems={navItems}
+        showLoginButton={!isAdmin}
+        loginContent={!isAdmin ? <LoginModal /> : null}
         actions={
           isAdmin ? (
             <form

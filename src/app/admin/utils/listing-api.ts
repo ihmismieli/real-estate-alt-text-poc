@@ -7,6 +7,7 @@ export async function createListing(data: {
     description?: string;
     apartmentType?: string;
     rooms?: string;
+    livingArea?: string;
 }) {
     const res = await fetch('/api/admin/listings', {
         method: 'POST',
@@ -20,6 +21,7 @@ export async function createListing(data: {
             municipality: data.municipality,
             description: data.description,
             price: data.price ? parseInt(data.price, 10) : null,
+            livingArea: data.livingArea ? parseInt(data.livingArea, 10) : null,
             apartmentType: data.apartmentType,
             rooms: data.rooms,
         }),
@@ -68,6 +70,7 @@ export async function updateListing(
         description?: string;
         apartmentType?: string;
         rooms?: string;
+        livingArea?: string;
     }
 ) {
     const res = await fetch(`/api/admin/listings/${id}`, {
@@ -82,6 +85,7 @@ export async function updateListing(
             municipality: data.municipality,
             description: data.description,
             price: data.price ? parseInt(data.price, 10) : null,
+            livingArea: data.livingArea ? parseInt(data.livingArea, 10) : null,
             apartmentType: data.apartmentType,
             rooms: data.rooms,
         }),
@@ -103,4 +107,40 @@ export async function deleteListing(id: string) {
     if (!res.ok) {
         throw new Error('Poistaminen epäonnistui');
     }
+}
+
+export async function deleteListingImage(listingId: string, imageId: string) {
+    const res = await fetch(`/api/admin/listings/${listingId}/images/${imageId}`, {
+        method: 'DELETE',
+    });
+
+    if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error ?? 'Kuvan poistaminen epäonnistui');
+    }
+
+    return res.json();
+}
+
+export async function updateListingImageAltText(
+    listingId: string,
+    imageId: string,
+    altText: string | null
+) {
+    const res = await fetch(`/api/admin/listings/${listingId}/images/${imageId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            altText,
+        }),
+    });
+
+    if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error ?? 'Tekstivastineen päivittäminen epäonnistui');
+    }
+
+    return res.json();
 }

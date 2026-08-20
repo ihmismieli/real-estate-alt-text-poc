@@ -13,7 +13,11 @@ export async function GET(
                 id,
             },
             include: {
-                images: true,
+                images: {
+                    orderBy: {
+                        createdAt: 'asc',
+                    },
+                },
             },
         });
         if (!listing) {
@@ -33,7 +37,7 @@ export async function PUT(
 ) {
     try {
         const { id } = await params;
-        const { description, price, address, postalCode, district, municipality, apartmentType, rooms } = await request.json();
+        const { description, price, address, postalCode, district, municipality, apartmentType, rooms, livingArea } = await request.json();
 
         const listing = await prisma.listing.update({
             where: {
@@ -48,6 +52,7 @@ export async function PUT(
                 apartmentType: apartmentType && apartmentType.trim() ? apartmentType : null,
                 rooms: rooms && rooms.trim() ? rooms : null,
                 price: price ? parseInt(String(price), 10) : null,
+                livingArea: livingArea ? parseInt(String(livingArea), 10) : null,
             },
         });
         return NextResponse.json(listing);
