@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@/auth';
+import { isCurrentUserAdmin } from '@/lib/dal'
 import { prisma } from '@/lib/prisma';
 import { deleteLocalImageByUrl } from '@/lib/local-image-storage';
 
@@ -12,18 +12,8 @@ type Params = {
     }>;
 };
 
-async function requireAdmin() {
-    const session = await auth();
-
-    if (session?.user?.email !== process.env.ADMIN_EMAIL) {
-        return false;
-    }
-
-    return true;
-}
-
 export async function PATCH(request: Request, { params }: Params) {
-    const isAdmin = await requireAdmin();
+    const isAdmin = await isCurrentUserAdmin();
 
     if (!isAdmin) {
         return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 });
@@ -74,7 +64,7 @@ export async function PATCH(request: Request, { params }: Params) {
 }
 
 export async function DELETE(_request: Request, { params }: Params) {
-    const isAdmin = await requireAdmin();
+    const isAdmin = await isCurrentUserAdmin();
 
     if (!isAdmin) {
         return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 });

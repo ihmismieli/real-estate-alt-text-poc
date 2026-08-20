@@ -1,14 +1,14 @@
-import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
+import { isCurrentUserAdmin } from '@/lib/dal';
 
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
+  const isAdmin = await isCurrentUserAdmin();
 
-  if (session?.user?.email !== process.env.ADMIN_EMAIL) {
+  if (!isAdmin) {
     redirect('/?login=1');
   }
 

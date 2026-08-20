@@ -1,12 +1,12 @@
-import { auth, signOut } from '@/auth';
+import { signOut } from '@/auth';
 import navigationStyles from './navigation.module.css';
 import Link from 'next/link';
 import NavigationMenu from './nav-menu';
 import LoginModal from './login-modal';
+import { isCurrentUserAdmin } from '@/lib/dal';
 
 export default async function Navigation() {
-  const session = await auth();
-  const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL;
+  const isAdmin = await isCurrentUserAdmin();
 
   const navItems = [{ href: '/', label: 'Kohteet' }];
 

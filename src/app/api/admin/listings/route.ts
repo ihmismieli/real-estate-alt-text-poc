@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { isCurrentUserAdmin } from '@/lib/dal'
 
 export async function GET() {
+
+    if (!(await isCurrentUserAdmin())) {
+        return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 })
+    }
 
     try {
         const listings = await prisma.listing.findMany({
@@ -21,6 +26,10 @@ export async function GET() {
 
 
 export async function POST(request: Request) {
+
+    if (!(await isCurrentUserAdmin())) {
+        return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 })
+    }
     try {
         const { description, price, address, postalCode, district, municipality, apartmentType, rooms, livingArea, } = await request.json();
 

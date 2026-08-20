@@ -1,11 +1,16 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { deleteListingUploadDirectory } from '@/lib/local-image-storage';
+import { isCurrentUserAdmin } from "@/lib/dal";
 
 export async function GET(
     request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
+    if (!(await isCurrentUserAdmin())) {
+        return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 })
+    }
+
     try {
         const { id } = await params;
         const listing = await prisma.listing.findUnique({
@@ -35,6 +40,9 @@ export async function PUT(
     request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
+    if (!(await isCurrentUserAdmin())) {
+        return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 })
+    }
     try {
         const { id } = await params;
         const { description, price, address, postalCode, district, municipality, apartmentType, rooms, livingArea } = await request.json();
@@ -67,6 +75,9 @@ export async function DELETE(
     request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
+    if (!(await isCurrentUserAdmin())) {
+        return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 })
+    }
     try {
         const { id } = await params;
         await prisma.listing.delete({
