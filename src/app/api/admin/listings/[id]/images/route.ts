@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { deleteLocalImageByUrl, saveListingImageLocally } from '@/lib/local-image-storage';
+import { isCurrentUserAdmin } from '@/lib/dal';
 
 export const runtime = 'nodejs';
 
@@ -23,6 +24,10 @@ export async function POST(
 
         if (!listing) {
             return NextResponse.json({ error: 'Kohdetta ei loytynyt' }, { status: 404 });
+        }
+
+        if (!(await isCurrentUserAdmin())) {
+            return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 })
         }
 
         const formData = await request.formData();
