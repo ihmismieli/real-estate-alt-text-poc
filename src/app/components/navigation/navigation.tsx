@@ -4,6 +4,7 @@ import Link from 'next/link';
 import NavigationMenu from './nav-menu';
 import LoginModal from './login-modal';
 import { isCurrentUserAdmin } from '@/lib/dal';
+import { Suspense } from 'react';
 
 export default async function Navigation() {
   const isAdmin = await isCurrentUserAdmin();
@@ -16,30 +17,35 @@ export default async function Navigation() {
 
   return (
     <nav className={navigationStyles.nav} aria-label="Navigaatio">
-      <NavigationMenu
-        brand={
-          <Link href="/" className={navigationStyles.brand}>
-            Tekstivastineet myyntikuville
-          </Link>
-        }
-        navItems={navItems}
-        showLoginButton={!isAdmin}
-        loginContent={!isAdmin ? <LoginModal /> : null}
-        actions={
-          isAdmin ? (
-            <form
-              action={async () => {
-                'use server';
-                await signOut({ redirectTo: '/' });
-              }}
-            >
-              <button type="submit" className={navigationStyles.signOutButton}>
-                Kirjaudu ulos
-              </button>
-            </form>
-          ) : null
-        }
-      />
+      <Suspense fallback={<div className={navigationStyles.inner} />}>
+        <NavigationMenu
+          brand={
+            <Link href="/" className={navigationStyles.brand}>
+              Tekstivastineet myyntikuville
+            </Link>
+          }
+          navItems={navItems}
+          showLoginButton={!isAdmin}
+          loginContent={!isAdmin ? <LoginModal /> : null}
+          actions={
+            isAdmin ? (
+              <form
+                action={async () => {
+                  'use server';
+                  await signOut({ redirectTo: '/' });
+                }}
+              >
+                <button
+                  type="submit"
+                  className={navigationStyles.signOutButton}
+                >
+                  Kirjaudu ulos
+                </button>
+              </form>
+            ) : null
+          }
+        />
+      </Suspense>
     </nav>
   );
 }
