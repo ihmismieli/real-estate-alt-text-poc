@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { isCurrentUserAdmin } from '@/lib/dal'
 import { prisma } from '@/lib/prisma';
 import { deleteLocalImageByUrl } from '@/lib/local-image-storage';
+import { del } from '@vercel/blob';
 
 export const runtime = 'nodejs';
 
@@ -41,7 +42,10 @@ export async function PATCH(request: Request, { params }: Params) {
         });
 
         if (!image) {
-            return NextResponse.json({ error: 'Kuvaa ei loytynyt' }, { status: 404 });
+            return NextResponse.json(
+                { error: 'Kuvaa ei loytynyt' },
+                { status: 404 }
+            );
         }
 
         const updatedImage = await prisma.image.update({
@@ -81,11 +85,21 @@ export async function DELETE(_request: Request, { params }: Params) {
             select: {
                 id: true,
                 url: true,
+                storageKey: true,
             },
         });
 
         if (!image) {
-            return NextResponse.json({ error: 'Kuvaa ei loytynyt' }, { status: 404 });
+            return NextResponse.json(
+                { error: 'Kuvaa ei loytynyt' },
+                { status: 404 }
+            );
+        }
+
+        if (image.storageKey) {
+            await del(image.storageKey);
+        } else {
+            await deleteLocalImageByUrl(image.url);
         }
 
         await prisma.image.delete({
@@ -93,12 +107,6 @@ export async function DELETE(_request: Request, { params }: Params) {
                 id: image.id,
             },
         });
-
-        try {
-            await deleteLocalImageByUrl(image.url);
-        } catch (fileError) {
-            console.error('Image file deletion failed:', fileError);
-        }
 
         return NextResponse.json({ ok: true });
     } catch (error) {

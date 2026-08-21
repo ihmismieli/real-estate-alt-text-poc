@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { deleteListingUploadDirectory } from '@/lib/local-image-storage';
 import { isCurrentUserAdmin } from "@/lib/dal";
+import { del } from '@vercel/blob';
 
 export async function GET(
     request: Request,
@@ -70,27 +71,59 @@ export async function PUT(
     }
 
 }
-
 export async function DELETE(
-    request: Request,
+    _request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
     if (!(await isCurrentUserAdmin())) {
-        return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 })
+        return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 });
     }
+
     try {
         const { id } = await params;
-        await prisma.listing.delete({
-            where: {
-                id,
+
+        const listing = await prisma.listing.findUnique({
+            where: { id },
+            select: {
+                id: true,
+                publicId: true,
+                images: {
+                    select: {
+                        storageKey: true,
+                    },
+                },
             },
         });
-        await deleteListingUploadDirectory(id).catch((error) => {
-            console.error('Error deleting upload directory:', error);
+
+        if (!listing) {
+            return NextResponse.json(
+                { error: 'Kohdetta ei löytynyt' },
+                { status: 404 }
+            );
+        }
+
+        const blobKeys = listing.images.flatMap((image) =>
+            image.storageKey ? [image.storageKey] : []
+        );
+
+        await Promise.all(blobKeys.map((storageKey) => del(storageKey)));
+
+        await prisma.listing.delete({
+            where: { id: listing.id },
         });
-        return NextResponse.json({ success: true, message: "Kohde poistettu" });
+
+        await deleteListingUploadDirectory(String(listing.publicId));
+
+        return NextResponse.json({
+            success: true,
+            message: 'Kohde poistettu',
+        });
     } catch (error) {
-        console.error("Error deleting listing:", error);
-        return NextResponse.json({ error: "Failed to delete listing" }, { status: 500 });
+        console.error('Error deleting listing:', error);
+
+        return NextResponse.json(
+            { error: 'Kohteen poistaminen epäonnistui' },
+            { status: 500 }
+        );
     }
 }
