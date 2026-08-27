@@ -4,6 +4,7 @@ import { isCurrentUserAdmin } from '@/lib/dal';
 import { randomUUID } from 'node:crypto';
 import sharp from 'sharp';
 import { del, put } from '@vercel/blob';
+import { checkSameOrigin } from '@/lib/security';
 
 export const runtime = 'nodejs';
 
@@ -81,6 +82,12 @@ export async function POST(
 ) {
     if (!(await isCurrentUserAdmin())) {
         return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 });
+    }
+
+    const originError = checkSameOrigin(request);
+
+    if (originError) {
+        return originError;
     }
 
     if (!process.env.BLOB_STORE_ID) {
