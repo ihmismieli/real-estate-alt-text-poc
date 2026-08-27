@@ -93,6 +93,11 @@ export type ListingScalarFieldEnum = (typeof ListingScalarFieldEnum)[keyof typeo
 export const ImageScalarFieldEnum = {
   id: 'id',
   url: 'url',
+  storageKey: 'storageKey',
+  originalFilename: 'originalFilename',
+  mimeType: 'mimeType',
+  width: 'width',
+  height: 'height',
   altText: 'altText',
   roomType: 'roomType',
   createdAt: 'createdAt',

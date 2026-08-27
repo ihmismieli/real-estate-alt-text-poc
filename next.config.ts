@@ -20,6 +20,12 @@ const nextConfig: NextConfig = {
         search: '',
       },
     ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "wwlwj7f2cipxpkoe.public.blob.vercel-storage.com",
+      },
+    ],
   }
 }
 

@@ -191,7 +191,7 @@ export default function ListingForm({
           onReject={(files) => {
             console.log('Rejected files', files);
           }}
-          maxSize={5 * 1024 ** 2}
+          maxSize={4 * 1024 ** 2}
           accept={IMAGE_MIME_TYPE}
           multiple
           disabled={isLoading}
@@ -225,7 +225,7 @@ export default function ListingForm({
               <Text size="lg">Raahaa kuvat tähän tai klikkaa valitaksesi</Text>
               <Text size="sm" c="dimmed" mt={7}>
                 Voit lisätä useita kuvia kerralla tai useassa erässä. Yhden
-                kuvan maksimikoko on 5 MB.
+                kuvan maksimikoko on 4 MB.
               </Text>
             </div>
           </Group>

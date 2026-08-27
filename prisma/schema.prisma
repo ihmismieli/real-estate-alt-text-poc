@@ -32,6 +32,11 @@ model Listing {
 model Image {
   id        String   @id @default(cuid())
   url       String
+  storageKey String?  @unique
+  originalFilename String?
+  mimeType   String?
+  width      Int?
+  height     Int?
   altText   String?
   roomType  String?
   createdAt DateTime @default(now())
