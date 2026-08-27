@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { deleteListingUploadDirectory } from '@/lib/local-image-storage';
 import { isCurrentUserAdmin } from "@/lib/dal";
 import { del } from '@vercel/blob';
+import { checkSameOrigin } from '@/lib/security';
 
 export async function GET(
     request: Request,
@@ -41,9 +42,17 @@ export async function PUT(
     request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
+
     if (!(await isCurrentUserAdmin())) {
         return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 })
     }
+
+    const originError = checkSameOrigin(request);
+
+    if (originError) {
+        return originError;
+    }
+
     try {
         const { id } = await params;
         const { description, price, address, postalCode, district, municipality, apartmentType, rooms, livingArea } = await request.json();

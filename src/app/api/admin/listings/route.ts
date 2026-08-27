@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { isCurrentUserAdmin } from '@/lib/dal'
+import { checkSameOrigin } from '@/lib/security';
 
 export async function GET() {
 
@@ -30,6 +31,12 @@ export async function POST(request: Request) {
     if (!(await isCurrentUserAdmin())) {
         return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 })
     }
+
+    const originError = checkSameOrigin(request);
+    if (originError) {
+        return originError;
+    }
+
     try {
         const { description, price, address, postalCode, district, municipality, apartmentType, rooms, livingArea, } = await request.json();
 

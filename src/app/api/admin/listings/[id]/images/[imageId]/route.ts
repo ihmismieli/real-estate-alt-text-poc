@@ -3,6 +3,7 @@ import { isCurrentUserAdmin } from '@/lib/dal'
 import { prisma } from '@/lib/prisma';
 import { deleteLocalImageByUrl } from '@/lib/local-image-storage';
 import { del } from '@vercel/blob';
+import { checkSameOrigin } from '@/lib/security';
 
 export const runtime = 'nodejs';
 
@@ -18,6 +19,12 @@ export async function PATCH(request: Request, { params }: Params) {
 
     if (!isAdmin) {
         return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 });
+    }
+
+    const originError = checkSameOrigin(request);
+
+    if (originError) {
+        return originError;
     }
 
     const { id, imageId } = await params;
@@ -67,11 +74,17 @@ export async function PATCH(request: Request, { params }: Params) {
     }
 }
 
-export async function DELETE(_request: Request, { params }: Params) {
+export async function DELETE(request: Request, { params }: Params) {
     const isAdmin = await isCurrentUserAdmin();
 
     if (!isAdmin) {
         return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 });
+    }
+
+    const originError = checkSameOrigin(request);
+
+    if (originError) {
+        return originError;
     }
 
     const { id, imageId } = await params;
