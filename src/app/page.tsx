@@ -20,14 +20,14 @@ export default async function Home() {
           className={styles.heroImage}
         />
 
-        <ScrollToLink targetId="listings-heading" className={styles.heroButton}>
+        <ScrollToLink targetId="myytavat-asunnot" className={styles.heroButton}>
           Tutustu kohteisiin
         </ScrollToLink>
       </section>
 
       <PageContainer>
-        <section aria-labelledby="listings-heading">
-          <h1 id="listings-heading">Myytävät kohteet</h1>
+        <section aria-labelledby="myytavat-asunnot">
+          <h1 id="myytavat-asunnot">Myytävät kohteet</h1>
 
           <ul
             className={styles.cards}
