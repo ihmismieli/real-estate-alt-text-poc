@@ -15,7 +15,7 @@ export default function Footer() {
             aria-label="Alatunnisteen navigaatio"
             className={styles.navigation}
           >
-            <ScrollToLink targetId="listings-heading" className={styles.link}>
+            <ScrollToLink targetId="myytavat-asunnot" className={styles.link}>
               MYYTÄVÄT KOHTEET
             </ScrollToLink>
           </nav>
