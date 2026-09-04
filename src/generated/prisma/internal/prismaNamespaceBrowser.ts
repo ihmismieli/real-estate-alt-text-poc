@@ -100,6 +100,7 @@ export const ImageScalarFieldEnum = {
   height: 'height',
   altText: 'altText',
   roomType: 'roomType',
+  origin: 'origin',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   listingId: 'listingId'

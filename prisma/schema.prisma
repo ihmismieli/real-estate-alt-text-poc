@@ -12,6 +12,14 @@ datasource db {
   provider = "postgresql"
 }
 
+enum ImageOrigin {
+  REAL_IMAGE
+  AI_BASIC
+  AI_GENERATED
+  AI_EDITED
+  UNKNOWN
+}
+
 model Listing {
   id            String   @id @default(cuid())
   publicId      Int      @unique @default(autoincrement())
@@ -39,6 +47,7 @@ model Image {
   height     Int?
   altText   String?
   roomType  String?
+  origin           ImageOrigin @default(UNKNOWN)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

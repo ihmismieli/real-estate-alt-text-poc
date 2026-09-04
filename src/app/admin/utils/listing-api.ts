@@ -1,3 +1,5 @@
+import type { NewListingImage } from '@/app/types/listing';
+
 export async function createListing(data: {
     address?: string;
     postalCode?: string;
@@ -35,13 +37,14 @@ export async function createListing(data: {
     return res.json();
 }
 
-export async function uploadListingImages(listingId: string, images: File[]) {
+export async function uploadListingImages(listingId: string, images: NewListingImage[]) {
     const uploadedImages = [];
 
 
     for (const image of images) {
         const formData = new FormData();
-        formData.append('images', image);
+        formData.append('images', image.file);
+        formData.append('origin', image.origin);
 
 
         const res = await fetch(`/api/admin/listings/${listingId}/images`, {
@@ -51,7 +54,9 @@ export async function uploadListingImages(listingId: string, images: File[]) {
 
         if (!res.ok) {
             const error = await res.json().catch(() => null);
-            throw new Error(error?.error || 'Kuvien lataus epäonnistui');
+            throw new Error(
+                error?.error || 'Kuvien lataus epäonnistui'
+            );
         }
 
         const createdImages = await res.json();

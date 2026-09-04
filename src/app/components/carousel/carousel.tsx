@@ -2,11 +2,15 @@
 
 import { Image } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
+import type { ImageOrigin } from '@/app/types/listing';
+import AiImageBadge from '@/app/components/ai-image-badge/ai-image-badge';
+import styles from './carousel.module.css';
 
 type CarouselImage = {
   id: string;
   url: string;
   altText?: string | null;
+  origin?: ImageOrigin | null;
 };
 
 type CarouselComponentProps = {
@@ -27,12 +31,22 @@ export default function CarouselComponent({
       />
     );
   }
+
   const slides = images.map((image) => (
     <Carousel.Slide key={image.id}>
-      <Image src={image.url} alt={image.altText ?? ''} h={400} fit="contain" />
+      <div className={styles.slideViewport}>
+        <div className={styles.imageFrame}>
+          <Image
+            src={image.url}
+            alt={image.altText ?? ''}
+            className={styles.image}
+          />
+
+          <AiImageBadge origin={image.origin} />
+        </div>
+      </div>
     </Carousel.Slide>
   ));
-
   return (
     <Carousel
       withIndicators
