@@ -9,7 +9,12 @@
 * 🟢 You can import this file directly.
 */
 
+export const ImageOrigin = {
+  REAL_IMAGE: 'REAL_IMAGE',
+  AI_BASIC: 'AI_BASIC',
+  AI_GENERATED: 'AI_GENERATED',
+  AI_EDITED: 'AI_EDITED',
+  UNKNOWN: 'UNKNOWN'
+} as const
 
-
-// This file is empty because there are no enums in the schema.
-export {}
+export type ImageOrigin = (typeof ImageOrigin)[keyof typeof ImageOrigin]

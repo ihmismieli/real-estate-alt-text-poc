@@ -5,6 +5,7 @@ import { randomUUID } from 'node:crypto';
 import sharp from 'sharp';
 import { del, put } from '@vercel/blob';
 import { checkSameOrigin } from '@/lib/security';
+import type { ImageOrigin } from '@/app/types/listing';
 
 export const runtime = 'nodejs';
 
@@ -97,7 +98,10 @@ export async function POST(
             { status: 500 }
         );
     }
-    const uploadedBlobs: Array<{ url: string; pathname: string }> = [];
+    const uploadedBlobs: Array<{
+        url: string;
+        pathname: string
+    }> = [];
 
     try {
         const { id } = await params;
@@ -112,6 +116,28 @@ export async function POST(
 
 
         const formData = await request.formData();
+
+        const origin = formData.get('origin');
+
+        const allowedOrigins = [
+            'REAL_IMAGE',
+            'AI_BASIC',
+            'AI_GENERATED',
+            'AI_EDITED',
+            'UNKNOWN',
+        ];
+
+        if (
+            typeof origin !== 'string' ||
+            !allowedOrigins.includes(origin)
+        ) {
+            return NextResponse.json(
+                { error: 'Virheellinen kuvan alkuperä' },
+                { status: 400 }
+            );
+        }
+
+
         const files = formData
             .getAll('images')
             .filter(isFile)
@@ -144,6 +170,7 @@ export async function POST(
                 mimeType: 'image/webp',
                 width: optimized.width,
                 height: optimized.height,
+                origin: origin as ImageOrigin,
             },
         });
 

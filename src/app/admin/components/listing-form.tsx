@@ -1,10 +1,18 @@
 'use client';
 
-import { Text, Textarea, TextInput, Button, Group } from '@mantine/core';
+import {
+  Text,
+  Textarea,
+  TextInput,
+  Button,
+  Group,
+  Select,
+} from '@mantine/core';
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { FiImage, FiUploadCloud, FiX } from 'react-icons/fi';
 import { useForm } from '@mantine/form';
 import { useState } from 'react';
+import type { ImageOrigin, NewListingImage } from '@/app/types/listing';
 
 export type ListingFormData = {
   address?: string;
@@ -16,7 +24,7 @@ export type ListingFormData = {
   apartmentType?: string;
   livingArea?: string;
   rooms?: string;
-  images?: File[];
+  images?: NewListingImage[];
 };
 
 type ListingFormProps = {
@@ -41,17 +49,49 @@ const emptyFormData: ListingFormData = {
   images: [],
 };
 
-function mergeFiles(previous: File[], next: File[]) {
-  const merged = [...previous, ...next];
+const IMAGE_ORIGIN_OPTIONS: {
+  value: ImageOrigin;
+  label: string;
+}[] = [
+  {
+    value: 'REAL_IMAGE',
+    label: 'Oikea valokuva',
+  },
+  {
+    value: 'AI_BASIC',
+    label: 'AI-kuva, perustaso',
+  },
+  {
+    value: 'AI_GENERATED',
+    label: 'Tekoälyn luoma kuva',
+  },
+  {
+    value: 'AI_EDITED',
+    label: 'Tekoälyllä muokattu kuva',
+  },
+  {
+    value: 'UNKNOWN',
+    label: 'Tuntematon',
+  },
+];
 
-  return merged.filter(
-    (file, index, self) =>
+function mergeFiles(
+  previous: NewListingImage[],
+  next: File[]
+): NewListingImage[] {
+  const newImages: NewListingImage[] = next.map((file) => ({
+    file,
+    origin: 'UNKNOWN',
+  }));
+
+  return [...previous, ...newImages].filter(
+    (image, index, allImages) =>
       index ===
-      self.findIndex(
+      allImages.findIndex(
         (candidate) =>
-          candidate.name === file.name &&
-          candidate.size === file.size &&
-          candidate.lastModified === file.lastModified
+          candidate.file.name === image.file.name &&
+          candidate.file.size === image.file.size &&
+          candidate.file.lastModified === image.file.lastModified
       )
   );
 }
@@ -70,12 +110,45 @@ export default function ListingForm({
     validate: {},
   });
 
-  const [selectedImages, setSelectedImages] = useState<File[]>(
+  const [selectedImages, setSelectedImages] = useState<NewListingImage[]>(
     initialData.images ?? []
   );
+
   const [fileInputKey, setFileInputKey] = useState(0);
 
+  const handleImageOriginChange = (file: File, value: string | null) => {
+    const selectedOption = IMAGE_ORIGIN_OPTIONS.find(
+      (option) => option.value === value
+    );
+
+    if (!selectedOption) {
+      return;
+    }
+
+    setSelectedImages((currentImages) =>
+      currentImages.map((image) =>
+        image.file === file
+          ? {
+              ...image,
+              origin: selectedOption.value,
+            }
+          : image
+      )
+    );
+  };
+
   const handleSubmit = async (values: ListingFormData) => {
+    const hasUnknownOrigin = selectedImages.some(
+      (image) => image.origin === 'UNKNOWN'
+    );
+
+    if (hasUnknownOrigin) {
+      form.setFieldError('images', 'Valitse jokaiselle kuvalle alkuperä');
+      return;
+    }
+
+    form.clearFieldError('images');
+
     await onSubmit({
       ...values,
       images: selectedImages,
@@ -237,18 +310,35 @@ export default function ListingForm({
               {selectedImages.length} valittua kuvaa
             </Text>
 
-            {selectedImages.map((file) => (
-              <Text
-                key={`${file.name}-${file.lastModified}`}
-                size="sm"
-                c="dimmed"
+            {selectedImages.map(({ file, origin }, index) => (
+              <Group
+                key={`${file.name}-${file.size}-${file.lastModified}`}
+                mt="xs"
+                align="end"
               >
-                {file.name}
-              </Text>
+                <Text size="sm" c="dimmed" style={{ flex: 1 }}>
+                  {file.name}
+                </Text>
+
+                <Select
+                  label={`Kuvan ${index + 1} alkuperä`}
+                  value={origin}
+                  onChange={(value) => handleImageOriginChange(file, value)}
+                  data={IMAGE_ORIGIN_OPTIONS}
+                  disabled={isLoading}
+                />
+              </Group>
             ))}
+
+            {form.errors.images && (
+              <Text c="red" size="sm" mt="xs">
+                {form.errors.images}
+              </Text>
+            )}
           </div>
         )}
       </div>
+
       <Group justify="center" gap="md" mt="lg">
         <Button
           type="submit"

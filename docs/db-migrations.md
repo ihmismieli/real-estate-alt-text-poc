@@ -22,7 +22,15 @@ Use the local database when developing a feature or changing the Prisma schema.
 
    This creates a new folder under `prisma/migrations`, applies it to the local database, and updates the generated Prisma client.
 
-4. Test the application locally.
+4. Generate the Prisma Client:
+
+   ```powershell
+   npx prisma generate
+   ```
+
+   This updates the generated Prisma Client and its TypeScript types under `src/generated/prisma`.
+
+5. Test the application locally.
 
 ## Check local migration status
 
