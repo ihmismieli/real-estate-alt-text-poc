@@ -13,18 +13,12 @@ import { FiImage, FiUploadCloud, FiX } from 'react-icons/fi';
 import { useForm, schemaResolver } from '@mantine/form';
 import { useState } from 'react';
 import type { ImageOrigin, NewListingImage } from '@/app/types/listing';
-import { listingFormSchema } from '@/app/schemas/listing-form-schema';
+import {
+  listingFormSchema,
+  type ListingFormType,
+} from '@/app/schemas/listing-schema';
 
-export type ListingFormData = {
-  address?: string;
-  postalCode?: string;
-  district?: string;
-  municipality?: string;
-  price?: string;
-  description?: string;
-  apartmentType?: string;
-  livingArea?: string;
-  rooms?: string;
+export type ListingFormData = ListingFormType & {
   images?: NewListingImage[];
 };
 
