@@ -28,6 +28,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "wwlwj7f2cipxpkoe.public.blob.vercel-storage.com",
       },
+      {
+        protocol: "https",
+        hostname: "7idrb9nj6i3seg2a.public.blob.vercel-storage.com",
+      },
     ],
   },
 
@@ -55,7 +59,7 @@ const nextConfig: NextConfig = {
           {
             key: 'Content-Security-Policy',
             value:
-              `default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://wwlwj7f2cipxpkoe.public.blob.vercel-storage.com; connect-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
+              `default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://wwlwj7f2cipxpkoe.public.blob.vercel-storage.com https://7idrb9nj6i3seg2a.public.blob.vercel-storage.com; connect-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
           },
         ],
       },
