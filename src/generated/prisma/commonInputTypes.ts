@@ -191,6 +191,23 @@ export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
+export type EnumImageOriginFilter<$PrismaModel = never> = {
+  equals?: $Enums.ImageOrigin | Prisma.EnumImageOriginFieldRefInput<$PrismaModel>
+  in?: $Enums.ImageOrigin[] | Prisma.ListEnumImageOriginFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ImageOrigin[] | Prisma.ListEnumImageOriginFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumImageOriginFilter<$PrismaModel> | $Enums.ImageOrigin
+}
+
+export type EnumImageOriginWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ImageOrigin | Prisma.EnumImageOriginFieldRefInput<$PrismaModel>
+  in?: $Enums.ImageOrigin[] | Prisma.ListEnumImageOriginFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ImageOrigin[] | Prisma.ListEnumImageOriginFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumImageOriginWithAggregatesFilter<$PrismaModel> | $Enums.ImageOrigin
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumImageOriginFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumImageOriginFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -379,6 +396,23 @@ export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedDateTimeFilter<$PrismaModel>
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
+}
+
+export type NestedEnumImageOriginFilter<$PrismaModel = never> = {
+  equals?: $Enums.ImageOrigin | Prisma.EnumImageOriginFieldRefInput<$PrismaModel>
+  in?: $Enums.ImageOrigin[] | Prisma.ListEnumImageOriginFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ImageOrigin[] | Prisma.ListEnumImageOriginFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumImageOriginFilter<$PrismaModel> | $Enums.ImageOrigin
+}
+
+export type NestedEnumImageOriginWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ImageOrigin | Prisma.EnumImageOriginFieldRefInput<$PrismaModel>
+  in?: $Enums.ImageOrigin[] | Prisma.ListEnumImageOriginFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ImageOrigin[] | Prisma.ListEnumImageOriginFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumImageOriginWithAggregatesFilter<$PrismaModel> | $Enums.ImageOrigin
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumImageOriginFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumImageOriginFilter<$PrismaModel>
 }
 
 

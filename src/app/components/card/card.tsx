@@ -2,6 +2,8 @@
 
 import { Card, Group, Text } from '@mantine/core';
 import Image from 'next/image';
+import type { ImageOrigin } from '@/app/types/listing';
+import AiImageBadge from '@/app/components/ai-image-badge/ai-image-badge';
 
 type CardProps = {
   publicId: number;
@@ -12,6 +14,7 @@ type CardProps = {
   price: number | null;
   livingArea?: number | null;
   image: string;
+  imageOrigin?: ImageOrigin | null;
 };
 
 export default function CardComponent({
@@ -23,6 +26,7 @@ export default function CardComponent({
   image,
   rooms,
   livingArea,
+  imageOrigin,
 }: CardProps) {
   const locationLabel =
     [address, district, municipality].filter(Boolean).join(', ') || 'Kohde';
@@ -36,18 +40,29 @@ export default function CardComponent({
       w="100%"
     >
       <Card.Section>
-        <Image
-          src={image}
-          alt={'Kuva kohteesta'}
-          width={768}
-          height={512}
-          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 340px"
+        <div
           style={{
+            position: 'relative',
             width: '100%',
             height: '160px',
-            objectFit: 'cover',
           }}
-        />
+        >
+          <Image
+            src={image}
+            alt="Kuva kohteesta"
+            width={768}
+            height={512}
+            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 340px"
+            style={{
+              display: 'block',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          />
+
+          <AiImageBadge origin={imageOrigin} />
+        </div>
       </Card.Section>
 
       <Text size="md" mt="md">

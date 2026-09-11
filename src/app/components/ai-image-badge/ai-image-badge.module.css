@@ -1,0 +1,15 @@
+.badge {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  z-index: 100;
+  width: 2.5rem;
+  height: auto;
+  pointer-events: none;
+}
+
+.badge img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
