@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },
   images: {
+    unoptimized: isDev,
     formats: ['image/webp', 'image/avif'],
     localPatterns: [
       {

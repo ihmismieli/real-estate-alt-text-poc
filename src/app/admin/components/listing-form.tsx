@@ -10,20 +10,15 @@ import {
 } from '@mantine/core';
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { FiImage, FiUploadCloud, FiX } from 'react-icons/fi';
-import { useForm } from '@mantine/form';
+import { useForm, schemaResolver } from '@mantine/form';
 import { useState } from 'react';
 import type { ImageOrigin, NewListingImage } from '@/app/types/listing';
+import {
+  listingFormSchema,
+  type ListingFormType,
+} from '@/app/schemas/listing-schema';
 
-export type ListingFormData = {
-  address?: string;
-  postalCode?: string;
-  district?: string;
-  municipality?: string;
-  price?: string;
-  description?: string;
-  apartmentType?: string;
-  livingArea?: string;
-  rooms?: string;
+export type ListingFormData = ListingFormType & {
   images?: NewListingImage[];
 };
 
@@ -107,7 +102,10 @@ export default function ListingForm({
   const form = useForm<ListingFormData>({
     mode: 'uncontrolled',
     initialValues: initialData,
-    validate: {},
+    validateInputOnBlur: true,
+    validate: schemaResolver(listingFormSchema, {
+      sync: true,
+    }),
   });
 
   const [selectedImages, setSelectedImages] = useState<NewListingImage[]>(

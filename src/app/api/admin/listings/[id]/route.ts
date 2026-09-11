@@ -4,6 +4,7 @@ import { deleteListingUploadDirectory } from '@/lib/local-image-storage';
 import { isCurrentUserAdmin } from "@/lib/dal";
 import { del } from '@vercel/blob';
 import { checkSameOrigin } from '@/lib/security';
+import { listingFormSchema } from '@/app/schemas/listing-schema';
 
 export async function GET(
     request: Request,
@@ -55,22 +56,35 @@ export async function PUT(
 
     try {
         const { id } = await params;
-        const { description, price, address, postalCode, district, municipality, apartmentType, rooms, livingArea } = await request.json();
+
+        const parsed = listingFormSchema.safeParse(await request.json());
+        if (!parsed.success) {
+            return NextResponse.json(
+                {
+                    error: 'Virheelliset tiedot',
+                    issues: parsed.error.issues,
+                },
+                { status: 400 }
+            );
+        }
+        const { description, price, address, postalCode, district, municipality, apartmentType, rooms, livingArea } = parsed.data;
 
         const listing = await prisma.listing.update({
             where: {
                 id,
             },
             data: {
-                address: address && address.trim() ? address : null,
-                postalCode: postalCode && postalCode.trim() ? postalCode : null,
-                district: district && district.trim() ? district : null,
-                municipality: municipality && municipality.trim() ? municipality : null,
-                description: description && description.trim() ? description : null,
-                apartmentType: apartmentType && apartmentType.trim() ? apartmentType : null,
-                rooms: rooms && rooms.trim() ? rooms : null,
-                price: price ? parseInt(String(price), 10) : null,
-                livingArea: livingArea ? parseInt(String(livingArea), 10) : null,
+                address: address || null,
+                postalCode: postalCode || null,
+                district: district || null,
+                municipality: municipality || null,
+                description: description || null,
+                apartmentType: apartmentType || null,
+                rooms: rooms || null,
+                price: price ? Number(price) : null,
+                livingArea: livingArea
+                    ? Number(livingArea.replace(',', '.'))
+                    : null,
             },
         });
         return NextResponse.json(listing);
