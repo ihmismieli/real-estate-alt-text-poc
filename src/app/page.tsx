@@ -6,18 +6,19 @@ import AiImageBadge from './components/ai-image-badge/ai-image-badge';
 import { Suspense } from 'react';
 import Listings from './components/listings/listings';
 import LoadingIndicator from './components/loading/loading';
+import heroImage from '../../public/hero.webp';
 
-export default async function Home() {
+export default function Home() {
   return (
     <>
       <section className={styles.hero}>
         <Image
-          src="/hero.webp"
+          src={heroImage}
           alt=""
           fill
           loading="eager"
           fetchPriority="high"
-          sizes="100vw"
+          sizes="(max-width: 1300px) 100vw, 1300px"
           className={styles.heroImage}
         />
 
