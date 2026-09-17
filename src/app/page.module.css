@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 1300px;
+  max-width: var(--page-max-width);
   margin: 0 auto;
 }
 
@@ -20,7 +20,7 @@
   border-radius: 4px;
   border: 1px solid var(--mantine-color-gray-3);
   box-shadow: var(--mantine-shadow-sm);
-  background: #fff;
+  background: var(--background);
   color: #111827;
   font-weight: 700;
   letter-spacing: 0.06em;
