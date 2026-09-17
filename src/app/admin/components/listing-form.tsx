@@ -22,13 +22,18 @@ export type ListingFormData = ListingFormType & {
   images?: NewListingImage[];
 };
 
+export type SubmitResult =
+  | { success: true }
+  | { success: false; message: string };
+
 type ListingFormProps = {
   initialData: ListingFormData;
-  onSubmit: (data: ListingFormData) => Promise<void>;
+  onSubmit: (data: ListingFormData) => Promise<SubmitResult>;
   onCancel: () => void;
   submitLabel?: string;
   isLoading?: boolean;
   resetAfterSubmit?: boolean;
+  showCancel?: boolean;
 };
 
 const emptyFormData: ListingFormData = {
@@ -95,6 +100,7 @@ export default function ListingForm({
   initialData = emptyFormData,
   onSubmit,
   onCancel,
+  showCancel = false,
   submitLabel = 'Tallenna',
   isLoading = false,
   resetAfterSubmit = false,
@@ -142,21 +148,36 @@ export default function ListingForm({
 
     if (hasUnknownOrigin) {
       form.setFieldError('images', 'Valitse jokaiselle kuvalle alkuperä');
-      return;
+      return {
+        success: false,
+        message: 'Valitse jokaiselle kuvalle alkuperä',
+      };
     }
 
     form.clearFieldError('images');
 
-    await onSubmit({
+    const result = await onSubmit({
       ...values,
       images: selectedImages,
     });
+
+    if (!result.success) {
+      return;
+    }
 
     if (resetAfterSubmit) {
       form.reset();
       setSelectedImages([]);
       setFileInputKey((current) => current + 1);
     }
+  };
+
+  const handleCancel = () => {
+    form.reset();
+    setSelectedImages([]);
+    setFileInputKey((current) => current + 1);
+
+    onCancel?.();
   };
 
   return (
@@ -259,8 +280,11 @@ export default function ListingForm({
           onDrop={(files) => {
             setSelectedImages((previous) => mergeFiles(previous, files));
           }}
-          onReject={(files) => {
-            console.log('Rejected files', files);
+          onReject={() => {
+            form.setFieldError(
+              'images',
+              'Tiedosto ei ole kelvollinen kuva tai se on liian suuri'
+            );
           }}
           maxSize={4 * 1024 ** 2}
           accept={IMAGE_MIME_TYPE}
@@ -346,9 +370,12 @@ export default function ListingForm({
         >
           {submitLabel}
         </Button>
-        <Button onClick={onCancel} variant="light" disabled={isLoading}>
-          Peruuta
-        </Button>
+
+        {showCancel && (
+          <Button onClick={handleCancel} variant="light" disabled={isLoading}>
+            Peruuta
+          </Button>
+        )}
       </Group>
     </form>
   );

@@ -3,7 +3,10 @@
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import PageContainer from '../../../components/page-container/page-container';
-import ListingForm, { ListingFormData } from '../../components/listing-form';
+import ListingForm, {
+  type ListingFormData,
+  type SubmitResult,
+} from '../../components/listing-form';
 import { updateListing, uploadListingImages } from '../../utils/listing-api';
 import { useListing } from '../../hooks/use-listing';
 import LoadingIndicator from '@/app/components/loading/loading';
@@ -16,7 +19,7 @@ export default function EditListingPage() {
   const { listing, error, isLoading, mutate } = useListing(id);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (data: ListingFormData) => {
+  const handleSubmit = async (data: ListingFormData): Promise<SubmitResult> => {
     setIsSubmitting(true);
 
     try {
@@ -31,13 +34,19 @@ export default function EditListingPage() {
         color: 'green',
         autoClose: 5000,
       });
+
       router.push('/admin');
+      return { success: true };
     } catch (err) {
       notifications.show({
         message: err instanceof Error ? err.message : 'Tuntematon virhe',
         color: 'red',
         autoClose: 5000,
       });
+      return {
+        success: false,
+        message: err instanceof Error ? err.message : 'Tuntematon virhe',
+      };
     } finally {
       setIsSubmitting(false);
     }
@@ -80,6 +89,7 @@ export default function EditListingPage() {
         onCancel={() => router.push('/admin')}
         submitLabel="Tallenna muutokset"
         isLoading={isSubmitting}
+        showCancel={true}
       />
       <h2>Tallennetut kuvat</h2>
 
