@@ -17,7 +17,7 @@ import { ListingImage } from '@/app/types/listing';
 import {
   deleteListingImage,
   updateListingImageAltText,
-} from '../../utils/listing-api';
+} from '@/app/admin/utils/listing-api';
 
 type ExistingImageProps = {
   listingId: string;

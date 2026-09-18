@@ -1,11 +1,11 @@
-import styles from './page.module.css';
-import PageContainer from './components/page-container/page-container';
+import styles from '@/app/page.module.css';
+import PageContainer from '@/app/components/page-container/page-container';
 import Image from 'next/image';
-import ScrollToLink from './components/scroll-to-link/scroll-to-link';
-import AiImageBadge from './components/ai-image-badge/ai-image-badge';
+import ScrollToLink from '@/app/components/scroll-to-link/scroll-to-link';
+import AiImageBadge from '@/app/components/ai-image-badge/ai-image-badge';
 import { Suspense } from 'react';
-import Listings from './components/listings/listings';
-import LoadingIndicator from './components/loading/loading';
+import Listings from '@/app/components/listings/listings';
+import LoadingIndicator from '@/app/components/loading/loading';
 
 export default function Home() {
   return (

@@ -8,8 +8,8 @@ import {
   listingFormSchema,
   type ListingFormType,
 } from '@/app/schemas/listing-schema';
-import ListingDetailsFields from './listing-details-fields';
-import ListingImageUploader from './listing-image-uploader';
+import ListingDetailsFields from '@/app/admin/components/listing-form/listing-details-fields';
+import ListingImageUploader from '@/app/admin/components/listing-form/listing-image-uploader';
 
 export type ListingFormData = ListingFormType & {
   images?: NewListingImage[];

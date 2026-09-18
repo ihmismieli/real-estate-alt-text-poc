@@ -1,4 +1,4 @@
-import pageContainerstyles from './page-container.module.css';
+import pageContainerstyles from '@/app/components/page-container/page-container.module.css';
 
 type PageContainerProps = {
   children: React.ReactNode;

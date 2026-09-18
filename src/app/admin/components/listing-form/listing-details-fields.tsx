@@ -2,7 +2,7 @@
 
 import { Textarea, TextInput } from '@mantine/core';
 import type { UseFormReturnType } from '@mantine/form';
-import type { ListingFormData } from './listing-form';
+import type { ListingFormData } from '@/app/admin/components/listing-form/listing-form';
 
 type ListingDetailsFieldsProps = {
   form: UseFormReturnType<ListingFormData>;

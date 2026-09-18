@@ -1,20 +1,20 @@
 'use client';
 
-import PageContainer from '../components/page-container/page-container';
+import PageContainer from '@/app/components/page-container/page-container';
 import { useState } from 'react';
-import styles from './page.module.css';
+import styles from '@/app/admin/page.module.css';
 import ListingForm, {
   type ListingFormData,
   type SubmitResult,
-} from './components/listing-form/listing-form';
-import ListingGrid from './components/listing-grid/listing-grid';
+} from '@/app/admin/components/listing-form/listing-form';
+import ListingGrid from '@/app/admin/components/listing-grid/listing-grid';
 import {
   createListing,
   deleteListing,
   uploadListingImages,
-} from './utils/listing-api';
-import { useListings } from './hooks/use-listings';
-import LoadingIndicator from '../components/loading/loading';
+} from '@/app/admin/utils/listing-api';
+import { useListings } from '@/app/admin/hooks/use-listings';
+import LoadingIndicator from '@/app/components/loading/loading';
 import { notifications } from '@mantine/notifications';
 
 export default function AdminPage() {

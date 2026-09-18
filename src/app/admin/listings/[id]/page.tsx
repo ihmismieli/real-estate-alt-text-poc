@@ -2,16 +2,16 @@
 
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import PageContainer from '../../../components/page-container/page-container';
+import PageContainer from '@/app/components/page-container/page-container';
 import ListingForm, {
   type ListingFormData,
   type SubmitResult,
-} from '../../components/listing-form/listing-form';
-import { updateListing, uploadListingImages } from '../../utils/listing-api';
-import { useListing } from '../../hooks/use-listing';
+} from '@/app/admin/components/listing-form/listing-form';
+import { updateListing, uploadListingImages } from '@/app/admin/utils/listing-api';
+import { useListing } from '@/app/admin/hooks/use-listing';
 import LoadingIndicator from '@/app/components/loading/loading';
 import { notifications } from '@mantine/notifications';
-import ExistingImages from '../../components/listing-images/existing-images';
+import ExistingImages from '@/app/admin/components/listing-images/existing-images';
 
 export default function EditListingPage() {
   const router = useRouter();
