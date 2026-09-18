@@ -1,7 +1,7 @@
 'use client';
 
 import useSWR from 'swr';
-import { fetcher } from '../utils/fetcher';
+import { fetcher } from '@/app/admin/utils/fetcher';
 import { Listing } from '@/app/types/listing';
 
 export function useListings() {

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import styles from './navigation.module.css';
+import styles from '@/app/components/navigation/navigation.module.css';
 
 export type NavItemType = {
   href: string;

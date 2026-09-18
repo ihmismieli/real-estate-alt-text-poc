@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import styles from './navigation.module.css';
+import styles from '@/app/components/navigation/navigation.module.css';
 import { Burger, Modal } from '@mantine/core';
-import type { NavItemType } from './nav-links';
+import type { NavItemType } from '@/app/components/navigation/nav-links';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import NavLinks from './nav-links';
+import NavLinks from '@/app/components/navigation/nav-links';
 
 type Props = {
   brand: React.ReactNode;

@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { Urbanist } from 'next/font/google';
-import './globals.css';
+import '@/app/globals.css';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import '@mantine/notifications/styles.css';
-import Navigation from './components/navigation/navigation';
+import Navigation from '@/app/components/navigation/navigation';
 import { MantineProvider, mantineHtmlProps, createTheme } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
-import Footer from './components/footer/footer';
+import Footer from '@/app/components/footer/footer';
 
 const urbanist = Urbanist({
   subsets: ['latin'],

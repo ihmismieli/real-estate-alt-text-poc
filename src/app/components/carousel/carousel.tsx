@@ -4,7 +4,7 @@ import { Image } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 import type { ImageOrigin } from '@/app/types/listing';
 import AiImageBadge from '@/app/components/ai-image-badge/ai-image-badge';
-import styles from './carousel.module.css';
+import styles from '@/app/components/carousel/carousel.module.css';
 
 type CarouselImage = {
   id: string;

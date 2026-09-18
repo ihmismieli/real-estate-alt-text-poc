@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import PageContainer from './components/page-container/page-container';
+import PageContainer from '@/app/components/page-container/page-container';
 
 export default function NotFound() {
   return (
