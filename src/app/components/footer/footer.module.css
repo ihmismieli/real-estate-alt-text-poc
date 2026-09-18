@@ -10,7 +10,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 28px;
-  width: min(1100px, 100%);
+  width: min(var(--page-max-width), 100%);
   margin: 0 auto;
 
   @media (min-width: 768px) {

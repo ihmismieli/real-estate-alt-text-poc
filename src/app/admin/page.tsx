@@ -3,8 +3,11 @@
 import PageContainer from '../components/page-container/page-container';
 import { useState } from 'react';
 import styles from './page.module.css';
-import ListingForm, { ListingFormData } from './components/listing-form';
-import ListingGrid from './components/listing-grid';
+import ListingForm, {
+  type ListingFormData,
+  type SubmitResult,
+} from './components/listing-form/listing-form';
+import ListingGrid from './components/listing-grid/listing-grid';
 import {
   createListing,
   deleteListing,
@@ -18,7 +21,9 @@ export default function AdminPage() {
   const { listings, error, isLoading, mutate } = useListings();
   const [isCreating, setIsCreating] = useState(false);
 
-  const handleCreateListing = async (formData: ListingFormData) => {
+  const handleCreateListing = async (
+    formData: ListingFormData
+  ): Promise<SubmitResult> => {
     setIsCreating(true);
 
     try {
@@ -29,17 +34,23 @@ export default function AdminPage() {
       }
 
       await mutate();
+
       notifications.show({
         message: 'Kohde luotu onnistuneesti',
         color: 'green',
         autoClose: 5000,
       });
+      return { success: true };
     } catch (err) {
       notifications.show({
         message: err instanceof Error ? err.message : 'Tuntematon virhe',
         color: 'red',
         autoClose: 5000,
       });
+      return {
+        success: false,
+        message: err instanceof Error ? err.message : 'Tuntematon virhe',
+      };
     } finally {
       setIsCreating(false);
     }
@@ -90,6 +101,7 @@ export default function AdminPage() {
           submitLabel="Luo kohde"
           isLoading={isCreating}
           resetAfterSubmit
+          showCancel
         />
       </div>
 

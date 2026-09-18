@@ -1,8 +1,8 @@
 'use client';
 
 import { SimpleGrid } from '@mantine/core';
-import ListingCard from './listing-card';
-import { Listing } from '../../types/listing';
+import ListingCard from '../listing-card/listing-card';
+import { Listing } from '../../../types/listing';
 
 type ListingGridProps = {
   listings: Listing[];

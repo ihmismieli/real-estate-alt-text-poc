@@ -2,12 +2,12 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { deleteListingUploadDirectory } from '@/lib/local-image-storage';
 import { isCurrentUserAdmin } from "@/lib/dal";
-import { del } from '@vercel/blob';
 import { checkSameOrigin } from '@/lib/security';
 import { listingFormSchema } from '@/app/schemas/listing-schema';
+import { deleteBlobIfExists } from "@/app/admin/utils/blob-utils";
 
 export async function GET(
-    request: Request,
+    _request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
     if (!(await isCurrentUserAdmin())) {
@@ -95,11 +95,17 @@ export async function PUT(
 
 }
 export async function DELETE(
-    _request: Request,
+    request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
     if (!(await isCurrentUserAdmin())) {
         return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 });
+    }
+
+    const originError = checkSameOrigin(request);
+
+    if (originError) {
+        return originError;
     }
 
     try {
@@ -129,7 +135,22 @@ export async function DELETE(
             image.storageKey ? [image.storageKey] : []
         );
 
-        await Promise.all(blobKeys.map((storageKey) => del(storageKey)));
+        const results = await Promise.allSettled(
+            blobKeys.map((storageKey) =>
+                deleteBlobIfExists(storageKey)
+            )
+        );
+
+        const failedBlobDeletions = results.some(
+            (result) => result.status === 'rejected'
+        );
+
+        if (failedBlobDeletions) {
+            return NextResponse.json(
+                { error: 'Jotkin kuvatiedostojen poistot epäonnistuivat' },
+                { status: 502 }
+            );
+        }
 
         await prisma.listing.delete({
             where: { id: listing.id },
@@ -141,6 +162,7 @@ export async function DELETE(
             success: true,
             message: 'Kohde poistettu',
         });
+
     } catch (error) {
         console.error('Error deleting listing:', error);
 
