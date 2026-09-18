@@ -3,7 +3,11 @@
 import { Group, Select, Text } from '@mantine/core';
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { FiImage, FiUploadCloud, FiX } from 'react-icons/fi';
-import type { ImageOrigin, NewListingImage } from '@/app/types/listing';
+import type {
+  ImageOrigin,
+  NewListingImage,
+  ImageType,
+} from '@/app/types/listing';
 import type { ReactNode } from 'react';
 
 type ListingImageUploaderProps = {
@@ -14,6 +18,24 @@ type ListingImageUploaderProps = {
   disabled: boolean;
   resetKey: number;
 };
+
+const IMAGE_TYPE_OPTIONS: {
+  value: ImageType;
+  label: string;
+}[] = [
+  {
+    value: 'MAIN',
+    label: 'Pääkuva',
+  },
+  {
+    value: 'FLOOR_PLAN',
+    label: 'Pohjakuva',
+  },
+  {
+    value: 'OTHER',
+    label: 'Muu',
+  },
+];
 
 const IMAGE_ORIGIN_OPTIONS: {
   value: ImageOrigin;
@@ -48,6 +70,7 @@ function mergeFiles(
   const newImages: NewListingImage[] = next.map((file) => ({
     file,
     origin: 'UNKNOWN',
+    imageType: 'OTHER',
   }));
 
   return [...previous, ...newImages].filter(
@@ -85,6 +108,19 @@ export default function ListingImageUploader({
           ? {
               ...image,
               origin: selectedOption.value,
+            }
+          : image
+      )
+    );
+  };
+
+  const handleImageTypeChange = (file: File, value: ImageType) => {
+    onImagesChange(
+      images.map((image) =>
+        image.file === file
+          ? {
+              ...image,
+              imageType: value,
             }
           : image
       )
@@ -152,7 +188,7 @@ export default function ListingImageUploader({
             {images.length} valittua kuvaa
           </Text>
 
-          {images.map(({ file, origin }, index) => (
+          {images.map(({ file, origin, imageType }, index) => (
             <Group
               key={`${file.name}-${file.size}-${file.lastModified}`}
               mt="xs"
@@ -167,6 +203,22 @@ export default function ListingImageUploader({
                 value={origin}
                 onChange={(value) => handleImageOriginChange(file, value)}
                 data={IMAGE_ORIGIN_OPTIONS}
+                disabled={disabled}
+              />
+
+              <Select
+                label={`Kuvan ${index + 1} tyyppi`}
+                value={imageType}
+                onChange={(value) => {
+                  if (
+                    value === 'MAIN' ||
+                    value === 'FLOOR_PLAN' ||
+                    value === 'OTHER'
+                  ) {
+                    handleImageTypeChange(file, value);
+                  }
+                }}
+                data={IMAGE_TYPE_OPTIONS}
                 disabled={disabled}
               />
             </Group>

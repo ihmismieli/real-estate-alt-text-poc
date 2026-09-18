@@ -45,6 +45,7 @@ export async function uploadListingImages(listingId: string, images: NewListingI
         const formData = new FormData();
         formData.append('images', image.file);
         formData.append('origin', image.origin);
+        formData.append('imageType', image.imageType);
 
 
         const res = await fetch(`/api/admin/listings/${listingId}/images`, {

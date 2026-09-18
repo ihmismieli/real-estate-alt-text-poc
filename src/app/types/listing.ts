@@ -7,12 +7,18 @@ export type ImageOrigin =
     | 'AI_EDITED'
     | 'UNKNOWN';
 
+export type ImageType =
+    | 'MAIN'
+    | 'FLOOR_PLAN'
+    | 'OTHER';
+
 /**
  * Image in the process of being uploaded on admin panel, not yet stored in the database.
  */
 export type NewListingImage = {
     file: File;
     origin: ImageOrigin;
+    imageType: ImageType;
 };
 
 export type ListingImage = {
@@ -26,6 +32,8 @@ export type ListingImage = {
     altText?: string | null;
     roomType?: string | null;
     origin?: ImageOrigin | null;
+    imageType: ImageType;
+    sortOrder: number;
     createdAt: DateValue;
     updatedAt: DateValue;
     listingId: string;

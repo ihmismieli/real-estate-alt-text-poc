@@ -20,6 +20,12 @@ enum ImageOrigin {
   UNKNOWN
 }
 
+enum ImageType {
+  MAIN
+  FLOOR_PLAN
+  OTHER
+}
+
 model Listing {
   id            String   @id @default(cuid())
   publicId      Int      @unique @default(autoincrement())
@@ -47,10 +53,14 @@ model Image {
   height     Int?
   altText   String?
   roomType  String?
-  origin           ImageOrigin @default(UNKNOWN)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  imageType ImageType  @default(OTHER)
+  sortOrder Int        @default(0)
+  origin               ImageOrigin @default(UNKNOWN)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 
   listingId String
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@index([listingId, imageType, sortOrder])
 }
