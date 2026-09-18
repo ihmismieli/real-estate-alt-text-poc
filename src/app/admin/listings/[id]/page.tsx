@@ -6,12 +6,12 @@ import PageContainer from '../../../components/page-container/page-container';
 import ListingForm, {
   type ListingFormData,
   type SubmitResult,
-} from '../../components/listing-form';
+} from '../../components/listing-form/listing-form';
 import { updateListing, uploadListingImages } from '../../utils/listing-api';
 import { useListing } from '../../hooks/use-listing';
 import LoadingIndicator from '@/app/components/loading/loading';
 import { notifications } from '@mantine/notifications';
-import ExistingImages from '../../components/existing-images';
+import ExistingImages from '../../components/listing-images/existing-images';
 
 export default function EditListingPage() {
   const router = useRouter();

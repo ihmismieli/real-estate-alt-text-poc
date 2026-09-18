@@ -6,8 +6,8 @@ import styles from './page.module.css';
 import ListingForm, {
   type ListingFormData,
   type SubmitResult,
-} from './components/listing-form';
-import ListingGrid from './components/listing-grid';
+} from './components/listing-form/listing-form';
+import ListingGrid from './components/listing-grid/listing-grid';
 import {
   createListing,
   deleteListing,
