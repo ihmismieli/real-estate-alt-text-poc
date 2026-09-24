@@ -117,6 +117,17 @@ export async function POST(
 
         const formData = await request.formData();
 
+        const altTextValue = formData.get('altText');
+
+        if (altTextValue !== null && typeof altTextValue !== 'string') {
+            return NextResponse.json(
+                { error: 'Virheellinen tekstivastine' },
+                { status: 400 }
+            );
+        }
+
+        const altText = altTextValue?.trim() || null;
+
         const origin = formData.get('origin');
 
         const allowedOrigins = [
@@ -233,6 +244,7 @@ export async function POST(
                 origin: origin as ImageOrigin,
                 imageType: imageType as ImageType,
                 sortOrder: sortOrder,
+                altText: altText,
             },
         });
 

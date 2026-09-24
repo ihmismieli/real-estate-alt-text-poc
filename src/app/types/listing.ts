@@ -19,6 +19,7 @@ export type NewListingImage = {
     file: File;
     origin: ImageOrigin;
     imageType: ImageType;
+    altText?: string | null;
 };
 
 export type ListingImage = {
