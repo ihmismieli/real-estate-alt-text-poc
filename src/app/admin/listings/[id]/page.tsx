@@ -7,11 +7,16 @@ import ListingForm, {
   type ListingFormData,
   type SubmitResult,
 } from '@/app/admin/components/listing-form/listing-form';
-import { updateListing, uploadListingImages } from '@/app/admin/utils/listing-api';
+import {
+  updateListing,
+  uploadListingImages,
+} from '@/app/admin/utils/listing-api';
 import { useListing } from '@/app/admin/hooks/use-listing';
 import LoadingIndicator from '@/app/components/loading/loading';
 import { notifications } from '@mantine/notifications';
 import ExistingImages from '@/app/admin/components/listing-images/existing-images';
+import { Adamina } from 'next/font/google';
+import AdminPageHeader from '../../components/admin-page-header/admin-page-header';
 
 export default function EditListingPage() {
   const router = useRouter();
@@ -81,25 +86,27 @@ export default function EditListingPage() {
   };
 
   return (
-    <PageContainer>
-      <h1>Muokkaa kohdetta</h1>
-      <ListingForm
-        initialData={formData}
-        onSubmit={handleSubmit}
-        onCancel={() => router.push('/admin')}
-        submitLabel="Tallenna muutokset"
-        isLoading={isSubmitting}
-        showCancel={true}
-      />
-      <h2>Tallennetut kuvat</h2>
+    <>
+      <AdminPageHeader title="Muokkaa kohdetta" />
+      <PageContainer>
+        <ListingForm
+          initialData={formData}
+          onSubmit={handleSubmit}
+          onCancel={() => router.push('/admin')}
+          submitLabel="Tallenna muutokset"
+          isLoading={isSubmitting}
+          showCancel={true}
+        />
+        <h2>Tallennetut kuvat</h2>
 
-      <ExistingImages
-        listingId={id}
-        images={listing.images ?? []}
-        onImagesChange={async () => {
-          await mutate();
-        }}
-      />
-    </PageContainer>
+        <ExistingImages
+          listingId={id}
+          images={listing.images ?? []}
+          onImagesChange={async () => {
+            await mutate();
+          }}
+        />
+      </PageContainer>
+    </>
   );
 }

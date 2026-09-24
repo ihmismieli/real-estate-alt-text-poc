@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Group, Text } from '@mantine/core';
+import { Card, Group, Text, Stack } from '@mantine/core';
 import Image from 'next/image';
 import type { ImageOrigin } from '@/app/types/listing';
 import AiImageBadge from '@/app/components/ai-image-badge/ai-image-badge';
@@ -28,8 +28,10 @@ export default function CardComponent({
   livingArea,
   imageOrigin,
 }: CardProps) {
-  const locationLabel =
-    [address, district, municipality].filter(Boolean).join(', ') || 'Kohde';
+  const addressAndDistrict =
+    address && district
+      ? `${address}, ${district}`
+      : address || district || 'Kohde';
 
   return (
     <Card
@@ -65,16 +67,36 @@ export default function CardComponent({
         </div>
       </Card.Section>
 
-      <Text size="md" mt="md">
-        {locationLabel}
-      </Text>
+      <Stack gap={2} mt="md" mih="3.2em">
+        <Text fw="bold" size="md" lineClamp={1}>
+          {addressAndDistrict}
+        </Text>
+
+        {municipality && (
+          <Text fw="bold" size="md" lineClamp={1}>
+            {municipality}
+          </Text>
+        )}
+      </Stack>
 
       <Group justify="space-between" mt="xs" w="100%">
-        {rooms && <Text fw="normal">{rooms}</Text>}
+        {rooms && (
+          <Text fw="normal" size="sm">
+            {rooms}
+          </Text>
+        )}
 
-        {livingArea && <Text fw="normal">{livingArea} m²</Text>}
+        {livingArea && (
+          <Text fw="normal" size="sm">
+            {livingArea} m²
+          </Text>
+        )}
 
-        {price && <Text fw="normal">{price.toLocaleString('fi-FI')} €</Text>}
+        {price && (
+          <Text fw="normal" size="sm">
+            {price.toLocaleString('fi-FI')} €
+          </Text>
+        )}
       </Group>
     </Card>
   );
