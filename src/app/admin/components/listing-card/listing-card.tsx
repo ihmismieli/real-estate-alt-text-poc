@@ -42,11 +42,7 @@ export default function ListingCard({ listing, onDelete }: ListingCardProps) {
           )}
         </Group>
 
-        {listing.rooms && (
-          <Text c="dimmed" size="sm">
-            {listing.rooms}
-          </Text>
-        )}
+        {listing.rooms && <Text size="sm">{listing.rooms}</Text>}
 
         <Group style={{ marginTop: 'auto' }}>
           <Link href={`/admin/listings/${listing.id}`}>

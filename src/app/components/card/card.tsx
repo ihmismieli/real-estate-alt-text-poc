@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Group, Text, Stack } from '@mantine/core';
+import { Card, Group, Text, Stack, Box } from '@mantine/core';
 import Image from 'next/image';
 import type { ImageOrigin } from '@/app/types/listing';
 import AiImageBadge from '@/app/components/ai-image-badge/ai-image-badge';
@@ -40,15 +40,14 @@ export default function CardComponent({
       component="a"
       href={`/kohde/${publicId}`}
       w="100%"
+      style={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
     >
       <Card.Section>
-        <div
-          style={{
-            position: 'relative',
-            width: '100%',
-            height: '160px',
-          }}
-        >
+        <Box pos="relative" h={200}>
           <Image
             src={image}
             alt="Kuva kohteesta"
@@ -64,7 +63,7 @@ export default function CardComponent({
           />
 
           <AiImageBadge origin={imageOrigin} />
-        </div>
+        </Box>
       </Card.Section>
 
       <Stack gap={2} mt="md" mih="3.2em">
@@ -79,7 +78,12 @@ export default function CardComponent({
         )}
       </Stack>
 
-      <Group justify="space-between" mt="xs" w="100%">
+      <Group
+        justify="space-between"
+        w="100%"
+        pt="xs"
+        style={{ marginTop: 'auto' }}
+      >
         {rooms && (
           <Text fw="normal" size="sm">
             {rooms}
