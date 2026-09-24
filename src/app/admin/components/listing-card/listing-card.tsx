@@ -11,7 +11,17 @@ type ListingCardProps = {
 
 export default function ListingCard({ listing, onDelete }: ListingCardProps) {
   return (
-    <Card shadow="sm" padding="lg" radius="md" withBorder>
+    <Card
+      shadow="sm"
+      padding="lg"
+      radius="md"
+      withBorder
+      style={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <Card.Section>
         <Image
           src={listing.images?.[0]?.url ?? '/listing-image-placeholder.png'}
@@ -20,7 +30,7 @@ export default function ListingCard({ listing, onDelete }: ListingCardProps) {
         />
       </Card.Section>
 
-      <Stack mt="md" gap="xs">
+      <Stack mt="md" gap="md" style={{ flex: 1 }}>
         <Group justify="space-between">
           <Text fw={600} style={{ flex: 1, minWidth: 0 }}>
             {listing.address
@@ -38,11 +48,7 @@ export default function ListingCard({ listing, onDelete }: ListingCardProps) {
           </Text>
         )}
 
-        {listing.description && (
-          <Text lineClamp={3}>{listing.description}</Text>
-        )}
-
-        <Group mt="md">
+        <Group style={{ marginTop: 'auto' }}>
           <Link href={`/admin/listings/${listing.id}`}>
             <Button size="sm" variant="light">
               Muokkaa
