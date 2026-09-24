@@ -1,8 +1,8 @@
 import { signOut } from '@/auth';
-import navigationStyles from './navigation.module.css';
+import navigationStyles from '@/app/components/navigation/navigation.module.css';
 import Link from 'next/link';
-import NavigationMenu from './nav-menu';
-import LoginModal from './login-modal';
+import NavigationMenu from '@/app/components/navigation/nav-menu';
+import LoginModal from '@/app/components/navigation/login-modal';
 import { isCurrentUserAdmin } from '@/lib/dal';
 import { Suspense } from 'react';
 

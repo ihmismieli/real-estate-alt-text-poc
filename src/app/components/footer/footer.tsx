@@ -1,5 +1,5 @@
-import styles from './footer.module.css';
-import ScrollToLink from '../scroll-to-link/scroll-to-link';
+import styles from '@/app/components/footer/footer.module.css';
+import ScrollToLink from '@/app/components/scroll-to-link/scroll-to-link';
 
 export default function Footer() {
   return (

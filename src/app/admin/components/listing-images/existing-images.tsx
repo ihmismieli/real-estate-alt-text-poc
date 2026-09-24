@@ -17,7 +17,7 @@ import { ListingImage } from '@/app/types/listing';
 import {
   deleteListingImage,
   updateListingImageAltText,
-} from '../utils/listing-api';
+} from '@/app/admin/utils/listing-api';
 
 type ExistingImageProps = {
   listingId: string;
@@ -33,13 +33,22 @@ export default function ExistingImagesEditor({
   const [altTexts, setAltTexts] = useState(() =>
     Object.fromEntries(images.map((image) => [image.id, image.altText ?? '']))
   );
+
   const [savingImageId, setSavingImageId] = useState<string | null>(null);
   const [deletingImageId, setDeletingImageId] = useState<string | null>(null);
 
   useEffect(() => {
-    setAltTexts(
-      Object.fromEntries(images.map((image) => [image.id, image.altText ?? '']))
-    );
+    setAltTexts((current) => {
+      const next = { ...current };
+
+      for (const image of images) {
+        if (!(image.id in next)) {
+          next[image.id] = image.altText ?? '';
+        }
+      }
+
+      return next;
+    });
   }, [images]);
 
   const handleAltTextChange = (imageId: string, value: string) => {
@@ -60,12 +69,13 @@ export default function ExistingImagesEditor({
 
     try {
       await updateListingImageAltText(listingId, imageId, value);
-      await onImagesChange();
 
       setAltTexts((current) => ({
         ...current,
         [imageId]: value ?? '',
       }));
+
+      await onImagesChange();
 
       notifications.show({
         message:
@@ -95,6 +105,13 @@ export default function ExistingImagesEditor({
 
     try {
       await deleteListingImage(listingId, imageId);
+
+      setAltTexts((current) => {
+        const next = { ...current };
+        delete next[imageId];
+        return next;
+      });
+
       await onImagesChange();
 
       notifications.show({
@@ -121,7 +138,8 @@ export default function ExistingImagesEditor({
     <Stack gap="lg" style={{ width: '100%', maxWidth: '800px' }}>
       {images.map((image, index) => {
         const currentAltText = altTexts[image.id] ?? '';
-        const originalAltText = image.altText ?? '';
+        const savedAltText = image.altText ?? '';
+        const notFinishedAltText = currentAltText !== savedAltText;
 
         return (
           <Group key={image.id} align="center" wrap="wrap">
@@ -168,6 +186,11 @@ export default function ExistingImagesEditor({
                   size="xs"
                   variant="light"
                   loading={savingImageId === image.id}
+                  disabled={
+                    !notFinishedAltText ||
+                    savingImageId !== null ||
+                    deletingImageId !== null
+                  }
                   onClick={() => handleSaveAltText(image.id)}
                 >
                   Tallenna tekstivastine
@@ -177,9 +200,7 @@ export default function ExistingImagesEditor({
                   size="xs"
                   variant="outline"
                   color="red"
-                  disabled={
-                    !originalAltText.trim() || savingImageId === image.id
-                  }
+                  disabled={!savedAltText.trim() || savingImageId === image.id}
                   onClick={() => handleSaveAltText(image.id, null)}
                 >
                   Poista tekstivastine

@@ -70,23 +70,11 @@ export default function CardComponent({
       </Text>
 
       <Group justify="space-between" mt="xs" w="100%">
-        {rooms && (
-          <Text fw="lighter" c="dimmed">
-            {rooms}
-          </Text>
-        )}
+        {rooms && <Text fw="normal">{rooms}</Text>}
 
-        {livingArea && (
-          <Text fw="lighter" c="dimmed">
-            {livingArea} m²
-          </Text>
-        )}
+        {livingArea && <Text fw="normal">{livingArea} m²</Text>}
 
-        {price && (
-          <Text fw="lighter" c="dimmed">
-            {price.toLocaleString('fi-FI')} €
-          </Text>
-        )}
+        {price && <Text fw="normal">{price.toLocaleString('fi-FI')} €</Text>}
       </Group>
     </Card>
   );

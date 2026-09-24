@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Card, Image, Text, Group, Stack, Badge, Button } from '@mantine/core';
-import { Listing } from '../../types/listing';
+import type { Listing } from '@/app/types/listing';
 
 type ListingCardProps = {
   listing: Listing;
