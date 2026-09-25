@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 import sharp from 'sharp';
 import { del, put } from '@vercel/blob';
 import { checkSameOrigin } from '@/lib/security';
-import type { ImageOrigin } from '@/app/types/listing';
+import type { ImageOrigin, ImageType } from '@/app/types/listing';
 
 export const runtime = 'nodejs';
 
@@ -117,6 +117,17 @@ export async function POST(
 
         const formData = await request.formData();
 
+        const altTextValue = formData.get('altText');
+
+        if (altTextValue !== null && typeof altTextValue !== 'string') {
+            return NextResponse.json(
+                { error: 'Virheellinen tekstivastine' },
+                { status: 400 }
+            );
+        }
+
+        const altText = altTextValue?.trim() || null;
+
         const origin = formData.get('origin');
 
         const allowedOrigins = [
@@ -137,6 +148,48 @@ export async function POST(
             );
         }
 
+        const imageType = formData.get('imageType');
+
+        const allowedImageTypes = [
+            'MAIN',
+            'FLOOR_PLAN',
+            'OTHER',
+        ];
+
+        if (
+            typeof imageType !== 'string' ||
+            !allowedImageTypes.includes(imageType)
+        ) {
+            return NextResponse.json(
+                { error: 'Virheellinen kuvatyyppi' },
+                { status: 400 }
+            );
+        }
+
+        if (
+            imageType === 'MAIN' ||
+            imageType === 'FLOOR_PLAN'
+        ) {
+            const existingImage = await prisma.image.findFirst({
+                where: {
+                    listingId: listing.id,
+                    imageType: imageType as ImageType,
+                },
+            });
+
+            if (existingImage) {
+                return NextResponse.json(
+                    {
+                        error:
+                            imageType === 'MAIN'
+                                ? 'Kohteella on jo pääkuva'
+                                : 'Kohteella on jo pohjakuva',
+                    },
+                    { status: 409 }
+                );
+            }
+        }
+
 
         const files = formData
             .getAll('images')
@@ -149,6 +202,24 @@ export async function POST(
                 { status: 400 }
             );
         }
+
+        const lastOtherImage = await prisma.image.findFirst({
+            where: {
+                listingId: listing.id,
+                imageType: 'OTHER',
+            },
+            orderBy: {
+                sortOrder: 'desc',
+            },
+            select: {
+                sortOrder: true,
+            },
+        });
+
+        const sortOrder =
+            imageType === 'OTHER'
+                ? (lastOtherImage?.sortOrder ?? -1) + 1
+                : 0;
 
         const optimized = await optimizeImage(files[0]);
 
@@ -171,6 +242,9 @@ export async function POST(
                 width: optimized.width,
                 height: optimized.height,
                 origin: origin as ImageOrigin,
+                imageType: imageType as ImageType,
+                sortOrder: sortOrder,
+                altText: altText,
             },
         });
 

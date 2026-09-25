@@ -5,5 +5,5 @@ type PageContainerProps = {
 };
 
 export default function PageContainer({ children }: PageContainerProps) {
-  return <main className={pageContainerstyles.page}>{children}</main>;
+  return <div className={pageContainerstyles.page}>{children}</div>;
 }

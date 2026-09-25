@@ -29,11 +29,13 @@ export type AggregateImage = {
 export type ImageAvgAggregateOutputType = {
   width: number | null
   height: number | null
+  sortOrder: number | null
 }
 
 export type ImageSumAggregateOutputType = {
   width: number | null
   height: number | null
+  sortOrder: number | null
 }
 
 export type ImageMinAggregateOutputType = {
@@ -46,6 +48,8 @@ export type ImageMinAggregateOutputType = {
   height: number | null
   altText: string | null
   roomType: string | null
+  imageType: $Enums.ImageType | null
+  sortOrder: number | null
   origin: $Enums.ImageOrigin | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -62,6 +66,8 @@ export type ImageMaxAggregateOutputType = {
   height: number | null
   altText: string | null
   roomType: string | null
+  imageType: $Enums.ImageType | null
+  sortOrder: number | null
   origin: $Enums.ImageOrigin | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -78,6 +84,8 @@ export type ImageCountAggregateOutputType = {
   height: number
   altText: number
   roomType: number
+  imageType: number
+  sortOrder: number
   origin: number
   createdAt: number
   updatedAt: number
@@ -89,11 +97,13 @@ export type ImageCountAggregateOutputType = {
 export type ImageAvgAggregateInputType = {
   width?: true
   height?: true
+  sortOrder?: true
 }
 
 export type ImageSumAggregateInputType = {
   width?: true
   height?: true
+  sortOrder?: true
 }
 
 export type ImageMinAggregateInputType = {
@@ -106,6 +116,8 @@ export type ImageMinAggregateInputType = {
   height?: true
   altText?: true
   roomType?: true
+  imageType?: true
+  sortOrder?: true
   origin?: true
   createdAt?: true
   updatedAt?: true
@@ -122,6 +134,8 @@ export type ImageMaxAggregateInputType = {
   height?: true
   altText?: true
   roomType?: true
+  imageType?: true
+  sortOrder?: true
   origin?: true
   createdAt?: true
   updatedAt?: true
@@ -138,6 +152,8 @@ export type ImageCountAggregateInputType = {
   height?: true
   altText?: true
   roomType?: true
+  imageType?: true
+  sortOrder?: true
   origin?: true
   createdAt?: true
   updatedAt?: true
@@ -241,6 +257,8 @@ export type ImageGroupByOutputType = {
   height: number | null
   altText: string | null
   roomType: string | null
+  imageType: $Enums.ImageType
+  sortOrder: number
   origin: $Enums.ImageOrigin
   createdAt: Date
   updatedAt: Date
@@ -280,6 +298,8 @@ export type ImageWhereInput = {
   height?: Prisma.IntNullableFilter<"Image"> | number | null
   altText?: Prisma.StringNullableFilter<"Image"> | string | null
   roomType?: Prisma.StringNullableFilter<"Image"> | string | null
+  imageType?: Prisma.EnumImageTypeFilter<"Image"> | $Enums.ImageType
+  sortOrder?: Prisma.IntFilter<"Image"> | number
   origin?: Prisma.EnumImageOriginFilter<"Image"> | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFilter<"Image"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Image"> | Date | string
@@ -297,6 +317,8 @@ export type ImageOrderByWithRelationInput = {
   height?: Prisma.SortOrderInput | Prisma.SortOrder
   altText?: Prisma.SortOrderInput | Prisma.SortOrder
   roomType?: Prisma.SortOrderInput | Prisma.SortOrder
+  imageType?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
   origin?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -317,6 +339,8 @@ export type ImageWhereUniqueInput = Prisma.AtLeast<{
   height?: Prisma.IntNullableFilter<"Image"> | number | null
   altText?: Prisma.StringNullableFilter<"Image"> | string | null
   roomType?: Prisma.StringNullableFilter<"Image"> | string | null
+  imageType?: Prisma.EnumImageTypeFilter<"Image"> | $Enums.ImageType
+  sortOrder?: Prisma.IntFilter<"Image"> | number
   origin?: Prisma.EnumImageOriginFilter<"Image"> | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFilter<"Image"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Image"> | Date | string
@@ -334,6 +358,8 @@ export type ImageOrderByWithAggregationInput = {
   height?: Prisma.SortOrderInput | Prisma.SortOrder
   altText?: Prisma.SortOrderInput | Prisma.SortOrder
   roomType?: Prisma.SortOrderInput | Prisma.SortOrder
+  imageType?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
   origin?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -358,6 +384,8 @@ export type ImageScalarWhereWithAggregatesInput = {
   height?: Prisma.IntNullableWithAggregatesFilter<"Image"> | number | null
   altText?: Prisma.StringNullableWithAggregatesFilter<"Image"> | string | null
   roomType?: Prisma.StringNullableWithAggregatesFilter<"Image"> | string | null
+  imageType?: Prisma.EnumImageTypeWithAggregatesFilter<"Image"> | $Enums.ImageType
+  sortOrder?: Prisma.IntWithAggregatesFilter<"Image"> | number
   origin?: Prisma.EnumImageOriginWithAggregatesFilter<"Image"> | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Image"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Image"> | Date | string
@@ -374,6 +402,8 @@ export type ImageCreateInput = {
   height?: number | null
   altText?: string | null
   roomType?: string | null
+  imageType?: $Enums.ImageType
+  sortOrder?: number
   origin?: $Enums.ImageOrigin
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -390,6 +420,8 @@ export type ImageUncheckedCreateInput = {
   height?: number | null
   altText?: string | null
   roomType?: string | null
+  imageType?: $Enums.ImageType
+  sortOrder?: number
   origin?: $Enums.ImageOrigin
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -406,6 +438,8 @@ export type ImageUpdateInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roomType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageType?: Prisma.EnumImageTypeFieldUpdateOperationsInput | $Enums.ImageType
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -422,6 +456,8 @@ export type ImageUncheckedUpdateInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roomType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageType?: Prisma.EnumImageTypeFieldUpdateOperationsInput | $Enums.ImageType
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -438,6 +474,8 @@ export type ImageCreateManyInput = {
   height?: number | null
   altText?: string | null
   roomType?: string | null
+  imageType?: $Enums.ImageType
+  sortOrder?: number
   origin?: $Enums.ImageOrigin
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -454,6 +492,8 @@ export type ImageUpdateManyMutationInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roomType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageType?: Prisma.EnumImageTypeFieldUpdateOperationsInput | $Enums.ImageType
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -469,6 +509,8 @@ export type ImageUncheckedUpdateManyInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roomType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageType?: Prisma.EnumImageTypeFieldUpdateOperationsInput | $Enums.ImageType
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -495,6 +537,8 @@ export type ImageCountOrderByAggregateInput = {
   height?: Prisma.SortOrder
   altText?: Prisma.SortOrder
   roomType?: Prisma.SortOrder
+  imageType?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
   origin?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -504,6 +548,7 @@ export type ImageCountOrderByAggregateInput = {
 export type ImageAvgOrderByAggregateInput = {
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
 }
 
 export type ImageMaxOrderByAggregateInput = {
@@ -516,6 +561,8 @@ export type ImageMaxOrderByAggregateInput = {
   height?: Prisma.SortOrder
   altText?: Prisma.SortOrder
   roomType?: Prisma.SortOrder
+  imageType?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
   origin?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -532,6 +579,8 @@ export type ImageMinOrderByAggregateInput = {
   height?: Prisma.SortOrder
   altText?: Prisma.SortOrder
   roomType?: Prisma.SortOrder
+  imageType?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
   origin?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -541,6 +590,7 @@ export type ImageMinOrderByAggregateInput = {
 export type ImageSumOrderByAggregateInput = {
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
 }
 
 export type ImageCreateNestedManyWithoutListingInput = {
@@ -585,6 +635,10 @@ export type ImageUncheckedUpdateManyWithoutListingNestedInput = {
   deleteMany?: Prisma.ImageScalarWhereInput | Prisma.ImageScalarWhereInput[]
 }
 
+export type EnumImageTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ImageType
+}
+
 export type EnumImageOriginFieldUpdateOperationsInput = {
   set?: $Enums.ImageOrigin
 }
@@ -599,6 +653,8 @@ export type ImageCreateWithoutListingInput = {
   height?: number | null
   altText?: string | null
   roomType?: string | null
+  imageType?: $Enums.ImageType
+  sortOrder?: number
   origin?: $Enums.ImageOrigin
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -614,6 +670,8 @@ export type ImageUncheckedCreateWithoutListingInput = {
   height?: number | null
   altText?: string | null
   roomType?: string | null
+  imageType?: $Enums.ImageType
+  sortOrder?: number
   origin?: $Enums.ImageOrigin
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -658,6 +716,8 @@ export type ImageScalarWhereInput = {
   height?: Prisma.IntNullableFilter<"Image"> | number | null
   altText?: Prisma.StringNullableFilter<"Image"> | string | null
   roomType?: Prisma.StringNullableFilter<"Image"> | string | null
+  imageType?: Prisma.EnumImageTypeFilter<"Image"> | $Enums.ImageType
+  sortOrder?: Prisma.IntFilter<"Image"> | number
   origin?: Prisma.EnumImageOriginFilter<"Image"> | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFilter<"Image"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Image"> | Date | string
@@ -674,6 +734,8 @@ export type ImageCreateManyListingInput = {
   height?: number | null
   altText?: string | null
   roomType?: string | null
+  imageType?: $Enums.ImageType
+  sortOrder?: number
   origin?: $Enums.ImageOrigin
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -689,6 +751,8 @@ export type ImageUpdateWithoutListingInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roomType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageType?: Prisma.EnumImageTypeFieldUpdateOperationsInput | $Enums.ImageType
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -704,6 +768,8 @@ export type ImageUncheckedUpdateWithoutListingInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roomType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageType?: Prisma.EnumImageTypeFieldUpdateOperationsInput | $Enums.ImageType
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -719,6 +785,8 @@ export type ImageUncheckedUpdateManyWithoutListingInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roomType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageType?: Prisma.EnumImageTypeFieldUpdateOperationsInput | $Enums.ImageType
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -736,6 +804,8 @@ export type ImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   height?: boolean
   altText?: boolean
   roomType?: boolean
+  imageType?: boolean
+  sortOrder?: boolean
   origin?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -753,6 +823,8 @@ export type ImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   height?: boolean
   altText?: boolean
   roomType?: boolean
+  imageType?: boolean
+  sortOrder?: boolean
   origin?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -770,6 +842,8 @@ export type ImageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   height?: boolean
   altText?: boolean
   roomType?: boolean
+  imageType?: boolean
+  sortOrder?: boolean
   origin?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -787,13 +861,15 @@ export type ImageSelectScalar = {
   height?: boolean
   altText?: boolean
   roomType?: boolean
+  imageType?: boolean
+  sortOrder?: boolean
   origin?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   listingId?: boolean
 }
 
-export type ImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "url" | "storageKey" | "originalFilename" | "mimeType" | "width" | "height" | "altText" | "roomType" | "origin" | "createdAt" | "updatedAt" | "listingId", ExtArgs["result"]["image"]>
+export type ImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "url" | "storageKey" | "originalFilename" | "mimeType" | "width" | "height" | "altText" | "roomType" | "imageType" | "sortOrder" | "origin" | "createdAt" | "updatedAt" | "listingId", ExtArgs["result"]["image"]>
 export type ImageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   listing?: boolean | Prisma.ListingDefaultArgs<ExtArgs>
 }
@@ -819,6 +895,8 @@ export type $ImagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     height: number | null
     altText: string | null
     roomType: string | null
+    imageType: $Enums.ImageType
+    sortOrder: number
     origin: $Enums.ImageOrigin
     createdAt: Date
     updatedAt: Date
@@ -1256,6 +1334,8 @@ export interface ImageFieldRefs {
   readonly height: Prisma.FieldRef<"Image", 'Int'>
   readonly altText: Prisma.FieldRef<"Image", 'String'>
   readonly roomType: Prisma.FieldRef<"Image", 'String'>
+  readonly imageType: Prisma.FieldRef<"Image", 'ImageType'>
+  readonly sortOrder: Prisma.FieldRef<"Image", 'Int'>
   readonly origin: Prisma.FieldRef<"Image", 'ImageOrigin'>
   readonly createdAt: Prisma.FieldRef<"Image", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Image", 'DateTime'>

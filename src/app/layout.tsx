@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { Urbanist } from 'next/font/google';
-import '@/app/globals.css';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import '@mantine/notifications/styles.css';
+import '@/app/globals.css';
 import Navigation from '@/app/components/navigation/navigation';
 import { MantineProvider, mantineHtmlProps, createTheme } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
@@ -42,7 +42,7 @@ export default function RootLayout({
         <MantineProvider theme={theme}>
           <Notifications />
           <Navigation />
-          {children}
+          <main className="pageContent">{children}</main>
           <Footer />
         </MantineProvider>
       </body>
