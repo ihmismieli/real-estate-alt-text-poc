@@ -42,7 +42,7 @@ export default function RootLayout({
         <MantineProvider theme={theme}>
           <Notifications />
           <Navigation />
-          {children}
+          <main className="pageContent">{children}</main>
           <Footer />
         </MantineProvider>
       </body>

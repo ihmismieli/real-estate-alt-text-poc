@@ -15,8 +15,7 @@ import { useListing } from '@/app/admin/hooks/use-listing';
 import LoadingIndicator from '@/app/components/loading/loading';
 import { notifications } from '@mantine/notifications';
 import ExistingImages from '@/app/admin/components/listing-images/existing-images';
-import { Adamina } from 'next/font/google';
-import AdminPageHeader from '../../components/admin-page-header/admin-page-header';
+import AdminPageHeader from '@/app/admin/components/admin-page-header/admin-page-header';
 
 export default function EditListingPage() {
   const router = useRouter();
@@ -59,9 +58,13 @@ export default function EditListingPage() {
 
   if (isLoading) {
     return (
-      <PageContainer>
-        <LoadingIndicator />
-      </PageContainer>
+      <>
+        <AdminPageHeader title="Muokkaa kohdetta" />
+
+        <PageContainer>
+          <LoadingIndicator />
+        </PageContainer>
+      </>
     );
   }
 

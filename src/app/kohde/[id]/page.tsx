@@ -35,7 +35,7 @@ export default async function ProtertyPage({
 
   return (
     <PageContainer>
-      <Box w="100%" maw={800} mt={'lg'}>
+      <Box w="100%" maw={800} mt={'xl'}>
         <section>
           <VisuallyHidden component="h2" id="listing-images-heading">
             Kohteen kuvat
