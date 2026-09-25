@@ -140,7 +140,7 @@ export default function ListingForm({
   return (
     <form
       onSubmit={form.onSubmit(handleFormSubmit)}
-      style={{ width: '100%', maxWidth: '800px' }}
+      style={{ width: '100%', maxWidth: '800px', marginBottom: '30px' }}
     >
       <ListingDetailsFields form={form} disabled={isLoading} />
 

@@ -47,7 +47,7 @@ export default async function ProtertyPage({
           />
         </section>
 
-        <section aria-labelledby="listing-details-heading">
+        <section aria-label="Kohteen tiedot">
           <h1 id="listing-details-heading">{location}</h1>
 
           <ListingDetails
@@ -63,8 +63,8 @@ export default async function ProtertyPage({
           )}
         </section>
 
-        <section>
-          <h2>Pohjakuva</h2>
+        <section aria-labelledby="floor-plan-heading">
+          <h2 id="floor-plan-heading">Pohjakuva</h2>
 
           {floorPlanImage && (
             <Center w="100%">
