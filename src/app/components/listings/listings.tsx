@@ -15,7 +15,9 @@ export default async function Listings() {
       aria-label={`Kohdelista, ${listings.length} kohdetta`}
     >
       {listings.map((listing) => {
-        const firstImage = listing.images?.[0];
+        const mainImage =
+          listing.images?.find((image) => image.imageType === 'MAIN') ??
+          listing.images?.[0];
 
         return (
           <li key={listing.id}>
@@ -27,8 +29,8 @@ export default async function Listings() {
               price={listing.price}
               rooms={listing.rooms}
               livingArea={listing.livingArea?.toNumber() ?? null}
-              image={firstImage?.url ?? '/listing-image-placeholder.png'}
-              imageOrigin={firstImage?.origin}
+              image={mainImage?.url ?? '/listing-image-placeholder.png'}
+              imageOrigin={mainImage?.origin}
             />
           </li>
         );

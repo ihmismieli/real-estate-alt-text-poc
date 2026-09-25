@@ -2,7 +2,6 @@
 
 import PageContainer from '@/app/components/page-container/page-container';
 import { useState } from 'react';
-import styles from '@/app/admin/page.module.css';
 import ListingForm, {
   type ListingFormData,
   type SubmitResult,
@@ -16,6 +15,7 @@ import {
 import { useListings } from '@/app/admin/hooks/use-listings';
 import LoadingIndicator from '@/app/components/loading/loading';
 import { notifications } from '@mantine/notifications';
+import AdminPageHeader from './components/admin-page-header/admin-page-header';
 
 export default function AdminPage() {
   const { listings, error, isLoading, mutate } = useListings();
@@ -79,39 +79,41 @@ export default function AdminPage() {
   };
 
   return (
-    <PageContainer>
-      <h1>Hallinnoi kohteita</h1>
+    <>
+      <AdminPageHeader title="Hallinnoi kohteita" />
 
-      <div className={styles.form}>
-        <h2>Luo uusi kohde</h2>
-        <ListingForm
-          initialData={{
-            address: '',
-            postalCode: '',
-            district: '',
-            municipality: '',
-            price: '',
-            description: '',
-            apartmentType: '',
-            rooms: '',
-            livingArea: '',
-          }}
-          onSubmit={handleCreateListing}
-          onCancel={() => {}}
-          submitLabel="Luo kohde"
-          isLoading={isCreating}
-          resetAfterSubmit
-          showCancel
-        />
-      </div>
+      <PageContainer>
+        <div>
+          <h2>Luo uusi kohde</h2>
+          <ListingForm
+            initialData={{
+              address: '',
+              postalCode: '',
+              district: '',
+              municipality: '',
+              price: '',
+              description: '',
+              apartmentType: '',
+              rooms: '',
+              livingArea: '',
+            }}
+            onSubmit={handleCreateListing}
+            onCancel={() => {}}
+            submitLabel="Luo kohde"
+            isLoading={isCreating}
+            resetAfterSubmit
+            showCancel
+          />
+        </div>
 
-      <h2 style={{ marginTop: '2rem' }}>Kohteet</h2>
+        <h2 style={{ marginTop: '2rem' }}>Kohteet</h2>
 
-      {isLoading && <LoadingIndicator />}
-      {error && <p>Kohteiden lataaminen epäonnistui</p>}
-      {!isLoading && !error && (
-        <ListingGrid listings={listings} onDelete={handleDeleteListing} />
-      )}
-    </PageContainer>
+        {isLoading && <LoadingIndicator />}
+        {error && <p>Kohteiden lataaminen epäonnistui</p>}
+        {!isLoading && !error && (
+          <ListingGrid listings={listings} onDelete={handleDeleteListing} />
+        )}
+      </PageContainer>
+    </>
   );
 }

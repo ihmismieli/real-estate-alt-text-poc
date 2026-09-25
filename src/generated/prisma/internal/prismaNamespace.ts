@@ -634,6 +634,8 @@ export const ImageScalarFieldEnum = {
   height: 'height',
   altText: 'altText',
   roomType: 'roomType',
+  imageType: 'imageType',
+  sortOrder: 'sortOrder',
   origin: 'origin',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -726,6 +728,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ImageType'
+ */
+export type EnumImageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ImageType'>
+    
+
+
+/**
+ * Reference to a field of type 'ImageType[]'
+ */
+export type ListEnumImageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ImageType[]'>
     
 
 

@@ -3,13 +3,16 @@
 import { useEffect, useState } from 'react';
 import {
   ActionIcon,
-  Box,
   Button,
   Group,
   Image,
   Stack,
   Text,
   Textarea,
+  Grid,
+  SimpleGrid,
+  Paper,
+  AspectRatio,
 } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { FiX } from 'react-icons/fi';
@@ -142,72 +145,89 @@ export default function ExistingImagesEditor({
         const notFinishedAltText = currentAltText !== savedAltText;
 
         return (
-          <Group key={image.id} align="center" wrap="wrap">
-            <Box pos="relative" w={320}>
-              <Image
-                src={image.url}
-                alt={image.altText ?? `Kohteen kuva ${index + 1}`}
-                w={320}
-                h={250}
-                fit="cover"
-                radius="sm"
-              />
+          <Paper key={image.id} withBorder radius="md" p="md">
+            <Group justify="space-between" align="center" mb="md">
+              <Text component="h3" size="md" fw={600} m={0}>
+                Kuva {index + 1}
+              </Text>
 
               <ActionIcon
-                pos="absolute"
-                top={6}
-                right={6}
-                size="sm"
+                size="lg"
                 color="red"
-                variant="filled"
+                variant="light"
                 disabled={deletingImageId === image.id}
                 onClick={() => handleDeleteImage(image.id)}
                 aria-label={`Poista kuva ${index + 1}`}
               >
                 <FiX aria-hidden="true" />
               </ActionIcon>
-            </Box>
+            </Group>
 
-            <Stack gap="xs" style={{ flex: 1, minWidth: 300 }}>
-              <Textarea
-                label={`Kuva ${index + 1} tekstivastine`}
-                placeholder="Kuvan tekstivastine"
-                value={currentAltText}
-                onChange={(event) =>
-                  handleAltTextChange(image.id, event.currentTarget.value)
-                }
-                autosize
-                minRows={7}
-              />
+            <Grid gap="lg" align="start">
+              <Grid.Col span={{ base: 12, sm: 5, md: 4 }}>
+                <Paper bg="gray.0" radius="sm">
+                  <AspectRatio ratio={4 / 3}>
+                    <Image
+                      src={image.url}
+                      alt={image.altText ?? `Kohteen kuva ${index + 1}`}
+                      fit="cover"
+                    />
+                  </AspectRatio>
+                </Paper>
+              </Grid.Col>
 
-              <Group justify="flex-start">
-                <Button
-                  type="button"
-                  size="xs"
-                  variant="light"
-                  loading={savingImageId === image.id}
-                  disabled={
-                    !notFinishedAltText ||
-                    savingImageId !== null ||
-                    deletingImageId !== null
-                  }
-                  onClick={() => handleSaveAltText(image.id)}
-                >
-                  Tallenna tekstivastine
-                </Button>
-                <Button
-                  type="button"
-                  size="xs"
-                  variant="outline"
-                  color="red"
-                  disabled={!savedAltText.trim() || savingImageId === image.id}
-                  onClick={() => handleSaveAltText(image.id, null)}
-                >
-                  Poista tekstivastine
-                </Button>
-              </Group>
-            </Stack>
-          </Group>
+              <Grid.Col span={{ base: 12, sm: 7, md: 8 }}>
+                <Stack gap="md">
+                  <Textarea
+                    label="Tekstivastine (valinnainen)"
+                    placeholder="Kirjoita kuvan tekstivastine"
+                    value={currentAltText}
+                    onChange={(event) =>
+                      handleAltTextChange(image.id, event.currentTarget.value)
+                    }
+                    autosize
+                    minRows={5}
+                    maxRows={9}
+                    lang="fi"
+                  />
+
+                  <SimpleGrid cols={{ base: 1, xs: 2 }} spacing="sm">
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="light"
+                      fullWidth
+                      loading={savingImageId === image.id}
+                      disabled={
+                        !notFinishedAltText ||
+                        savingImageId !== null ||
+                        deletingImageId !== null
+                      }
+                      onClick={() => handleSaveAltText(image.id)}
+                    >
+                      Tallenna tekstivastine
+                    </Button>
+
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      color="red"
+                      fullWidth
+                      disabled={
+                        !savedAltText.trim() ||
+                        savingImageId !== null ||
+                        deletingImageId !== null
+                      }
+                      onClick={() => handleSaveAltText(image.id, null)}
+                    >
+                      Poista tekstivastine
+                    </Button>
+                  </SimpleGrid>
+                </Stack>
+              </Grid.Col>
+            </Grid>
+          </Paper>
         );
       })}
     </Stack>

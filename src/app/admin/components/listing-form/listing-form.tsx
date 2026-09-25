@@ -81,6 +81,36 @@ export default function ListingForm({
       };
     }
 
+    const mainImage = selectedImages.filter(
+      (image) => image.imageType === 'MAIN'
+    );
+
+    const floorPlanImage = selectedImages.filter(
+      (image) => image.imageType === 'FLOOR_PLAN'
+    );
+
+    if (mainImage.length > 1) {
+      const message = 'Kohteella voi olla vain yksi pääkuva';
+
+      form.setFieldError('images', message);
+
+      return {
+        success: false,
+        message,
+      };
+    }
+
+    if (floorPlanImage.length > 1) {
+      const message = 'Kohteella voi olla vain yksi pohjakuva';
+
+      form.setFieldError('images', message);
+
+      return {
+        success: false,
+        message,
+      };
+    }
+
     form.clearFieldError('images');
 
     const result = await onSubmit({
@@ -110,7 +140,7 @@ export default function ListingForm({
   return (
     <form
       onSubmit={form.onSubmit(handleFormSubmit)}
-      style={{ width: '100%', maxWidth: '800px' }}
+      style={{ width: '100%', maxWidth: '800px', marginBottom: '30px' }}
     >
       <ListingDetailsFields form={form} disabled={isLoading} />
 

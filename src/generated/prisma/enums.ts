@@ -18,3 +18,12 @@ export const ImageOrigin = {
 } as const
 
 export type ImageOrigin = (typeof ImageOrigin)[keyof typeof ImageOrigin]
+
+
+export const ImageType = {
+  MAIN: 'MAIN',
+  FLOOR_PLAN: 'FLOOR_PLAN',
+  OTHER: 'OTHER'
+} as const
+
+export type ImageType = (typeof ImageType)[keyof typeof ImageType]

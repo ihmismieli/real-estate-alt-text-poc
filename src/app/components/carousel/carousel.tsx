@@ -2,15 +2,18 @@
 
 import { Image } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
-import type { ImageOrigin } from '@/app/types/listing';
+import type { ImageOrigin, ImageType } from '@/app/types/listing';
 import AiImageBadge from '@/app/components/ai-image-badge/ai-image-badge';
 import styles from '@/app/components/carousel/carousel.module.css';
+import { sortListingImages } from '@/app/utils/image-utils';
 
-type CarouselImage = {
+export type CarouselImage = {
   id: string;
   url: string;
   altText?: string | null;
   origin?: ImageOrigin | null;
+  imageType: ImageType;
+  sortOrder: number;
 };
 
 type CarouselComponentProps = {
@@ -32,7 +35,9 @@ export default function CarouselComponent({
     );
   }
 
-  const slides = images.map((image) => (
+  const sortedImages = sortListingImages(images);
+
+  const slides = sortedImages.map((image) => (
     <Carousel.Slide key={image.id}>
       <div className={styles.slideViewport}>
         <div className={styles.imageFrame}>

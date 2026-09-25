@@ -50,26 +50,13 @@ npx prisma migrate reset
 
 Never run `migrate reset` against the Preview or production database.
 
-## Vercel Preview database
+## Vercel databases
 
-After a migration has been reviewed and merged into `develop`, apply the already-created migrations to the Vercel Preview database:
-
-```powershell
-git checkout develop
-git pull
-npx vercel env run -e preview -- npx prisma migrate deploy
-```
-
-This uses the `DATABASE_URL` from the Vercel Preview environment. It does not use the local `localhost` database. Ensure the local `.env` files do not override the Preview value when running this command.
-
-`migrate deploy` applies pending migration files. It does not create a new migration and does not reset the database.
-
-## Production database
-
-Production migrations should be run by the production CI/CD deployment using:
+Migrations are applied automatically when either Vercel project is deployed. Both projects use this Build Command:
 
 ```powershell
-npx prisma migrate deploy
+npx prisma generate && npx prisma migrate deploy && npm run build
 ```
 
-The production command must use the production environment's `DATABASE_URL`. Do not use the local or Preview database URL for production.
+- The `poc-dev` project uses the Preview database's `DATABASE_URL`.
+- The `poc` project uses the production database's `DATABASE_URL`.
