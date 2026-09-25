@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Group, Text, Stack, Box } from '@mantine/core';
+import { Card, Group, Text, Stack, Box, VisuallyHidden } from '@mantine/core';
 import Image from 'next/image';
 import type { ImageOrigin } from '@/app/types/listing';
 import AiImageBadge from '@/app/components/ai-image-badge/ai-image-badge';
@@ -92,7 +92,8 @@ export default function CardComponent({
 
         {livingArea && (
           <Text fw="normal" size="sm">
-            {livingArea} m²
+            <span aria-hidden="true"> {livingArea} m²</span>
+            <VisuallyHidden>{livingArea} neliömetriä</VisuallyHidden>
           </Text>
         )}
 
