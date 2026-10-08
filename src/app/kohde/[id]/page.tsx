@@ -53,7 +53,7 @@ export default async function ProtertyPage({
           <ListingDetails
             price={listing.price}
             rooms={listing.rooms}
-            livingArea={listing.livingArea?.toNumber() ?? null}
+            livingArea={listing.livingArea}
           />
 
           {listing.description && (
@@ -73,6 +73,7 @@ export default async function ProtertyPage({
                 alt={floorPlanImage?.altText ?? 'Kohteen pohjakuva'}
                 width={600}
                 height={400}
+                style={{ maxWidth: '100%', height: 'auto' }}
               />
             </Center>
           )}

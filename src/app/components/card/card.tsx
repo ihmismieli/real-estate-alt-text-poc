@@ -4,6 +4,7 @@ import { Card, Group, Text, Stack, Box, VisuallyHidden } from '@mantine/core';
 import Image from 'next/image';
 import type { ImageOrigin } from '@/app/types/listing';
 import AiImageBadge from '@/app/components/ai-image-badge/ai-image-badge';
+import Link from 'next/link';
 
 type CardProps = {
   publicId: number;
@@ -37,7 +38,7 @@ export default function CardComponent({
     <Card
       shadow="sm"
       padding="xl"
-      component="a"
+      component={Link}
       href={`/kohde/${publicId}`}
       w="100%"
       style={{

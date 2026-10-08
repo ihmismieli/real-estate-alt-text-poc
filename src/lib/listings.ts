@@ -1,14 +1,26 @@
 import { prisma } from '@/lib/prisma';
+import { cacheLife, cacheTag } from 'next/cache';
 
 export async function getListings() {
-    return prisma.listing.findMany({
+    'use cache';
+
+    cacheLife('hours');
+    cacheTag('listings');
+
+    const listings = await prisma.listing.findMany({
         orderBy: {
-            createdAt: "desc",
+            createdAt: 'desc',
         },
         include: {
             images: true,
         },
     });
+
+    return listings.map((listing) => ({
+        ...listing,
+        livingArea: listing.livingArea?.toNumber() ?? null,
+    }));
+
 }
 
 export async function getListingById(id: string) {
@@ -21,10 +33,25 @@ export async function getListingById(id: string) {
 }
 
 export async function getListingByPublicId(publicId: number) {
-    return prisma.listing.findUnique({
+    'use cache';
+
+    cacheLife('hours');
+    cacheTag(`listing:${publicId}`);
+
+
+    const listing = await prisma.listing.findUnique({
         where: { publicId },
         include: {
             images: true,
         },
     });
+
+    if (!listing) {
+        return null;
+    }
+
+    return {
+        ...listing,
+        livingArea: listing.livingArea?.toNumber() ?? null,
+    }
 }

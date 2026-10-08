@@ -4,8 +4,8 @@ import { prisma } from '@/lib/prisma';
 import { deleteLocalImageByUrl } from '@/lib/local-image-storage';
 import { del } from '@vercel/blob';
 import { checkSameOrigin } from '@/lib/security';
+import { invalidateListing } from '@/lib/listing-cache';
 
-export const runtime = 'nodejs';
 
 type Params = {
     params: Promise<{
@@ -45,6 +45,11 @@ export async function PATCH(request: Request, { params }: Params) {
             },
             select: {
                 id: true,
+                listing: {
+                    select: {
+                        publicId: true,
+                    },
+                },
             },
         });
 
@@ -63,6 +68,8 @@ export async function PATCH(request: Request, { params }: Params) {
                 altText: altText?.trim() ? altText.trim() : null,
             },
         });
+
+        invalidateListing(image.listing.publicId);
 
         return NextResponse.json(updatedImage);
     } catch (error) {
@@ -99,6 +106,11 @@ export async function DELETE(request: Request, { params }: Params) {
                 id: true,
                 url: true,
                 storageKey: true,
+                listing: {
+                    select: {
+                        publicId: true,
+                    },
+                },
             },
         });
 
@@ -120,6 +132,9 @@ export async function DELETE(request: Request, { params }: Params) {
                 id: image.id,
             },
         });
+
+        invalidateListing(image.listing.publicId);
+
 
         return NextResponse.json({ ok: true });
     } catch (error) {

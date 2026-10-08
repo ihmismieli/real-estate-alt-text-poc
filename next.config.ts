@@ -4,6 +4,7 @@ const isDev = process.env.NODE_ENV === 'development';
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  cacheComponents: true,
   experimental: {
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },

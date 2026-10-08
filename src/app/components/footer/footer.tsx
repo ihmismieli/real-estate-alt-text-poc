@@ -1,7 +1,14 @@
 import styles from '@/app/components/footer/footer.module.css';
 import ScrollToLink from '@/app/components/scroll-to-link/scroll-to-link';
+import { cacheLife } from 'next/cache';
+import { Suspense } from 'react';
+import Link from 'next/link';
 
-export default function Footer() {
+export default async function Footer() {
+  'use cache';
+
+  cacheLife('hours');
+
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
@@ -15,9 +22,17 @@ export default function Footer() {
             aria-label="Alatunnisteen navigaatio"
             className={styles.navigation}
           >
-            <ScrollToLink targetId="myytavat-asunnot" className={styles.link}>
-              MYYTÄVÄT KOHTEET
-            </ScrollToLink>
+            <Suspense
+              fallback={
+                <Link href="/#myytavat-asunnot" className={styles.link}>
+                  MYYTÄVÄT KOHTEET
+                </Link>
+              }
+            >
+              <ScrollToLink targetId="myytavat-asunnot" className={styles.link}>
+                MYYTÄVÄT KOHTEET
+              </ScrollToLink>
+            </Suspense>
           </nav>
         </div>
 

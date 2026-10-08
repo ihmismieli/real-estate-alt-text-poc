@@ -6,8 +6,7 @@ import sharp from 'sharp';
 import { del, put } from '@vercel/blob';
 import { checkSameOrigin } from '@/lib/security';
 import type { ImageOrigin, ImageType } from '@/app/types/listing';
-
-export const runtime = 'nodejs';
+import { invalidateListing } from '@/lib/listing-cache';
 
 const MAX_FILE_SIZE_BYTES = 4 * 1024 * 1024;
 const MAX_INPUT_PIXELS = 40_000_000;
@@ -247,6 +246,8 @@ export async function POST(
                 altText: altText,
             },
         });
+
+        invalidateListing(listing.publicId);
 
         return NextResponse.json([image], { status: 201 });
     } catch (error) {
