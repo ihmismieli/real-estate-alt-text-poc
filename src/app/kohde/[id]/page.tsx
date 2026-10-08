@@ -53,7 +53,7 @@ export default async function ProtertyPage({
           <ListingDetails
             price={listing.price}
             rooms={listing.rooms}
-            livingArea={listing.livingArea?.toNumber() ?? null}
+            livingArea={listing.livingArea}
           />
 
           {listing.description && (

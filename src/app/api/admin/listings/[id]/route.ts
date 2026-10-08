@@ -5,6 +5,7 @@ import { isCurrentUserAdmin } from "@/lib/dal";
 import { checkSameOrigin } from '@/lib/security';
 import { listingFormSchema } from '@/app/schemas/listing-schema';
 import { deleteBlobIfExists } from "@/app/admin/utils/blob-utils";
+import { invalidateListing } from '@/lib/listing-cache';
 
 export async function GET(
     _request: Request,
@@ -87,6 +88,8 @@ export async function PUT(
                     : null,
             },
         });
+        invalidateListing(listing.publicId);
+
         return NextResponse.json(listing);
     } catch (error) {
         console.error("Error updating listing:", error);
@@ -155,6 +158,8 @@ export async function DELETE(
         await prisma.listing.delete({
             where: { id: listing.id },
         });
+
+        invalidateListing(listing.publicId);
 
         await deleteListingUploadDirectory(String(listing.publicId));
 

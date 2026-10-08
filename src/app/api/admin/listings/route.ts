@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { isCurrentUserAdmin } from '@/lib/dal'
 import { checkSameOrigin } from '@/lib/security';
 import { listingFormSchema } from '@/app/schemas/listing-schema';
+import { invalidateListing } from '@/lib/listing-cache';
 
 export async function GET() {
 
@@ -69,6 +70,7 @@ export async function POST(request: Request) {
                     : null,
             },
         });
+        invalidateListing(listing.publicId);
         return NextResponse.json(listing, { status: 201 });
     } catch (error) {
         console.error("Error creating listing:", error);
