@@ -1,8 +1,14 @@
 import { getListings } from '@/lib/listings';
 import CardComponent from '@/app/components/card/card';
 import styles from '@/app/components/listings/listings.module.css';
+import { cacheLife, cacheTag } from 'next/cache';
 
 export default async function Listings() {
+  'use cache';
+
+  cacheLife('hours');
+  cacheTag('listings');
+
   const listings = await getListings();
 
   if (listings.length === 0) {
@@ -28,7 +34,7 @@ export default async function Listings() {
               district={listing.district}
               price={listing.price}
               rooms={listing.rooms}
-              livingArea={listing.livingArea?.toNumber() ?? null}
+              livingArea={listing.livingArea}
               image={mainImage?.url ?? '/listing-image-placeholder.png'}
               imageOrigin={mainImage?.origin}
             />
