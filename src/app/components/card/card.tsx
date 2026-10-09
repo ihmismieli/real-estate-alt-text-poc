@@ -39,6 +39,7 @@ export default function CardComponent({
       shadow="sm"
       padding="xl"
       component={Link}
+      prefetch={true}
       href={`/kohde/${publicId}`}
       w="100%"
       style={{
