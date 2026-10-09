@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Listing: 'Listing',
-  Image: 'Image'
+  Image: 'Image',
+  AltTextGeneration: 'AltTextGeneration'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -110,6 +111,25 @@ export const ImageScalarFieldEnum = {
 } as const
 
 export type ImageScalarFieldEnum = (typeof ImageScalarFieldEnum)[keyof typeof ImageScalarFieldEnum]
+
+
+export const AltTextGenerationScalarFieldEnum = {
+  id: 'id',
+  imageId: 'imageId',
+  status: 'status',
+  model: 'model',
+  inputTokens: 'inputTokens',
+  outputTokens: 'outputTokens',
+  totalTokens: 'totalTokens',
+  cachedInputTokens: 'cachedInputTokens',
+  cacheWriteTokens: 'cacheWriteTokens',
+  generatedAltText: 'generatedAltText',
+  errorCode: 'errorCode',
+  requestId: 'requestId',
+  createdAt: 'createdAt'
+} as const
+
+export type AltTextGenerationScalarFieldEnum = (typeof AltTextGenerationScalarFieldEnum)[keyof typeof AltTextGenerationScalarFieldEnum]
 
 
 export const SortOrder = {

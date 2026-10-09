@@ -2,7 +2,7 @@
 
 import { SimpleGrid } from '@mantine/core';
 import ListingCard from '@/app/admin/components/listing-card/listing-card';
-import type { Listing } from '@/app/types/listing';
+import type { Listing } from '@/app/types/listing-types';
 
 type ListingGridProps = {
   listings: Listing[];
