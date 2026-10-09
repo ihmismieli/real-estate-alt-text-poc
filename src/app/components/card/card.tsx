@@ -2,7 +2,7 @@
 
 import { Card, Group, Text, Stack, Box, VisuallyHidden } from '@mantine/core';
 import Image from 'next/image';
-import type { ImageOrigin } from '@/app/types/listing';
+import type { ImageOrigin } from '@/app/types/listing-types';
 import AiImageBadge from '@/app/components/ai-image-badge/ai-image-badge';
 import Link from 'next/link';
 
