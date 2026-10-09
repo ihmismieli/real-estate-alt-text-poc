@@ -106,10 +106,26 @@ export async function generateImageAltText({
             );
         }
 
+        const usage = response.usage;
+
+        if (!usage) {
+            return altTextFailureResult(
+                'GENERATION_FAILED',
+                'OpenAI ei palauttanut tokenien käyttötietoja.'
+            );
+        }
+
         return {
             success: true,
             altText,
             model,
+            usage: {
+                inputTokens: usage.input_tokens,
+                outputTokens: usage.output_tokens,
+                totalTokens: usage.total_tokens,
+                cachedInputTokens: usage.input_tokens_details.cached_tokens,
+                cacheWriteTokens: usage.input_tokens_details.cache_write_tokens,
+            },
         };
     } catch (error) {
         console.error('Alt-text generation failed', {

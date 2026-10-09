@@ -10,4 +10,5 @@
  */
 export type * from './models/Listing'
 export type * from './models/Image'
+export type * from './models/AltTextGeneration'
 export type * from './commonInputTypes'

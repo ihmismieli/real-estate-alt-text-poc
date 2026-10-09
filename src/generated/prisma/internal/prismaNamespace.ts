@@ -398,7 +398,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Listing: 'Listing',
-  Image: 'Image'
+  Image: 'Image',
+  AltTextGeneration: 'AltTextGeneration'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "listing" | "image"
+    modelProps: "listing" | "image" | "altTextGeneration"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -566,6 +567,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AltTextGeneration: {
+      payload: Prisma.$AltTextGenerationPayload<ExtArgs>
+      fields: Prisma.AltTextGenerationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AltTextGenerationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AltTextGenerationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AltTextGenerationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AltTextGenerationPayload>
+        }
+        findFirst: {
+          args: Prisma.AltTextGenerationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AltTextGenerationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AltTextGenerationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AltTextGenerationPayload>
+        }
+        findMany: {
+          args: Prisma.AltTextGenerationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AltTextGenerationPayload>[]
+        }
+        create: {
+          args: Prisma.AltTextGenerationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AltTextGenerationPayload>
+        }
+        createMany: {
+          args: Prisma.AltTextGenerationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AltTextGenerationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AltTextGenerationPayload>[]
+        }
+        delete: {
+          args: Prisma.AltTextGenerationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AltTextGenerationPayload>
+        }
+        update: {
+          args: Prisma.AltTextGenerationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AltTextGenerationPayload>
+        }
+        deleteMany: {
+          args: Prisma.AltTextGenerationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AltTextGenerationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AltTextGenerationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AltTextGenerationPayload>[]
+        }
+        upsert: {
+          args: Prisma.AltTextGenerationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AltTextGenerationPayload>
+        }
+        aggregate: {
+          args: Prisma.AltTextGenerationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAltTextGeneration>
+        }
+        groupBy: {
+          args: Prisma.AltTextGenerationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AltTextGenerationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AltTextGenerationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AltTextGenerationCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -644,6 +719,25 @@ export const ImageScalarFieldEnum = {
 } as const
 
 export type ImageScalarFieldEnum = (typeof ImageScalarFieldEnum)[keyof typeof ImageScalarFieldEnum]
+
+
+export const AltTextGenerationScalarFieldEnum = {
+  id: 'id',
+  imageId: 'imageId',
+  status: 'status',
+  model: 'model',
+  inputTokens: 'inputTokens',
+  outputTokens: 'outputTokens',
+  totalTokens: 'totalTokens',
+  cachedInputTokens: 'cachedInputTokens',
+  cacheWriteTokens: 'cacheWriteTokens',
+  generatedAltText: 'generatedAltText',
+  errorCode: 'errorCode',
+  requestId: 'requestId',
+  createdAt: 'createdAt'
+} as const
+
+export type AltTextGenerationScalarFieldEnum = (typeof AltTextGenerationScalarFieldEnum)[keyof typeof AltTextGenerationScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -771,6 +865,20 @@ export type EnumImageOriginFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'ImageOrigin[]'
  */
 export type ListEnumImageOriginFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ImageOrigin[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AltTextGenerationStatus'
+ */
+export type EnumAltTextGenerationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AltTextGenerationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'AltTextGenerationStatus[]'
+ */
+export type ListEnumAltTextGenerationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AltTextGenerationStatus[]'>
     
 
 
@@ -940,6 +1048,7 @@ export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaC
 export type GlobalOmitConfig = {
   listing?: Prisma.ListingOmit
   image?: Prisma.ImageOmit
+  altTextGeneration?: Prisma.AltTextGenerationOmit
 }
 
 /* Types for Logging */

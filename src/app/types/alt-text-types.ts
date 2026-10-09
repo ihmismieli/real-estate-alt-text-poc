@@ -9,11 +9,20 @@ export type AltTextErrorCode =
     | 'INVALID_IMAGE_URL'
     | 'GENERATION_FAILED';
 
+export type AltTextUsage = {
+    inputTokens: number;
+    outputTokens: number;
+    totalTokens: number;
+    cachedInputTokens: number;
+    cacheWriteTokens: number;
+}
+
 export type GenerateAltTextResult =
     | {
         success: true;
         altText: string;
         model: string;
+        usage: AltTextUsage;
     }
     | {
         success: false;
@@ -22,3 +31,4 @@ export type GenerateAltTextResult =
             message: string;
         };
     };
+
