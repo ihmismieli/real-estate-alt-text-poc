@@ -44,21 +44,29 @@ export default function ListingCard({ listing, onDelete }: ListingCardProps) {
 
         {listing.rooms && <Text size="sm">{listing.rooms}</Text>}
 
-        <Group style={{ marginTop: 'auto' }}>
-          <Link href={`/admin/listings/${listing.id}`}>
-            <Button size="sm" variant="light">
-              Muokkaa
-            </Button>
-          </Link>
+        <Group justify="space-between" style={{ marginTop: 'auto' }}>
+          <Group>
+            <Link href={`/admin/listings/${listing.id}`}>
+              <Button size="sm" variant="light">
+                Muokkaa
+              </Button>
+            </Link>
 
-          <Button
-            size="sm"
-            color="red"
+            <Button
+              size="sm"
+              color="red"
+              variant="light"
+              onClick={() => onDelete(listing.id)}
+            >
+              Poista
+            </Button>
+          </Group>
+          <Badge
+            color={listing.status === 'DRAFT' ? 'yellow' : 'green'}
             variant="light"
-            onClick={() => onDelete(listing.id)}
           >
-            Poista
-          </Button>
+            {listing.status === 'DRAFT' ? 'Luonnos' : 'Julkaistu'}
+          </Badge>
         </Group>
       </Stack>
     </Card>

@@ -153,3 +153,22 @@ export async function updateListingImageAltText(
 
     return res.json();
 }
+
+type PublishedListing = {
+    id: string;
+    publicId: number;
+    status: 'PUBLISHED';
+};
+
+export async function publishListing(id: string): Promise<PublishedListing> {
+    const res = await fetch(`/api/admin/listings/${id}/publish`, {
+        method: 'POST',
+    });
+
+    if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error ?? 'Kohteen julkaiseminen epäonnistui');
+    }
+
+    return res.json();
+}

@@ -16,10 +16,12 @@ import { useListings } from '@/app/admin/hooks/use-listings';
 import LoadingIndicator from '@/app/components/loading/loading';
 import { notifications } from '@mantine/notifications';
 import AdminPageHeader from './components/admin-page-header/admin-page-header';
+import { useRouter } from 'next/navigation';
 
 export default function AdminPage() {
   const { listings, error, isLoading, mutate } = useListings();
   const [isCreating, setIsCreating] = useState(false);
+  const router = useRouter();
 
   const handleCreateListing = async (
     formData: ListingFormData
@@ -36,10 +38,11 @@ export default function AdminPage() {
       await mutate();
 
       notifications.show({
-        message: 'Kohde luotu onnistuneesti',
+        message: 'Luonnos tallennettu onnistuneesti',
         color: 'green',
         autoClose: 5000,
       });
+      router.push(`/admin/listings/${listing.id}`);
       return { success: true };
     } catch (err) {
       notifications.show({
@@ -99,7 +102,7 @@ export default function AdminPage() {
             }}
             onSubmit={handleCreateListing}
             onCancel={() => {}}
-            submitLabel="Luo kohde"
+            submitLabel="Tallenna luonnos"
             isLoading={isCreating}
             resetAfterSubmit
             showCancel
