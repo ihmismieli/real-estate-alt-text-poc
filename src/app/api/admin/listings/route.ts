@@ -57,6 +57,7 @@ export async function POST(request: Request) {
 
         const listing = await prisma.listing.create({
             data: {
+                status: 'DRAFT',
                 address: address || null,
                 postalCode: postalCode || null,
                 district: district || null,

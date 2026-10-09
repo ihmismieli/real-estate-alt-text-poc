@@ -27,3 +27,11 @@ export const ImageType = {
 } as const
 
 export type ImageType = (typeof ImageType)[keyof typeof ImageType]
+
+
+export const ListingStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED'
+} as const
+
+export type ListingStatus = (typeof ListingStatus)[keyof typeof ListingStatus]

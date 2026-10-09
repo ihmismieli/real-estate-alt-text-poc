@@ -8,6 +8,9 @@ export async function getListings() {
     cacheTag('listings');
 
     const listings = await prisma.listing.findMany({
+        where: {
+            status: 'PUBLISHED',
+        },
         orderBy: {
             createdAt: 'desc',
         },
@@ -40,7 +43,10 @@ export async function getListingByPublicId(publicId: number) {
 
 
     const listing = await prisma.listing.findUnique({
-        where: { publicId },
+        where: {
+            publicId,
+            status: 'PUBLISHED',
+        },
         include: {
             images: true,
         },

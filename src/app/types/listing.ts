@@ -1,5 +1,7 @@
 type DateValue = Date | string;
 
+export type ListingStatus = 'DRAFT' | 'PUBLISHED';
+
 export type ImageOrigin =
     | 'REAL_IMAGE'
     | 'AI_BASIC'
@@ -43,6 +45,7 @@ export type ListingImage = {
 export type Listing = {
     id: string;
     publicId: number;
+    status: ListingStatus;
     address?: string | null;
     postalCode?: string | null;
     district?: string | null;
