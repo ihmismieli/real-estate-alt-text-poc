@@ -9,6 +9,7 @@ export const listings: Listing[] = [
         price: 249000,
         createdAt: new Date(),
         updatedAt: new Date(),
+        status: 'PUBLISHED',
     },
     {
         id: "2",
@@ -18,5 +19,6 @@ export const listings: Listing[] = [
         price: 329000,
         createdAt: new Date(),
         updatedAt: new Date(),
+        status: 'PUBLISHED',
     },
 ];

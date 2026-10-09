@@ -122,10 +122,11 @@ export default function ListingForm({
       return;
     }
 
+    setSelectedImages([]);
+    setFileInputKey((current) => current + 1);
+
     if (resetAfterSubmit) {
       form.reset();
-      setSelectedImages([]);
-      setFileInputKey((current) => current + 1);
     }
     return result;
   };

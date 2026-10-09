@@ -26,9 +26,15 @@ enum ImageType {
   OTHER
 }
 
+enum ListingStatus {
+  DRAFT
+  PUBLISHED
+}
+
 model Listing {
   id            String   @id @default(cuid())
   publicId      Int      @unique @default(autoincrement())
+  status        ListingStatus @default(DRAFT)
   address       String?
   postalCode    String?
   district      String?

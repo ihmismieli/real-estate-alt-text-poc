@@ -608,6 +608,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const ListingScalarFieldEnum = {
   id: 'id',
   publicId: 'publicId',
+  status: 'status',
   address: 'address',
   postalCode: 'postalCode',
   district: 'district',
@@ -700,6 +701,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ListingStatus'
+ */
+export type EnumListingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ListingStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ListingStatus[]'
+ */
+export type ListEnumListingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ListingStatus[]'>
     
 
 
