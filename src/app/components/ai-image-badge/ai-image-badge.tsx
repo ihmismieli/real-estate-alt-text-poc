@@ -1,6 +1,6 @@
 'use client';
 
-import type { ImageOrigin } from '@/app/types/listing-types';
+import type { ImageOrigin } from '@/app/types/listing';
 import Image from 'next/image';
 import styles from '@/app/components/ai-image-badge/ai-image-badge.module.css';
 

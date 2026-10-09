@@ -16,7 +16,7 @@ import type {
   ImageOrigin,
   NewListingImage,
   ImageType,
-} from '@/app/types/listing-types';
+} from '@/app/types/listing';
 import { useEffect, useRef, type ReactNode } from 'react';
 
 type ListingImageUploaderProps = {
