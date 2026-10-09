@@ -1,4 +1,4 @@
-import type { NewListingImage } from '@/app/types/listing';
+import type { NewListingImage } from '@/app/types/listing-types';
 
 export async function createListing(data: {
     address?: string;

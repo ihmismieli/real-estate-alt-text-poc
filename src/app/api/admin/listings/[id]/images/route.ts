@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 import sharp from 'sharp';
 import { del, put } from '@vercel/blob';
 import { checkSameOrigin } from '@/lib/security';
-import type { ImageOrigin, ImageType } from '@/app/types/listing';
+import type { ImageOrigin, ImageType } from '@/app/types/listing-types';
 import { invalidateListing } from '@/lib/listing-cache';
 
 const MAX_FILE_SIZE_BYTES = 4 * 1024 * 1024;
