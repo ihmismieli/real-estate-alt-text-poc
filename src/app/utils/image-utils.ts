@@ -1,7 +1,7 @@
 import type {
     ImageType,
     ListingImage,
-} from '@/app/types/listing-types';
+} from '@/app/types/listing';
 import { CarouselImage } from '../components/carousel/carousel';
 
 export const IMAGE_TYPE_ORDER: Record<ImageType, number> = {

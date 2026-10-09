@@ -26,19 +26,14 @@ enum ImageType {
   OTHER
 }
 
-enum AltTextGenerationStatus {
-  SUCCEEDED
-  FAILED
-}
-
 enum ListingStatus {
   DRAFT
   PUBLISHED
 }
 
 model Listing {
-  id            String        @id @default(cuid())
-  publicId      Int           @unique @default(autoincrement())
+  id            String   @id @default(cuid())
+  publicId      Int      @unique @default(autoincrement())
   status        ListingStatus @default(DRAFT)
   address       String?
   postalCode    String?
@@ -49,52 +44,29 @@ model Listing {
   apartmentType String?
   rooms         String?
   livingArea    Decimal?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
   images        Image[]
 }
 
 model Image {
-  id               String      @id @default(cuid())
-  url              String
-  storageKey       String?     @unique
+  id        String   @id @default(cuid())
+  url       String
+  storageKey String?  @unique
   originalFilename String?
-  mimeType         String?
-  width            Int?
-  height           Int?
-  altText          String?
-  roomType         String?
-  imageType        ImageType   @default(OTHER)
-  sortOrder        Int         @default(0)
-  origin           ImageOrigin @default(UNKNOWN)
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
-
-  altTextGenerations AltTextGeneration[]
+  mimeType   String?
+  width      Int?
+  height     Int?
+  altText   String?
+  roomType  String?
+  imageType ImageType  @default(OTHER)
+  sortOrder Int        @default(0)
+  origin               ImageOrigin @default(UNKNOWN)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 
   listingId String
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 
   @@index([listingId, imageType, sortOrder])
-}
-
-model AltTextGeneration {
-  id      String                  @id @default(cuid())
-  imageId String
-  image   Image                   @relation(fields: [imageId], references: [id], onDelete: Cascade)
-  status  AltTextGenerationStatus
-  model   String?
-
-  inputTokens       Int?
-  outputTokens      Int?
-  totalTokens       Int?
-  cachedInputTokens Int?
-  cacheWriteTokens  Int?
-  generatedAltText  String?
-  errorCode         String?
-  requestId         String?
-
-  createdAt DateTime @default(now())
-
-  @@index([imageId, createdAt])
 }

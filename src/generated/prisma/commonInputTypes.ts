@@ -242,23 +242,6 @@ export type EnumImageOriginWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumImageOriginFilter<$PrismaModel>
 }
 
-export type EnumAltTextGenerationStatusFilter<$PrismaModel = never> = {
-  equals?: $Enums.AltTextGenerationStatus | Prisma.EnumAltTextGenerationStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.AltTextGenerationStatus[] | Prisma.ListEnumAltTextGenerationStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.AltTextGenerationStatus[] | Prisma.ListEnumAltTextGenerationStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumAltTextGenerationStatusFilter<$PrismaModel> | $Enums.AltTextGenerationStatus
-}
-
-export type EnumAltTextGenerationStatusWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.AltTextGenerationStatus | Prisma.EnumAltTextGenerationStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.AltTextGenerationStatus[] | Prisma.ListEnumAltTextGenerationStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.AltTextGenerationStatus[] | Prisma.ListEnumAltTextGenerationStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumAltTextGenerationStatusWithAggregatesFilter<$PrismaModel> | $Enums.AltTextGenerationStatus
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumAltTextGenerationStatusFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumAltTextGenerationStatusFilter<$PrismaModel>
-}
-
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -498,23 +481,6 @@ export type NestedEnumImageOriginWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumImageOriginFilter<$PrismaModel>
   _max?: Prisma.NestedEnumImageOriginFilter<$PrismaModel>
-}
-
-export type NestedEnumAltTextGenerationStatusFilter<$PrismaModel = never> = {
-  equals?: $Enums.AltTextGenerationStatus | Prisma.EnumAltTextGenerationStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.AltTextGenerationStatus[] | Prisma.ListEnumAltTextGenerationStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.AltTextGenerationStatus[] | Prisma.ListEnumAltTextGenerationStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumAltTextGenerationStatusFilter<$PrismaModel> | $Enums.AltTextGenerationStatus
-}
-
-export type NestedEnumAltTextGenerationStatusWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.AltTextGenerationStatus | Prisma.EnumAltTextGenerationStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.AltTextGenerationStatus[] | Prisma.ListEnumAltTextGenerationStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.AltTextGenerationStatus[] | Prisma.ListEnumAltTextGenerationStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumAltTextGenerationStatusWithAggregatesFilter<$PrismaModel> | $Enums.AltTextGenerationStatus
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumAltTextGenerationStatusFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumAltTextGenerationStatusFilter<$PrismaModel>
 }
 
 

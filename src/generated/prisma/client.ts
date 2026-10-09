@@ -51,8 +51,3 @@ export type Listing = Prisma.ListingModel
  * 
  */
 export type Image = Prisma.ImageModel
-/**
- * Model AltTextGeneration
- * 
- */
-export type AltTextGeneration = Prisma.AltTextGenerationModel
