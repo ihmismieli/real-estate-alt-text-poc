@@ -14,6 +14,16 @@ export type ImageType =
     | 'FLOOR_PLAN'
     | 'OTHER';
 
+export type ImageAltTextStatus =
+    | 'IDLE'
+    | 'PROCESSING'
+    | 'COMPLETED'
+    | 'FAILED';
+
+export type AltTextSource =
+    | 'MANUAL'
+    | 'AI_GENERATED'
+
 /**
  * Image in the process of being uploaded on admin panel, not yet stored in the database.
  */
@@ -40,6 +50,9 @@ export type ListingImage = {
     createdAt: DateValue;
     updatedAt: DateValue;
     listingId: string;
+    altTextStatus: ImageAltTextStatus;
+    altTextSource?: AltTextSource | null;
+    altTextStartedAt?: string | Date | null;
 };
 
 export type Listing = {

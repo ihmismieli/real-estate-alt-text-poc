@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   ActionIcon,
   Button,
@@ -22,7 +22,7 @@ import {
   updateListingImageAltText,
 } from '@/app/admin/utils/listing-api';
 
-type ExistingImageProps = {
+type ExistingImagesType = {
   listingId: string;
   images: ListingImage[];
   onImagesChange: () => Promise<void>;
@@ -32,27 +32,10 @@ export default function ExistingImagesEditor({
   listingId,
   images,
   onImagesChange,
-}: ExistingImageProps) {
-  const [altTexts, setAltTexts] = useState(() =>
-    Object.fromEntries(images.map((image) => [image.id, image.altText ?? '']))
-  );
-
+}: ExistingImagesType) {
+  const [altTexts, setAltTexts] = useState<Record<string, string>>({});
   const [savingImageId, setSavingImageId] = useState<string | null>(null);
   const [deletingImageId, setDeletingImageId] = useState<string | null>(null);
-
-  useEffect(() => {
-    setAltTexts((current) => {
-      const next = { ...current };
-
-      for (const image of images) {
-        if (!(image.id in next)) {
-          next[image.id] = image.altText ?? '';
-        }
-      }
-
-      return next;
-    });
-  }, [images]);
 
   const handleAltTextChange = (imageId: string, value: string) => {
     setAltTexts((current) => ({
@@ -65,20 +48,31 @@ export default function ExistingImagesEditor({
     imageId: string,
     nextAltText?: string | null
   ) => {
+    const draftBeforeSave = altTexts[imageId];
+
+    const savedAltText =
+      images.find((image) => image.id === imageId)?.altText ?? '';
+
     const value =
-      nextAltText === undefined ? (altTexts[imageId] ?? '') : nextAltText;
+      nextAltText === undefined
+        ? (draftBeforeSave ?? savedAltText)
+        : nextAltText;
 
     setSavingImageId(imageId);
 
     try {
       await updateListingImageAltText(listingId, imageId, value);
-
-      setAltTexts((current) => ({
-        ...current,
-        [imageId]: value ?? '',
-      }));
-
       await onImagesChange();
+
+      setAltTexts((current) => {
+        if (current[imageId] !== draftBeforeSave) {
+          return current;
+        }
+
+        const next = { ...current };
+        delete next[imageId];
+        return next;
+      });
 
       notifications.show({
         message:
@@ -140,7 +134,7 @@ export default function ExistingImagesEditor({
   return (
     <Stack gap="lg" style={{ width: '100%', maxWidth: '800px' }}>
       {images.map((image, index) => {
-        const currentAltText = altTexts[image.id] ?? '';
+        const currentAltText = altTexts[image.id] ?? image.altText ?? '';
         const savedAltText = image.altText ?? '';
         const notFinishedAltText = currentAltText !== savedAltText;
 
@@ -178,6 +172,21 @@ export default function ExistingImagesEditor({
 
               <Grid.Col span={{ base: 12, sm: 7, md: 8 }}>
                 <Stack gap="md">
+                  <Text size="sm" role="status">
+                    {image.altTextStatus === 'PROCESSING' &&
+                      'Tekstivastinetta luodaan… Voit myös kirjoittaa ja tallentaa oman tekstin, jolloin AI-generointi keskeytyy tallentamattomana.'}
+
+                    {image.altTextStatus === 'COMPLETED' &&
+                      'Tekstivastine luotu tekoälyllä. Tarkista sen sisältö.'}
+
+                    {image.altTextStatus === 'FAILED' &&
+                      'Automaattinen luonti ei valmistunut. Voit kirjoittaa tekstivastineen itse.'}
+
+                    {image.altTextStatus === 'IDLE' &&
+                      image.altTextSource === 'MANUAL' &&
+                      'Käyttäjän tallentama tekstivastine.'}
+                  </Text>
+
                   <Textarea
                     label="Tekstivastine (valinnainen)"
                     placeholder="Kirjoita kuvan tekstivastine"
@@ -186,7 +195,7 @@ export default function ExistingImagesEditor({
                       handleAltTextChange(image.id, event.currentTarget.value)
                     }
                     autosize
-                    minRows={5}
+                    minRows={6}
                     maxRows={9}
                     lang="fi"
                   />

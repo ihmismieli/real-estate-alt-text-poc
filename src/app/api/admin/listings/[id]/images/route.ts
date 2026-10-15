@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { isCurrentUserAdmin } from '@/lib/dal';
 import { randomUUID } from 'node:crypto';
@@ -6,7 +6,8 @@ import sharp from 'sharp';
 import { del, put } from '@vercel/blob';
 import { checkSameOrigin } from '@/lib/security';
 import type { ImageOrigin, ImageType } from '@/app/types/listing-types';
-import { invalidateListing } from '@/lib/listing-cache';
+import { invalidateListingSafely } from '@/lib/listing-cache';
+import { generateAndSaveImageAltText } from '@/lib/alt-text/generate-and-save-image-alt-text';
 
 const MAX_FILE_SIZE_BYTES = 4 * 1024 * 1024;
 const MAX_INPUT_PIXELS = 40_000_000;
@@ -17,6 +18,8 @@ const ALLOWED_MIME_TYPES = new Set([
     'image/webp',
 ]);
 const ALLOWED_SHARP_FORMATS = new Set(['jpeg', 'png', 'webp']);
+
+export const maxDuration = 120;
 
 class InvalidImageError extends Error { }
 
@@ -232,6 +235,8 @@ export async function POST(
 
         uploadedBlobs.push(blob);
 
+        const shouldGenerateAltText = altText === null;
+
         const image = await prisma.image.create({
             data: {
                 listingId: listing.id,
@@ -244,10 +249,24 @@ export async function POST(
                 imageType: imageType as ImageType,
                 sortOrder: sortOrder,
                 altText: altText,
+                altTextStatus: shouldGenerateAltText ? 'PROCESSING' : 'IDLE',
+                altTextSource: shouldGenerateAltText ? null : 'MANUAL',
+                altTextStartedAt: shouldGenerateAltText ? new Date() : null,
             },
         });
 
-        invalidateListing(listing.publicId);
+        uploadedBlobs.length = 0;
+
+        if (shouldGenerateAltText) {
+            after(async () => {
+                await generateAndSaveImageAltText(
+                    image,
+                    listing.publicId
+                );
+            });
+        }
+
+        invalidateListingSafely(listing.publicId);
 
         return NextResponse.json([image], { status: 201 });
     } catch (error) {

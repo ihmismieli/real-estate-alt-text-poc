@@ -17,6 +17,23 @@ export async function GET(
 
     try {
         const { id } = await params;
+
+        const generationCutOff = new Date(Date.now() - 3 * 60 * 1000); // 3 minutes ago
+
+        await prisma.image.updateMany({
+            where: {
+                listingId: id,
+                altTextStatus: 'PROCESSING',
+                altTextStartedAt: {
+                    lt: generationCutOff,
+                },
+            },
+            data: {
+                altTextStatus: 'IDLE',
+                altTextStartedAt: null,
+            },
+        });
+
         const listing = await prisma.listing.findUnique({
             where: {
                 id,
