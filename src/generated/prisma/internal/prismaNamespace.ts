@@ -715,6 +715,9 @@ export const ImageScalarFieldEnum = {
   origin: 'origin',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  altTextStatus: 'altTextStatus',
+  altTextSource: 'altTextSource',
+  altTextStartedAt: 'altTextStartedAt',
   listingId: 'listingId'
 } as const
 
@@ -865,6 +868,34 @@ export type EnumImageOriginFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'ImageOrigin[]'
  */
 export type ListEnumImageOriginFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ImageOrigin[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ImageAltTextStatus'
+ */
+export type EnumImageAltTextStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ImageAltTextStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ImageAltTextStatus[]'
+ */
+export type ListEnumImageAltTextStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ImageAltTextStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AltTextSource'
+ */
+export type EnumAltTextSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AltTextSource'>
+    
+
+
+/**
+ * Reference to a field of type 'AltTextSource[]'
+ */
+export type ListEnumAltTextSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AltTextSource[]'>
     
 
 

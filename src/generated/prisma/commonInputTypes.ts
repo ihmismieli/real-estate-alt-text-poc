@@ -222,6 +222,31 @@ export type EnumImageOriginFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumImageOriginFilter<$PrismaModel> | $Enums.ImageOrigin
 }
 
+export type EnumImageAltTextStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ImageAltTextStatus | Prisma.EnumImageAltTextStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ImageAltTextStatus[] | Prisma.ListEnumImageAltTextStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ImageAltTextStatus[] | Prisma.ListEnumImageAltTextStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumImageAltTextStatusFilter<$PrismaModel> | $Enums.ImageAltTextStatus
+}
+
+export type EnumAltTextSourceNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.AltTextSource | Prisma.EnumAltTextSourceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.AltTextSource[] | Prisma.ListEnumAltTextSourceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.AltTextSource[] | Prisma.ListEnumAltTextSourceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumAltTextSourceNullableFilter<$PrismaModel> | $Enums.AltTextSource | null
+}
+
+export type DateTimeNullableFilter<$PrismaModel = never> = {
+  equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
+  in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
+  notIn?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
+  lt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  lte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+}
+
 export type EnumImageTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ImageType | Prisma.EnumImageTypeFieldRefInput<$PrismaModel>
   in?: $Enums.ImageType[] | Prisma.ListEnumImageTypeFieldRefInput<$PrismaModel>
@@ -240,6 +265,40 @@ export type EnumImageOriginWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumImageOriginFilter<$PrismaModel>
   _max?: Prisma.NestedEnumImageOriginFilter<$PrismaModel>
+}
+
+export type EnumImageAltTextStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ImageAltTextStatus | Prisma.EnumImageAltTextStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ImageAltTextStatus[] | Prisma.ListEnumImageAltTextStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ImageAltTextStatus[] | Prisma.ListEnumImageAltTextStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumImageAltTextStatusWithAggregatesFilter<$PrismaModel> | $Enums.ImageAltTextStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumImageAltTextStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumImageAltTextStatusFilter<$PrismaModel>
+}
+
+export type EnumAltTextSourceNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AltTextSource | Prisma.EnumAltTextSourceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.AltTextSource[] | Prisma.ListEnumAltTextSourceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.AltTextSource[] | Prisma.ListEnumAltTextSourceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumAltTextSourceNullableWithAggregatesFilter<$PrismaModel> | $Enums.AltTextSource | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAltTextSourceNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAltTextSourceNullableFilter<$PrismaModel>
+}
+
+export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
+  in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
+  notIn?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
+  lt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  lte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
 export type EnumAltTextGenerationStatusFilter<$PrismaModel = never> = {
@@ -480,6 +539,31 @@ export type NestedEnumImageOriginFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumImageOriginFilter<$PrismaModel> | $Enums.ImageOrigin
 }
 
+export type NestedEnumImageAltTextStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ImageAltTextStatus | Prisma.EnumImageAltTextStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ImageAltTextStatus[] | Prisma.ListEnumImageAltTextStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ImageAltTextStatus[] | Prisma.ListEnumImageAltTextStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumImageAltTextStatusFilter<$PrismaModel> | $Enums.ImageAltTextStatus
+}
+
+export type NestedEnumAltTextSourceNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.AltTextSource | Prisma.EnumAltTextSourceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.AltTextSource[] | Prisma.ListEnumAltTextSourceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.AltTextSource[] | Prisma.ListEnumAltTextSourceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumAltTextSourceNullableFilter<$PrismaModel> | $Enums.AltTextSource | null
+}
+
+export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+  equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
+  in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
+  notIn?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
+  lt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  lte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+}
+
 export type NestedEnumImageTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ImageType | Prisma.EnumImageTypeFieldRefInput<$PrismaModel>
   in?: $Enums.ImageType[] | Prisma.ListEnumImageTypeFieldRefInput<$PrismaModel>
@@ -498,6 +582,40 @@ export type NestedEnumImageOriginWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumImageOriginFilter<$PrismaModel>
   _max?: Prisma.NestedEnumImageOriginFilter<$PrismaModel>
+}
+
+export type NestedEnumImageAltTextStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ImageAltTextStatus | Prisma.EnumImageAltTextStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ImageAltTextStatus[] | Prisma.ListEnumImageAltTextStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ImageAltTextStatus[] | Prisma.ListEnumImageAltTextStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumImageAltTextStatusWithAggregatesFilter<$PrismaModel> | $Enums.ImageAltTextStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumImageAltTextStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumImageAltTextStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumAltTextSourceNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AltTextSource | Prisma.EnumAltTextSourceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.AltTextSource[] | Prisma.ListEnumAltTextSourceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.AltTextSource[] | Prisma.ListEnumAltTextSourceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumAltTextSourceNullableWithAggregatesFilter<$PrismaModel> | $Enums.AltTextSource | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAltTextSourceNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAltTextSourceNullableFilter<$PrismaModel>
+}
+
+export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
+  in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
+  notIn?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null
+  lt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  lte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumAltTextGenerationStatusFilter<$PrismaModel = never> = {

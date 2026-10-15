@@ -37,6 +37,24 @@ export const AltTextGenerationStatus = {
 export type AltTextGenerationStatus = (typeof AltTextGenerationStatus)[keyof typeof AltTextGenerationStatus]
 
 
+export const AltTextSource = {
+  MANUAL: 'MANUAL',
+  AI_GENERATED: 'AI_GENERATED'
+} as const
+
+export type AltTextSource = (typeof AltTextSource)[keyof typeof AltTextSource]
+
+
+export const ImageAltTextStatus = {
+  IDLE: 'IDLE',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const
+
+export type ImageAltTextStatus = (typeof ImageAltTextStatus)[keyof typeof ImageAltTextStatus]
+
+
 export const ListingStatus = {
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED'
