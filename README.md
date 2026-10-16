@@ -1,6 +1,6 @@
 # Accessible Alternative Text for Real Estate Listings – PoC
 
-A proof-of-concept application for managing real estate listings and accessible alternative text for listing images. The application displays properties for sale and provides an admin interface for managing listing and image data.
+A proof-of-concept application for managing real estate listings and accessible alternative text for listing images using the OpenAI Responses API. The application displays properties for sale and provides an admin interface for managing listing and image data.
 
 ## Features
 
@@ -10,6 +10,15 @@ A proof-of-concept application for managing real estate listings and accessible 
 - Upload and delete listing images
 - Store listing data in PostgreSQL with Prisma
 - Store images in Vercel Blob
+
+### AI-generated alternative text
+
+- Automatically generates Finnish alternative text in the background for newly uploaded images without manually entered alternative text.
+- Uses the OpenAI Responses API with separate instructions for floor plans and other listing images.
+- Allows admins to select the AI model used for generation.
+
+For setup instructions and details about the generation workflow,
+see [AI-generated alternative text](docs/ai-alt-text.md).
 
 ## Technologies
 
@@ -33,7 +42,7 @@ Next.js, React, TypeScript, Prisma, PostgreSQL, Auth.js, Vercel Blob, Sharp, and
    npm ci
    ```
 
-2. Create `.env.local` from `.env.example` and fill in the local values. The local `DATABASE_URL` should point to your local PostgreSQL database, for example `localhost:5433`.
+2. Create `.env` from `.env.example` and fill in the local values. The local `DATABASE_URL` should point to your local PostgreSQL database.
 
    Required environment variables include:
 
@@ -49,6 +58,8 @@ Next.js, React, TypeScript, Prisma, PostgreSQL, Auth.js, Vercel Blob, Sharp, and
    ADMIN_EMAIL
    BLOB_STORE_ID
    BLOB_READ_WRITE_TOKEN
+   OPEN_API_KEY
+   OPENAI_MODEL
    ```
 
 3. Apply the Prisma migrations to the local database:

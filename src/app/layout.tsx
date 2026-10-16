@@ -9,6 +9,8 @@ import { MantineProvider, mantineHtmlProps, createTheme } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import Footer from '@/app/components/footer/footer';
 import { Suspense } from 'react';
+import NavigationFallback from '@/app/components/navigation/navigation-fallback';
+import navigationStyles from '@/app/components/navigation/navigation.module.css';
 
 const urbanist = Urbanist({
   subsets: ['latin'],
@@ -42,7 +44,13 @@ export default function RootLayout({
       <body>
         <MantineProvider theme={theme}>
           <Notifications />
-          <Suspense fallback={<div style={{ minHeight: 64 }} />}>
+          <Suspense
+            fallback={
+              <nav className={navigationStyles.nav} aria-label="Navigaatio">
+                <NavigationFallback />
+              </nav>
+            }
+          >
             <Navigation />
           </Suspense>
           <main className="pageContent">{children}</main>

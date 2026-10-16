@@ -107,6 +107,9 @@ export const ImageScalarFieldEnum = {
   origin: 'origin',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  altTextStatus: 'altTextStatus',
+  altTextSource: 'altTextSource',
+  altTextStartedAt: 'altTextStartedAt',
   listingId: 'listingId'
 } as const
 

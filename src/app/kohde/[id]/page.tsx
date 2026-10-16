@@ -36,9 +36,14 @@ export default async function ProtertyPage({
   return (
     <PageContainer>
       <Box w="100%" maw={800} mt={'xl'}>
-        <section>
+        <section aria-labelledby="listing-images-heading">
           <VisuallyHidden component="h2" id="listing-images-heading">
             Kohteen kuvat
+          </VisuallyHidden>
+
+          <VisuallyHidden component="p">
+            Tekstivastineiden laatimisessa on käytetty tekoälyä. Ne voivat
+            sisältää virheitä.
           </VisuallyHidden>
 
           <CarouselComponent
