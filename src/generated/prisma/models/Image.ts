@@ -53,6 +53,9 @@ export type ImageMinAggregateOutputType = {
   origin: $Enums.ImageOrigin | null
   createdAt: Date | null
   updatedAt: Date | null
+  altTextStatus: $Enums.ImageAltTextStatus | null
+  altTextSource: $Enums.AltTextSource | null
+  altTextStartedAt: Date | null
   listingId: string | null
 }
 
@@ -71,6 +74,9 @@ export type ImageMaxAggregateOutputType = {
   origin: $Enums.ImageOrigin | null
   createdAt: Date | null
   updatedAt: Date | null
+  altTextStatus: $Enums.ImageAltTextStatus | null
+  altTextSource: $Enums.AltTextSource | null
+  altTextStartedAt: Date | null
   listingId: string | null
 }
 
@@ -89,6 +95,9 @@ export type ImageCountAggregateOutputType = {
   origin: number
   createdAt: number
   updatedAt: number
+  altTextStatus: number
+  altTextSource: number
+  altTextStartedAt: number
   listingId: number
   _all: number
 }
@@ -121,6 +130,9 @@ export type ImageMinAggregateInputType = {
   origin?: true
   createdAt?: true
   updatedAt?: true
+  altTextStatus?: true
+  altTextSource?: true
+  altTextStartedAt?: true
   listingId?: true
 }
 
@@ -139,6 +151,9 @@ export type ImageMaxAggregateInputType = {
   origin?: true
   createdAt?: true
   updatedAt?: true
+  altTextStatus?: true
+  altTextSource?: true
+  altTextStartedAt?: true
   listingId?: true
 }
 
@@ -157,6 +172,9 @@ export type ImageCountAggregateInputType = {
   origin?: true
   createdAt?: true
   updatedAt?: true
+  altTextStatus?: true
+  altTextSource?: true
+  altTextStartedAt?: true
   listingId?: true
   _all?: true
 }
@@ -262,6 +280,9 @@ export type ImageGroupByOutputType = {
   origin: $Enums.ImageOrigin
   createdAt: Date
   updatedAt: Date
+  altTextStatus: $Enums.ImageAltTextStatus
+  altTextSource: $Enums.AltTextSource | null
+  altTextStartedAt: Date | null
   listingId: string
   _count: ImageCountAggregateOutputType | null
   _avg: ImageAvgAggregateOutputType | null
@@ -303,7 +324,11 @@ export type ImageWhereInput = {
   origin?: Prisma.EnumImageOriginFilter<"Image"> | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFilter<"Image"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Image"> | Date | string
+  altTextStatus?: Prisma.EnumImageAltTextStatusFilter<"Image"> | $Enums.ImageAltTextStatus
+  altTextSource?: Prisma.EnumAltTextSourceNullableFilter<"Image"> | $Enums.AltTextSource | null
+  altTextStartedAt?: Prisma.DateTimeNullableFilter<"Image"> | Date | string | null
   listingId?: Prisma.StringFilter<"Image"> | string
+  altTextGenerations?: Prisma.AltTextGenerationListRelationFilter
   listing?: Prisma.XOR<Prisma.ListingScalarRelationFilter, Prisma.ListingWhereInput>
 }
 
@@ -322,7 +347,11 @@ export type ImageOrderByWithRelationInput = {
   origin?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  altTextStatus?: Prisma.SortOrder
+  altTextSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  altTextStartedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   listingId?: Prisma.SortOrder
+  altTextGenerations?: Prisma.AltTextGenerationOrderByRelationAggregateInput
   listing?: Prisma.ListingOrderByWithRelationInput
 }
 
@@ -344,7 +373,11 @@ export type ImageWhereUniqueInput = Prisma.AtLeast<{
   origin?: Prisma.EnumImageOriginFilter<"Image"> | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFilter<"Image"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Image"> | Date | string
+  altTextStatus?: Prisma.EnumImageAltTextStatusFilter<"Image"> | $Enums.ImageAltTextStatus
+  altTextSource?: Prisma.EnumAltTextSourceNullableFilter<"Image"> | $Enums.AltTextSource | null
+  altTextStartedAt?: Prisma.DateTimeNullableFilter<"Image"> | Date | string | null
   listingId?: Prisma.StringFilter<"Image"> | string
+  altTextGenerations?: Prisma.AltTextGenerationListRelationFilter
   listing?: Prisma.XOR<Prisma.ListingScalarRelationFilter, Prisma.ListingWhereInput>
 }, "id" | "storageKey">
 
@@ -363,6 +396,9 @@ export type ImageOrderByWithAggregationInput = {
   origin?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  altTextStatus?: Prisma.SortOrder
+  altTextSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  altTextStartedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   listingId?: Prisma.SortOrder
   _count?: Prisma.ImageCountOrderByAggregateInput
   _avg?: Prisma.ImageAvgOrderByAggregateInput
@@ -389,6 +425,9 @@ export type ImageScalarWhereWithAggregatesInput = {
   origin?: Prisma.EnumImageOriginWithAggregatesFilter<"Image"> | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Image"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Image"> | Date | string
+  altTextStatus?: Prisma.EnumImageAltTextStatusWithAggregatesFilter<"Image"> | $Enums.ImageAltTextStatus
+  altTextSource?: Prisma.EnumAltTextSourceNullableWithAggregatesFilter<"Image"> | $Enums.AltTextSource | null
+  altTextStartedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Image"> | Date | string | null
   listingId?: Prisma.StringWithAggregatesFilter<"Image"> | string
 }
 
@@ -407,6 +446,10 @@ export type ImageCreateInput = {
   origin?: $Enums.ImageOrigin
   createdAt?: Date | string
   updatedAt?: Date | string
+  altTextStatus?: $Enums.ImageAltTextStatus
+  altTextSource?: $Enums.AltTextSource | null
+  altTextStartedAt?: Date | string | null
+  altTextGenerations?: Prisma.AltTextGenerationCreateNestedManyWithoutImageInput
   listing: Prisma.ListingCreateNestedOneWithoutImagesInput
 }
 
@@ -425,7 +468,11 @@ export type ImageUncheckedCreateInput = {
   origin?: $Enums.ImageOrigin
   createdAt?: Date | string
   updatedAt?: Date | string
+  altTextStatus?: $Enums.ImageAltTextStatus
+  altTextSource?: $Enums.AltTextSource | null
+  altTextStartedAt?: Date | string | null
   listingId: string
+  altTextGenerations?: Prisma.AltTextGenerationUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type ImageUpdateInput = {
@@ -443,6 +490,10 @@ export type ImageUpdateInput = {
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  altTextStatus?: Prisma.EnumImageAltTextStatusFieldUpdateOperationsInput | $Enums.ImageAltTextStatus
+  altTextSource?: Prisma.NullableEnumAltTextSourceFieldUpdateOperationsInput | $Enums.AltTextSource | null
+  altTextStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  altTextGenerations?: Prisma.AltTextGenerationUpdateManyWithoutImageNestedInput
   listing?: Prisma.ListingUpdateOneRequiredWithoutImagesNestedInput
 }
 
@@ -461,7 +512,11 @@ export type ImageUncheckedUpdateInput = {
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  altTextStatus?: Prisma.EnumImageAltTextStatusFieldUpdateOperationsInput | $Enums.ImageAltTextStatus
+  altTextSource?: Prisma.NullableEnumAltTextSourceFieldUpdateOperationsInput | $Enums.AltTextSource | null
+  altTextStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listingId?: Prisma.StringFieldUpdateOperationsInput | string
+  altTextGenerations?: Prisma.AltTextGenerationUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type ImageCreateManyInput = {
@@ -479,6 +534,9 @@ export type ImageCreateManyInput = {
   origin?: $Enums.ImageOrigin
   createdAt?: Date | string
   updatedAt?: Date | string
+  altTextStatus?: $Enums.ImageAltTextStatus
+  altTextSource?: $Enums.AltTextSource | null
+  altTextStartedAt?: Date | string | null
   listingId: string
 }
 
@@ -497,6 +555,9 @@ export type ImageUpdateManyMutationInput = {
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  altTextStatus?: Prisma.EnumImageAltTextStatusFieldUpdateOperationsInput | $Enums.ImageAltTextStatus
+  altTextSource?: Prisma.NullableEnumAltTextSourceFieldUpdateOperationsInput | $Enums.AltTextSource | null
+  altTextStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ImageUncheckedUpdateManyInput = {
@@ -514,6 +575,9 @@ export type ImageUncheckedUpdateManyInput = {
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  altTextStatus?: Prisma.EnumImageAltTextStatusFieldUpdateOperationsInput | $Enums.ImageAltTextStatus
+  altTextSource?: Prisma.NullableEnumAltTextSourceFieldUpdateOperationsInput | $Enums.AltTextSource | null
+  altTextStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   listingId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -542,6 +606,9 @@ export type ImageCountOrderByAggregateInput = {
   origin?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  altTextStatus?: Prisma.SortOrder
+  altTextSource?: Prisma.SortOrder
+  altTextStartedAt?: Prisma.SortOrder
   listingId?: Prisma.SortOrder
 }
 
@@ -566,6 +633,9 @@ export type ImageMaxOrderByAggregateInput = {
   origin?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  altTextStatus?: Prisma.SortOrder
+  altTextSource?: Prisma.SortOrder
+  altTextStartedAt?: Prisma.SortOrder
   listingId?: Prisma.SortOrder
 }
 
@@ -584,6 +654,9 @@ export type ImageMinOrderByAggregateInput = {
   origin?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  altTextStatus?: Prisma.SortOrder
+  altTextSource?: Prisma.SortOrder
+  altTextStartedAt?: Prisma.SortOrder
   listingId?: Prisma.SortOrder
 }
 
@@ -591,6 +664,11 @@ export type ImageSumOrderByAggregateInput = {
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
+}
+
+export type ImageScalarRelationFilter = {
+  is?: Prisma.ImageWhereInput
+  isNot?: Prisma.ImageWhereInput
 }
 
 export type ImageCreateNestedManyWithoutListingInput = {
@@ -643,6 +721,32 @@ export type EnumImageOriginFieldUpdateOperationsInput = {
   set?: $Enums.ImageOrigin
 }
 
+export type EnumImageAltTextStatusFieldUpdateOperationsInput = {
+  set?: $Enums.ImageAltTextStatus
+}
+
+export type NullableEnumAltTextSourceFieldUpdateOperationsInput = {
+  set?: $Enums.AltTextSource | null
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type ImageCreateNestedOneWithoutAltTextGenerationsInput = {
+  create?: Prisma.XOR<Prisma.ImageCreateWithoutAltTextGenerationsInput, Prisma.ImageUncheckedCreateWithoutAltTextGenerationsInput>
+  connectOrCreate?: Prisma.ImageCreateOrConnectWithoutAltTextGenerationsInput
+  connect?: Prisma.ImageWhereUniqueInput
+}
+
+export type ImageUpdateOneRequiredWithoutAltTextGenerationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ImageCreateWithoutAltTextGenerationsInput, Prisma.ImageUncheckedCreateWithoutAltTextGenerationsInput>
+  connectOrCreate?: Prisma.ImageCreateOrConnectWithoutAltTextGenerationsInput
+  upsert?: Prisma.ImageUpsertWithoutAltTextGenerationsInput
+  connect?: Prisma.ImageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ImageUpdateToOneWithWhereWithoutAltTextGenerationsInput, Prisma.ImageUpdateWithoutAltTextGenerationsInput>, Prisma.ImageUncheckedUpdateWithoutAltTextGenerationsInput>
+}
+
 export type ImageCreateWithoutListingInput = {
   id?: string
   url: string
@@ -658,6 +762,10 @@ export type ImageCreateWithoutListingInput = {
   origin?: $Enums.ImageOrigin
   createdAt?: Date | string
   updatedAt?: Date | string
+  altTextStatus?: $Enums.ImageAltTextStatus
+  altTextSource?: $Enums.AltTextSource | null
+  altTextStartedAt?: Date | string | null
+  altTextGenerations?: Prisma.AltTextGenerationCreateNestedManyWithoutImageInput
 }
 
 export type ImageUncheckedCreateWithoutListingInput = {
@@ -675,6 +783,10 @@ export type ImageUncheckedCreateWithoutListingInput = {
   origin?: $Enums.ImageOrigin
   createdAt?: Date | string
   updatedAt?: Date | string
+  altTextStatus?: $Enums.ImageAltTextStatus
+  altTextSource?: $Enums.AltTextSource | null
+  altTextStartedAt?: Date | string | null
+  altTextGenerations?: Prisma.AltTextGenerationUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type ImageCreateOrConnectWithoutListingInput = {
@@ -721,7 +833,110 @@ export type ImageScalarWhereInput = {
   origin?: Prisma.EnumImageOriginFilter<"Image"> | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFilter<"Image"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Image"> | Date | string
+  altTextStatus?: Prisma.EnumImageAltTextStatusFilter<"Image"> | $Enums.ImageAltTextStatus
+  altTextSource?: Prisma.EnumAltTextSourceNullableFilter<"Image"> | $Enums.AltTextSource | null
+  altTextStartedAt?: Prisma.DateTimeNullableFilter<"Image"> | Date | string | null
   listingId?: Prisma.StringFilter<"Image"> | string
+}
+
+export type ImageCreateWithoutAltTextGenerationsInput = {
+  id?: string
+  url: string
+  storageKey?: string | null
+  originalFilename?: string | null
+  mimeType?: string | null
+  width?: number | null
+  height?: number | null
+  altText?: string | null
+  roomType?: string | null
+  imageType?: $Enums.ImageType
+  sortOrder?: number
+  origin?: $Enums.ImageOrigin
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  altTextStatus?: $Enums.ImageAltTextStatus
+  altTextSource?: $Enums.AltTextSource | null
+  altTextStartedAt?: Date | string | null
+  listing: Prisma.ListingCreateNestedOneWithoutImagesInput
+}
+
+export type ImageUncheckedCreateWithoutAltTextGenerationsInput = {
+  id?: string
+  url: string
+  storageKey?: string | null
+  originalFilename?: string | null
+  mimeType?: string | null
+  width?: number | null
+  height?: number | null
+  altText?: string | null
+  roomType?: string | null
+  imageType?: $Enums.ImageType
+  sortOrder?: number
+  origin?: $Enums.ImageOrigin
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  altTextStatus?: $Enums.ImageAltTextStatus
+  altTextSource?: $Enums.AltTextSource | null
+  altTextStartedAt?: Date | string | null
+  listingId: string
+}
+
+export type ImageCreateOrConnectWithoutAltTextGenerationsInput = {
+  where: Prisma.ImageWhereUniqueInput
+  create: Prisma.XOR<Prisma.ImageCreateWithoutAltTextGenerationsInput, Prisma.ImageUncheckedCreateWithoutAltTextGenerationsInput>
+}
+
+export type ImageUpsertWithoutAltTextGenerationsInput = {
+  update: Prisma.XOR<Prisma.ImageUpdateWithoutAltTextGenerationsInput, Prisma.ImageUncheckedUpdateWithoutAltTextGenerationsInput>
+  create: Prisma.XOR<Prisma.ImageCreateWithoutAltTextGenerationsInput, Prisma.ImageUncheckedCreateWithoutAltTextGenerationsInput>
+  where?: Prisma.ImageWhereInput
+}
+
+export type ImageUpdateToOneWithWhereWithoutAltTextGenerationsInput = {
+  where?: Prisma.ImageWhereInput
+  data: Prisma.XOR<Prisma.ImageUpdateWithoutAltTextGenerationsInput, Prisma.ImageUncheckedUpdateWithoutAltTextGenerationsInput>
+}
+
+export type ImageUpdateWithoutAltTextGenerationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roomType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageType?: Prisma.EnumImageTypeFieldUpdateOperationsInput | $Enums.ImageType
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  altTextStatus?: Prisma.EnumImageAltTextStatusFieldUpdateOperationsInput | $Enums.ImageAltTextStatus
+  altTextSource?: Prisma.NullableEnumAltTextSourceFieldUpdateOperationsInput | $Enums.AltTextSource | null
+  altTextStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listing?: Prisma.ListingUpdateOneRequiredWithoutImagesNestedInput
+}
+
+export type ImageUncheckedUpdateWithoutAltTextGenerationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roomType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageType?: Prisma.EnumImageTypeFieldUpdateOperationsInput | $Enums.ImageType
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  altTextStatus?: Prisma.EnumImageAltTextStatusFieldUpdateOperationsInput | $Enums.ImageAltTextStatus
+  altTextSource?: Prisma.NullableEnumAltTextSourceFieldUpdateOperationsInput | $Enums.AltTextSource | null
+  altTextStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  listingId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ImageCreateManyListingInput = {
@@ -739,6 +954,9 @@ export type ImageCreateManyListingInput = {
   origin?: $Enums.ImageOrigin
   createdAt?: Date | string
   updatedAt?: Date | string
+  altTextStatus?: $Enums.ImageAltTextStatus
+  altTextSource?: $Enums.AltTextSource | null
+  altTextStartedAt?: Date | string | null
 }
 
 export type ImageUpdateWithoutListingInput = {
@@ -756,6 +974,10 @@ export type ImageUpdateWithoutListingInput = {
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  altTextStatus?: Prisma.EnumImageAltTextStatusFieldUpdateOperationsInput | $Enums.ImageAltTextStatus
+  altTextSource?: Prisma.NullableEnumAltTextSourceFieldUpdateOperationsInput | $Enums.AltTextSource | null
+  altTextStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  altTextGenerations?: Prisma.AltTextGenerationUpdateManyWithoutImageNestedInput
 }
 
 export type ImageUncheckedUpdateWithoutListingInput = {
@@ -773,6 +995,10 @@ export type ImageUncheckedUpdateWithoutListingInput = {
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  altTextStatus?: Prisma.EnumImageAltTextStatusFieldUpdateOperationsInput | $Enums.ImageAltTextStatus
+  altTextSource?: Prisma.NullableEnumAltTextSourceFieldUpdateOperationsInput | $Enums.AltTextSource | null
+  altTextStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  altTextGenerations?: Prisma.AltTextGenerationUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type ImageUncheckedUpdateManyWithoutListingInput = {
@@ -790,8 +1016,40 @@ export type ImageUncheckedUpdateManyWithoutListingInput = {
   origin?: Prisma.EnumImageOriginFieldUpdateOperationsInput | $Enums.ImageOrigin
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  altTextStatus?: Prisma.EnumImageAltTextStatusFieldUpdateOperationsInput | $Enums.ImageAltTextStatus
+  altTextSource?: Prisma.NullableEnumAltTextSourceFieldUpdateOperationsInput | $Enums.AltTextSource | null
+  altTextStartedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+
+/**
+ * Count Type ImageCountOutputType
+ */
+
+export type ImageCountOutputType = {
+  altTextGenerations: number
+}
+
+export type ImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  altTextGenerations?: boolean | ImageCountOutputTypeCountAltTextGenerationsArgs
+}
+
+/**
+ * ImageCountOutputType without action
+ */
+export type ImageCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ImageCountOutputType
+   */
+  select?: Prisma.ImageCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ImageCountOutputType without action
+ */
+export type ImageCountOutputTypeCountAltTextGenerationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AltTextGenerationWhereInput
+}
 
 
 export type ImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -809,8 +1067,13 @@ export type ImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   origin?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  altTextStatus?: boolean
+  altTextSource?: boolean
+  altTextStartedAt?: boolean
   listingId?: boolean
+  altTextGenerations?: boolean | Prisma.Image$altTextGenerationsArgs<ExtArgs>
   listing?: boolean | Prisma.ListingDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.ImageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["image"]>
 
 export type ImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -828,6 +1091,9 @@ export type ImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   origin?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  altTextStatus?: boolean
+  altTextSource?: boolean
+  altTextStartedAt?: boolean
   listingId?: boolean
   listing?: boolean | Prisma.ListingDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["image"]>
@@ -847,6 +1113,9 @@ export type ImageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   origin?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  altTextStatus?: boolean
+  altTextSource?: boolean
+  altTextStartedAt?: boolean
   listingId?: boolean
   listing?: boolean | Prisma.ListingDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["image"]>
@@ -866,12 +1135,17 @@ export type ImageSelectScalar = {
   origin?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  altTextStatus?: boolean
+  altTextSource?: boolean
+  altTextStartedAt?: boolean
   listingId?: boolean
 }
 
-export type ImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "url" | "storageKey" | "originalFilename" | "mimeType" | "width" | "height" | "altText" | "roomType" | "imageType" | "sortOrder" | "origin" | "createdAt" | "updatedAt" | "listingId", ExtArgs["result"]["image"]>
+export type ImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "url" | "storageKey" | "originalFilename" | "mimeType" | "width" | "height" | "altText" | "roomType" | "imageType" | "sortOrder" | "origin" | "createdAt" | "updatedAt" | "altTextStatus" | "altTextSource" | "altTextStartedAt" | "listingId", ExtArgs["result"]["image"]>
 export type ImageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  altTextGenerations?: boolean | Prisma.Image$altTextGenerationsArgs<ExtArgs>
   listing?: boolean | Prisma.ListingDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.ImageCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ImageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   listing?: boolean | Prisma.ListingDefaultArgs<ExtArgs>
@@ -883,6 +1157,7 @@ export type ImageIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $ImagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Image"
   objects: {
+    altTextGenerations: Prisma.$AltTextGenerationPayload<ExtArgs>[]
     listing: Prisma.$ListingPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -900,6 +1175,9 @@ export type $ImagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     origin: $Enums.ImageOrigin
     createdAt: Date
     updatedAt: Date
+    altTextStatus: $Enums.ImageAltTextStatus
+    altTextSource: $Enums.AltTextSource | null
+    altTextStartedAt: Date | null
     listingId: string
   }, ExtArgs["result"]["image"]>
   composites: {}
@@ -1295,6 +1573,7 @@ readonly fields: ImageFieldRefs;
  */
 export interface Prisma__ImageClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  altTextGenerations<T extends Prisma.Image$altTextGenerationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Image$altTextGenerationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AltTextGenerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   listing<T extends Prisma.ListingDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ListingDefaultArgs<ExtArgs>>): Prisma.Prisma__ListingClient<runtime.Types.Result.GetResult<Prisma.$ListingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1339,6 +1618,9 @@ export interface ImageFieldRefs {
   readonly origin: Prisma.FieldRef<"Image", 'ImageOrigin'>
   readonly createdAt: Prisma.FieldRef<"Image", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Image", 'DateTime'>
+  readonly altTextStatus: Prisma.FieldRef<"Image", 'ImageAltTextStatus'>
+  readonly altTextSource: Prisma.FieldRef<"Image", 'AltTextSource'>
+  readonly altTextStartedAt: Prisma.FieldRef<"Image", 'DateTime'>
   readonly listingId: Prisma.FieldRef<"Image", 'String'>
 }
     
@@ -1738,6 +2020,30 @@ export type ImageDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Images to delete.
    */
   limit?: number
+}
+
+/**
+ * Image.altTextGenerations
+ */
+export type Image$altTextGenerationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AltTextGeneration
+   */
+  select?: Prisma.AltTextGenerationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AltTextGeneration
+   */
+  omit?: Prisma.AltTextGenerationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AltTextGenerationInclude<ExtArgs> | null
+  where?: Prisma.AltTextGenerationWhereInput
+  orderBy?: Prisma.AltTextGenerationOrderByWithRelationInput | Prisma.AltTextGenerationOrderByWithRelationInput[]
+  cursor?: Prisma.AltTextGenerationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AltTextGenerationScalarFieldEnum | Prisma.AltTextGenerationScalarFieldEnum[]
 }
 
 /**

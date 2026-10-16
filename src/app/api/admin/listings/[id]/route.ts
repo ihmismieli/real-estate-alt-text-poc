@@ -17,6 +17,23 @@ export async function GET(
 
     try {
         const { id } = await params;
+
+        const generationCutOff = new Date(Date.now() - 3 * 60 * 1000); // 3 minutes ago
+
+        await prisma.image.updateMany({
+            where: {
+                listingId: id,
+                altTextStatus: 'PROCESSING',
+                altTextStartedAt: {
+                    lt: generationCutOff,
+                },
+            },
+            data: {
+                altTextStatus: 'IDLE',
+                altTextStartedAt: null,
+            },
+        });
+
         const listing = await prisma.listing.findUnique({
             where: {
                 id,
@@ -26,9 +43,24 @@ export async function GET(
                     orderBy: {
                         createdAt: 'asc',
                     },
+                    include: {
+                        altTextGenerations: {
+                            where: {
+                                status: 'SUCCEEDED',
+                            },
+                            orderBy: {
+                                createdAt: 'desc',
+                            },
+                            take: 1,
+                            select: {
+                                model: true,
+                            },
+                        },
+                    },
                 },
             },
         });
+
         if (!listing) {
             return NextResponse.json({ error: "Kohdetta ei löytynyt" }, { status: 404 });
         }
