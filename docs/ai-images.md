@@ -32,5 +32,5 @@ Before publishing, make sure that:
 
 - every AI image has an AI badge;
 - the badge is visible in the bottom-right corner in all views;
-- the badge remains visible across different image aspect ratios and screen sizes; and
+- the badge remains visible across different image aspect ratios and screen sizes
 - regular images that have not been processed with AI do not receive the label.
