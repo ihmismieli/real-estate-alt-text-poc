@@ -6,6 +6,10 @@ import type {
     GenerateAltTextResult,
 } from '@/app/types/alt-text-types';
 import { getAltTextInstructions } from '@/lib/alt-text/prompts';
+import {
+    DEFAULT_ALT_TEXT_MODEL,
+    isAltTextModel,
+} from '@/lib/alt-text/models';
 
 function altTextFailureResult(code: AltTextErrorCode, message: string): GenerateAltTextResult {
     return {
@@ -18,16 +22,25 @@ function altTextFailureResult(code: AltTextErrorCode, message: string): Generate
 }
 
 export async function generateImageAltText({
-    imageUrl, imageType,
+    imageUrl,
+    imageType,
+    model: selectedModel,
 }: GenerateAltTextInput): Promise<GenerateAltTextResult> {
     const apiKey = process.env.OPENAI_API_KEY;
-    const model = process.env.OPENAI_MODEL;
+    const model = selectedModel ?? process.env.OPENAI_MODEL ?? DEFAULT_ALT_TEXT_MODEL;
 
-    if (!apiKey || !model) {
+    if (!apiKey) {
         return altTextFailureResult(
             'CONFIGURATION_ERROR',
-            'OpenAI API avainta tai mallia ei ole määritetty.'
+            'OpenAI API key is not set.'
         );
+    }
+
+    if (!isAltTextModel(model)) {
+        return altTextFailureResult(
+            'CONFIGURATION_ERROR',
+            'AI model is not allowed.'
+        )
     }
 
     try {
@@ -36,13 +49,13 @@ export async function generateImageAltText({
         if (url.protocol !== 'https:') {
             return altTextFailureResult(
                 'INVALID_IMAGE_URL',
-                'Kuvan URL-osoite täytyy käyttää HTTPS-protokollaa'
+                'The image URL must use HTTPS.'
             );
         }
     } catch {
         return altTextFailureResult(
             'INVALID_IMAGE_URL',
-            'Kuvan URL-osoite ei ole kelvollinen'
+            'The image URL is invalid.'
         );
     }
 
@@ -102,7 +115,7 @@ export async function generateImageAltText({
         if (response.status !== 'completed' || refused || !altText) {
             return altTextFailureResult(
                 'GENERATION_FAILED',
-                'OpenAI:n vastaus ei sisältänyt tekstivastinetta'
+                'OpenAI did not return a completed response containing alt text.'
             );
         }
 
@@ -111,14 +124,14 @@ export async function generateImageAltText({
         if (!usage) {
             return altTextFailureResult(
                 'GENERATION_FAILED',
-                'OpenAI ei palauttanut tokenien käyttötietoja.'
+                'OpenAI did not return token usage information.'
             );
         }
 
         return {
             success: true,
             altText,
-            model,
+            model: response.model,
             usage: {
                 inputTokens: usage.input_tokens,
                 outputTokens: usage.output_tokens,
@@ -140,7 +153,7 @@ export async function generateImageAltText({
 
         return altTextFailureResult(
             'GENERATION_FAILED',
-            'Tekstivastineen luonti epäonnistui. Yritä uudelleen.'
+            'Alt-text generation failed.'
         );
     }
 }

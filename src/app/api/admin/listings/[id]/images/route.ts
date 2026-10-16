@@ -8,6 +8,10 @@ import { checkSameOrigin } from '@/lib/security';
 import type { ImageOrigin, ImageType } from '@/app/types/listing-types';
 import { invalidateListingSafely } from '@/lib/listing-cache';
 import { generateAndSaveImageAltText } from '@/lib/alt-text/generate-and-save-image-alt-text';
+import {
+    DEFAULT_ALT_TEXT_MODEL,
+    isAltTextModel,
+} from '@/lib/alt-text/models';
 
 const MAX_FILE_SIZE_BYTES = 4 * 1024 * 1024;
 const MAX_INPUT_PIXELS = 40_000_000;
@@ -118,6 +122,27 @@ export async function POST(
 
 
         const formData = await request.formData();
+
+        const selectedModel = formData.get('altTextModel');
+
+        if (selectedModel !== null && !isAltTextModel(selectedModel)) {
+            return NextResponse.json(
+                { error: 'Virheellinen AI-malli' },
+                { status: 400 }
+            );
+        }
+
+        const model = selectedModel ?? process.env.OPENAI_MODEL ?? DEFAULT_ALT_TEXT_MODEL;
+
+        if (!isAltTextModel(model)) {
+            console.error('Invalid OPENAI_MODEL configuration');
+
+            return NextResponse.json(
+                { error: 'Oletusmalli on väärin määritelty.' },
+                { status: 500 }
+            );
+        }
+
 
         const altTextValue = formData.get('altText');
 
@@ -261,7 +286,8 @@ export async function POST(
             after(async () => {
                 await generateAndSaveImageAltText(
                     image,
-                    listing.publicId
+                    listing.publicId,
+                    model
                 );
             });
         }

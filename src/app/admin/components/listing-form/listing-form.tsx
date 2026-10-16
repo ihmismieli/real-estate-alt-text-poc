@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Group } from '@mantine/core';
+import { Button, Group, Select } from '@mantine/core';
 import { useForm, schemaResolver } from '@mantine/form';
 import { useState } from 'react';
 import type { NewListingImage } from '@/app/types/listing-types';
@@ -10,9 +10,16 @@ import {
 } from '@/app/schemas/listing-schema';
 import ListingDetailsFields from '@/app/admin/components/listing-form/listing-details-fields';
 import ListingImageUploader from '@/app/admin/components/listing-form/listing-image-uploader';
+import {
+  ALT_TEXT_MODEL_OPTIONS,
+  DEFAULT_ALT_TEXT_MODEL,
+  isAltTextModel,
+} from '@/lib/alt-text/models';
+import type { AiModel } from '@/app/types/alt-text-types';
 
 export type ListingFormData = ListingFormType & {
   images?: NewListingImage[];
+  altTextModel?: AiModel;
 };
 
 export type SubmitResult =
@@ -62,6 +69,10 @@ export default function ListingForm({
 
   const [selectedImages, setSelectedImages] = useState<NewListingImage[]>(
     initialData.images ?? []
+  );
+
+  const [selectedAltTextModel, setSelectedAltTextModel] = useState<AiModel>(
+    initialData.altTextModel ?? DEFAULT_ALT_TEXT_MODEL
   );
 
   const [fileInputKey, setFileInputKey] = useState(0);
@@ -116,6 +127,7 @@ export default function ListingForm({
     const result = await onSubmit({
       ...values,
       images: selectedImages,
+      altTextModel: selectedAltTextModel,
     });
 
     if (!result.success) {
@@ -127,12 +139,14 @@ export default function ListingForm({
 
     if (resetAfterSubmit) {
       form.reset();
+      setSelectedAltTextModel(DEFAULT_ALT_TEXT_MODEL);
     }
     return result;
   };
 
   const handleFormCancel = () => {
     form.reset();
+    setSelectedAltTextModel(DEFAULT_ALT_TEXT_MODEL);
     setSelectedImages([]);
     setFileInputKey((current) => current + 1);
     onCancel();
@@ -144,6 +158,22 @@ export default function ListingForm({
       style={{ width: '100%', maxWidth: '800px', marginBottom: '30px' }}
     >
       <ListingDetailsFields form={form} disabled={isLoading} />
+
+      <Select
+        label="Tekstivastineiden generointimalli"
+        description="Valittua mallia käytetään uusille kuville, joiden tekstivastine puuttuu."
+        data={ALT_TEXT_MODEL_OPTIONS}
+        value={selectedAltTextModel}
+        onChange={(value) => {
+          if (isAltTextModel(value)) {
+            setSelectedAltTextModel(value);
+          }
+        }}
+        allowDeselect={false}
+        clearable={false}
+        disabled={isLoading}
+        mb="md"
+      />
 
       <ListingImageUploader
         images={selectedImages}

@@ -21,6 +21,7 @@ import {
   deleteListingImage,
   updateListingImageAltText,
 } from '@/app/admin/utils/listing-api';
+import ImageAltTextStatus from '@/app/admin/components/listing-images/image-alt-text-status';
 
 type ExistingImagesType = {
   listingId: string;
@@ -172,20 +173,7 @@ export default function ExistingImagesEditor({
 
               <Grid.Col span={{ base: 12, sm: 7, md: 8 }}>
                 <Stack gap="md">
-                  <Text size="sm" role="status">
-                    {image.altTextStatus === 'PROCESSING' &&
-                      'Tekstivastinetta luodaan… Voit myös kirjoittaa ja tallentaa oman tekstin, jolloin AI-generointi keskeytyy tallentamattomana.'}
-
-                    {image.altTextStatus === 'COMPLETED' &&
-                      'Tekstivastine luotu tekoälyllä. Tarkista sen sisältö.'}
-
-                    {image.altTextStatus === 'FAILED' &&
-                      'Automaattinen luonti ei valmistunut. Voit kirjoittaa tekstivastineen itse.'}
-
-                    {image.altTextStatus === 'IDLE' &&
-                      image.altTextSource === 'MANUAL' &&
-                      'Käyttäjän tallentama tekstivastine.'}
-                  </Text>
+                  <ImageAltTextStatus image={image} />
 
                   <Textarea
                     label="Tekstivastine (valinnainen)"

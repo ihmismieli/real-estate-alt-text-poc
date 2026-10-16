@@ -43,9 +43,24 @@ export async function GET(
                     orderBy: {
                         createdAt: 'asc',
                     },
+                    include: {
+                        altTextGenerations: {
+                            where: {
+                                status: 'SUCCEEDED',
+                            },
+                            orderBy: {
+                                createdAt: 'desc',
+                            },
+                            take: 1,
+                            select: {
+                                model: true,
+                            },
+                        },
+                    },
                 },
             },
         });
+
         if (!listing) {
             return NextResponse.json({ error: "Kohdetta ei löytynyt" }, { status: 404 });
         }

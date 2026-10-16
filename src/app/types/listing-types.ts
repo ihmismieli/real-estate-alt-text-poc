@@ -53,6 +53,9 @@ export type ListingImage = {
     altTextStatus: ImageAltTextStatus;
     altTextSource?: AltTextSource | null;
     altTextStartedAt?: string | Date | null;
+    altTextGenerations?: {
+        model: string | null;
+    }[];
 };
 
 export type Listing = {

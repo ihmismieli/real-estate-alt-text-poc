@@ -3,12 +3,15 @@ import { prisma } from '@/lib/prisma';
 import { invalidateListingSafely } from '@/lib/listing-cache';
 import { generateImageAltText } from './generate-image-alt-text';
 import type { ListingImage } from '@/app/types/listing-types';
+import { AiModel } from '@/app/types/alt-text-types';
+import { saveAltTextGenerationHistory } from './save-alt-text-generation-history';
 
 type ImageGenerationType = Pick<ListingImage, 'id' | 'url' | 'imageType'>;
 
 export async function generateAndSaveImageAltText(
     image: ImageGenerationType,
-    listingPublicId: number
+    listingPublicId: number,
+    model: AiModel
 ): Promise<void> {
 
     const processingAltText = {
@@ -39,11 +42,19 @@ export async function generateAndSaveImageAltText(
         const result = await generateImageAltText({
             imageUrl: image.url,
             imageType: image.imageType,
+            model,
         });
+
+        await saveAltTextGenerationHistory(
+            image.id,
+            model,
+            result
+        );
 
         if (!result.success) {
             console.error('Image alt-text generation failed', {
                 imageId: image.id,
+                model,
                 error: result.error,
             });
 

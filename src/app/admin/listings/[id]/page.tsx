@@ -36,7 +36,7 @@ export default function EditListingPage() {
       await updateListing(id, data);
 
       if (data.images && data.images.length > 0) {
-        await uploadListingImages(id, data.images);
+        await uploadListingImages(id, data.images, data.altTextModel);
       }
 
       notifications.show({
