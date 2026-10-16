@@ -5,8 +5,11 @@ import NavigationMenu from '@/app/components/navigation/nav-menu';
 import LoginModal from '@/app/components/navigation/login-modal';
 import { isCurrentUserAdmin } from '@/lib/dal';
 import { Suspense } from 'react';
+import NavigationFallback from './navigation-fallback';
+import { connection } from 'next/server';
 
 export default async function Navigation() {
+  await connection();
   const isAdmin = await isCurrentUserAdmin();
 
   const navItems = [{ href: '/', label: 'Kohteet' }];
@@ -17,7 +20,7 @@ export default async function Navigation() {
 
   return (
     <nav className={navigationStyles.nav} aria-label="Navigaatio">
-      <Suspense fallback={<div className={navigationStyles.inner} />}>
+      <Suspense fallback={<NavigationFallback />}>
         <NavigationMenu
           brand={
             <Link href="/" className={navigationStyles.brand}>

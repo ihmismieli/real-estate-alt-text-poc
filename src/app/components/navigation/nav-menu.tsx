@@ -7,7 +7,7 @@ import type { NavItemType } from '@/app/components/navigation/nav-links';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import NavLinks from '@/app/components/navigation/nav-links';
 
-type Props = {
+type NavigationMenu = {
   brand: React.ReactNode;
   navItems: NavItemType[];
   actions?: React.ReactNode;
@@ -21,7 +21,7 @@ export default function NavigationMenu({
   actions,
   showLoginButton,
   loginContent,
-}: Props) {
+}: NavigationMenu) {
   const [open, setOpen] = useState(false);
   const [loginOpenedByUser, setLoginOpenedByUser] = useState(false);
 
