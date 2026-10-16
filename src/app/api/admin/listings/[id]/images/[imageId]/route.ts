@@ -4,21 +4,24 @@ import { prisma } from '@/lib/prisma';
 import { deleteLocalImageByUrl } from '@/lib/local-image-storage';
 import { del } from '@vercel/blob';
 import { checkSameOrigin } from '@/lib/security';
-import { invalidateListing } from '@/lib/listing-cache';
+import { invalidateListing, invalidateListingSafely } from '@/lib/listing-cache';
 
 
-type Params = {
+type ImageParams = {
     params: Promise<{
         id: string;
         imageId: string;
     }>;
 };
 
-export async function PATCH(request: Request, { params }: Params) {
+export async function PATCH(request: Request, { params }: ImageParams) {
     const isAdmin = await isCurrentUserAdmin();
 
     if (!isAdmin) {
-        return NextResponse.json({ error: 'Ei oikeutta' }, { status: 401 });
+        return NextResponse.json(
+            { error: 'Ei oikeutta' },
+            { status: 401 }
+        );
     }
 
     const originError = checkSameOrigin(request);
@@ -60,16 +63,22 @@ export async function PATCH(request: Request, { params }: Params) {
             );
         }
 
+        const typedAltText = altText?.trim() || null;
+
         const updatedImage = await prisma.image.update({
             where: {
                 id: image.id,
             },
             data: {
-                altText: altText?.trim() ? altText.trim() : null,
+                altText: typedAltText,
+                altTextSource: typedAltText ? 'MANUAL' : null,
+                // Prevent automatic alt text generation replacing this edit.
+                altTextStatus: 'IDLE',
+                altTextStartedAt: null,
             },
         });
 
-        invalidateListing(image.listing.publicId);
+        invalidateListingSafely(image.listing.publicId);
 
         return NextResponse.json(updatedImage);
     } catch (error) {
@@ -81,7 +90,7 @@ export async function PATCH(request: Request, { params }: Params) {
     }
 }
 
-export async function DELETE(request: Request, { params }: Params) {
+export async function DELETE(request: Request, { params }: ImageParams) {
     const isAdmin = await isCurrentUserAdmin();
 
     if (!isAdmin) {

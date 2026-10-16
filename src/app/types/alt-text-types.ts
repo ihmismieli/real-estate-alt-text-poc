@@ -1,8 +1,14 @@
 import type { ImageType } from '@/app/types/listing-types';
 
+export type AiModel =
+    | 'gpt-6-luna'
+    | 'gpt-6-sol'
+    | 'gpt-6-astra';
+
 export type GenerateAltTextInput = {
     imageUrl: string;
     imageType: ImageType;
+    model?: AiModel;
 };
 export type AltTextErrorCode =
     | 'CONFIGURATION_ERROR'

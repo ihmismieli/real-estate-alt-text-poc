@@ -31,6 +31,18 @@ enum AltTextGenerationStatus {
   FAILED
 }
 
+enum AltTextSource {
+  MANUAL
+  AI_GENERATED
+}
+
+enum ImageAltTextStatus {
+  IDLE
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
 enum ListingStatus {
   DRAFT
   PUBLISHED
@@ -71,6 +83,10 @@ model Image {
   updatedAt        DateTime    @updatedAt
 
   altTextGenerations AltTextGeneration[]
+  
+  altTextStatus ImageAltTextStatus @default(IDLE)
+  altTextSource AltTextSource?
+  altTextStartedAt DateTime?
 
   listingId String
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)

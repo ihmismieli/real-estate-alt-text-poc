@@ -32,7 +32,11 @@ export default function AdminPage() {
       const listing = await createListing(formData);
 
       if (formData.images && formData.images.length > 0) {
-        await uploadListingImages(listing.id, formData.images);
+        await uploadListingImages(
+          listing.id,
+          formData.images,
+          formData.altTextModel
+        );
       }
 
       await mutate();

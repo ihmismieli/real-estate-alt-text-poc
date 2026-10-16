@@ -1,4 +1,5 @@
 import type { NewListingImage } from '@/app/types/listing-types';
+import type { AiModel } from '@/app/types/alt-text-types';
 
 export async function createListing(data: {
     address?: string;
@@ -37,7 +38,11 @@ export async function createListing(data: {
     return res.json();
 }
 
-export async function uploadListingImages(listingId: string, images: NewListingImage[]) {
+export async function uploadListingImages(
+    listingId: string,
+    images: NewListingImage[],
+    altTextModel?: AiModel
+) {
     const uploadedImages = [];
 
 
@@ -47,6 +52,10 @@ export async function uploadListingImages(listingId: string, images: NewListingI
         formData.append('origin', image.origin);
         formData.append('imageType', image.imageType);
         formData.append('altText', image.altText ?? '');
+
+        if (altTextModel !== undefined) {
+            formData.append('altTextModel', altTextModel);
+        }
 
 
         const res = await fetch(`/api/admin/listings/${listingId}/images`, {
