@@ -1,4 +1,4 @@
-import { Listing } from '@/app/types/listing';
+import { Listing } from '@/app/types/listing-types';
 
 export const listings: Listing[] = [
     {

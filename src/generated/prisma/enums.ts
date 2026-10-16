@@ -29,6 +29,14 @@ export const ImageType = {
 export type ImageType = (typeof ImageType)[keyof typeof ImageType]
 
 
+export const AltTextGenerationStatus = {
+  SUCCEEDED: 'SUCCEEDED',
+  FAILED: 'FAILED'
+} as const
+
+export type AltTextGenerationStatus = (typeof AltTextGenerationStatus)[keyof typeof AltTextGenerationStatus]
+
+
 export const ListingStatus = {
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED'

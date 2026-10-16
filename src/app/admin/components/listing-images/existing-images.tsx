@@ -16,7 +16,7 @@ import {
 } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { FiX } from 'react-icons/fi';
-import { ListingImage } from '@/app/types/listing';
+import { ListingImage } from '@/app/types/listing-types';
 import {
   deleteListingImage,
   updateListingImageAltText,

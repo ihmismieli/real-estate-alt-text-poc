@@ -3,7 +3,7 @@
 import { Button, Group } from '@mantine/core';
 import { useForm, schemaResolver } from '@mantine/form';
 import { useState } from 'react';
-import type { NewListingImage } from '@/app/types/listing';
+import type { NewListingImage } from '@/app/types/listing-types';
 import {
   listingFormSchema,
   type ListingFormType,

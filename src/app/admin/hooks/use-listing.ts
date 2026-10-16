@@ -2,7 +2,7 @@
 
 import useSWR from 'swr';
 import { fetcher } from '@/app/admin/utils/fetcher';
-import { Listing } from '@/app/types/listing';
+import { Listing } from '@/app/types/listing-types';
 
 export function useListing(id?: string) {
     const { data, error, isLoading, mutate } = useSWR<Listing>(

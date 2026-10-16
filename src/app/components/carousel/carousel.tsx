@@ -2,7 +2,7 @@
 
 import { Image, VisuallyHidden } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
-import type { ImageOrigin, ImageType } from '@/app/types/listing';
+import type { ImageOrigin, ImageType } from '@/app/types/listing-types';
 import AiImageBadge from '@/app/components/ai-image-badge/ai-image-badge';
 import styles from '@/app/components/carousel/carousel.module.css';
 import { sortListingImages } from '@/app/utils/image-utils';
