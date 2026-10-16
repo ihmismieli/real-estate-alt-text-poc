@@ -2,8 +2,6 @@ export const ROOM_IMAGE_PROMPT = `Kuvaile asunnon huone mahdollisimman selkeäst
 
 Tärkein tavoite on kuvata itse tilaa, sen rakennetta ja pintamateriaaleja, ei sitä miten tila on sisustettu.
 
-Aloita tekstivastine aina "Tekoälyn tuottama, saattaa sisältää virheitä.", jonka jälkeen voi aloittaa kuvauksen.
-
 Kerro tilasta maksimissaan neljällä virkkeellä.
 
 Kuvaile ensisijaisesti:

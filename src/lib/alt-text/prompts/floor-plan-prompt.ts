@@ -10,8 +10,6 @@ Tavoitteena on, että käyttäjä pystyy tekstin perusteella muodostamaan yksink
 
 Kuvaustapa:
 
-Aloita tekstivastine aina "Tekoälyn tuottama, saattaa sisältää virheitä.", jonka jälkeen voi aloittaa kuvauksen.
-
 Aloita aina ulko-ovelta ja kuvaa asunto ikään kuin henkilö astuisi sisään ja etenisi asunnossa.
 Käytä ulko-ovea ja siitä alkavaa eteistä, käytävää tai muuta pääasiallista kulkureittiä kuvauksen pysyvänä lähtökohtana.
 Etene tämän kulkureitin mukaisesti asunnon sisäänpäin ja kerro huoneet siinä järjestyksessä kuin ne tulevat vastaan.
