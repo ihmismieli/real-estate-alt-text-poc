@@ -3,17 +3,24 @@
 import useSWR from 'swr';
 import { fetcher } from '@/app/admin/utils/fetcher';
 import { Listing } from '@/app/types/listing-types';
+import { useState } from 'react';
 
 export function useListing(id?: string) {
+    const [hasProcessingImages, setHasProcessingImages] = useState(false);
+
     const { data, error, isLoading, mutate } = useSWR<Listing>(
         id ? `/api/admin/listings/${id}` : null,
         fetcher,
         {
-            refreshInterval: (listing) => {
-                const isGeneratingAltText = listing?.images?.some(
+            revalidateOnMount: true,
+            refreshInterval: id && hasProcessingImages ? 5000 : 0,
+
+            onSuccess: (listing) => {
+                const isGenerating = listing.images?.some(
                     (image) => image.altTextStatus === 'PROCESSING'
                 );
-                return isGeneratingAltText ? 5000 : 0; // Refresh every 5 seconds if alt text is being generated
+
+                setHasProcessingImages(isGenerating ?? false);
             },
         }
     );

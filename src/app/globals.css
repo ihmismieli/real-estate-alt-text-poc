@@ -2,11 +2,11 @@
 
 :root {
   --background: #ffffff;
-
   --background-secondary: #111827;
   --page-max-width: 1300px;
   --navigation-text-color: #111827;
   --link-underline-offset: 0.4em;
+  --loading-indicator-color: #c4a29e;
 }
 
 html {

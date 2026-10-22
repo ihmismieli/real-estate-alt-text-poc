@@ -1,4 +1,4 @@
-import { Text } from '@mantine/core';
+import { Text, Group, Loader } from '@mantine/core';
 import type { ListingImage } from '@/app/types/listing-types';
 import { ALT_TEXT_MODEL_OPTIONS } from '@/lib/alt-text/models';
 
@@ -56,8 +56,18 @@ export default function ImageAltTextStatus({ image }: ImageAltTextStatus) {
   }
 
   return (
-    <Text size="sm" role="status">
-      {message}
-    </Text>
+    <Group gap="xs" align="center" wrap="nowrap">
+      <Text size="sm" role="status">
+        {message}
+      </Text>
+
+      {image.altTextStatus === 'PROCESSING' && (
+        <Loader
+          size="xs"
+          aria-hidden="true"
+          color="var(--loading-indicator-color)"
+        />
+      )}
+    </Group>
   );
 }
