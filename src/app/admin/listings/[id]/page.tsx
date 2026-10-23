@@ -20,6 +20,7 @@ import AdminPageHeader from '@/app/admin/components/admin-page-header/admin-page
 import Link from 'next/link';
 import { Badge, Button, Group, Text } from '@mantine/core';
 import { useSWRConfig } from 'swr';
+import { refreshClientCache } from '@/app/admin/actions/refresh-client-cache';
 
 export default function EditListingPage() {
   const router = useRouter();
@@ -33,12 +34,15 @@ export default function EditListingPage() {
     setIsSubmitting(true);
 
     try {
-      await updateListing(id, data);
+      const updatedListing = await updateListing(id, data);
 
       if (data.images && data.images.length > 0) {
         await uploadListingImages(id, data.images, data.altTextModel);
       }
 
+      await refreshClientCache(updatedListing.publicId).catch((error) => {
+        console.error('Failed to refresh the client cache', error);
+      });
       notifications.show({
         message: 'Kohde päivitetty onnistuneesti',
         color: 'green',
@@ -87,6 +91,10 @@ export default function EditListingPage() {
           current ? { ...current, status: published.status } : current,
         { revalidate: false }
       );
+
+      await refreshClientCache(published.publicId).catch((error) => {
+        console.error('Failed to refresh the client cache', error);
+      });
 
       notifications.show({
         message: 'Kohde julkaistu onnistuneesti',
