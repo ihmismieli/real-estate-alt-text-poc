@@ -34,16 +34,15 @@ export default function EditListingPage() {
     setIsSubmitting(true);
 
     try {
-      await updateListing(id, data);
+      const updatedListing = await updateListing(id, data);
 
       if (data.images && data.images.length > 0) {
         await uploadListingImages(id, data.images, data.altTextModel);
       }
 
-      await refreshClientCache().catch((error) => {
+      await refreshClientCache(updatedListing.publicId).catch((error) => {
         console.error('Failed to refresh the client cache', error);
       });
-
       notifications.show({
         message: 'Kohde päivitetty onnistuneesti',
         color: 'green',
@@ -93,7 +92,7 @@ export default function EditListingPage() {
         { revalidate: false }
       );
 
-      await refreshClientCache().catch((error) => {
+      await refreshClientCache(published.publicId).catch((error) => {
         console.error('Failed to refresh the client cache', error);
       });
 
