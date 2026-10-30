@@ -12,6 +12,7 @@ Kuvaustapa:
 
 Aloita aina ulko-ovelta ja kuvaa asunto ikään kuin henkilö astuisi sisään ja etenisi asunnossa.
 Käytä ulko-ovea ja siitä alkavaa eteistä, käytävää tai muuta pääasiallista kulkureittiä kuvauksen pysyvänä lähtökohtana.
+Tunnista ensin sisääntulosuunta, määritä puolet sen perusteella ja tarkista ne ennen vastausta.
 Etene tämän kulkureitin mukaisesti asunnon sisäänpäin ja kerro huoneet siinä järjestyksessä kuin ne tulevat vastaan.
 
 Suosi yksinkertaisia ilmauksia, kuten:
@@ -73,19 +74,14 @@ Suosi esimerkiksi:
 
 Älä vaihda tarpeettomasti viitepistettä huoneesta toiseen.
 
-5. Älä toista itsestään selvää kulkuyhteyttä.
+5. Kerro huoneiden väliset kulkuyhteydet selvästi.
 
-Jos huoneen sijainnista käy jo selvästi ilmi, että siihen kuljetaan eteisestä tai käytävältä, tätä ei tarvitse sanoa erikseen.
+Kerro jokaisesta kuvatusta huoneesta, mistä tilasta siihen pääsee, kun yhteys näkyy pohjapiirroksessa. Yhdistä sijainti ja kulkuyhteys samaan lyhyeen virkkeeseen, esimerkiksi: ”Eteisestä on vasemmalle ovi makuuhuoneeseen.”
 
-Esimerkiksi:
+Kerro myös näkyvät suorat yhteydet huoneiden välillä, esimerkiksi: ”Keittiöstä on avoin kulkuaukko olohuoneeseen.”
 
-Suosi:
-"Heti vasemmalla on ensimmäinen makuuhuone."
-
-Vältä:
-"Heti vasemmalla on ensimmäinen makuuhuone, johon kuljetaan eteisestä."
-
-Kerro kulkuyhteys erikseen vain, jos se on poikkeava tai olennainen, esimerkiksi jos huoneeseen kuljetaan toisen huoneen kautta.
+Erota ovella suljettava yhteys ja avoin kulkuaukko vain, jos ero näkyy piirroksessa.
+Huoneiden vierekkäisyys ei tarkoita kulkuyhteyttä. Kerro kukin yhteys kerran.
 
 6. Älä kuvaa samaa sijaintia kahdesti.
 

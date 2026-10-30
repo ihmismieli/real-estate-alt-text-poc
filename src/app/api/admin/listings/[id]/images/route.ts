@@ -194,24 +194,18 @@ export async function POST(
         }
 
         if (
-            imageType === 'MAIN' ||
-            imageType === 'FLOOR_PLAN'
+            imageType === 'MAIN'
         ) {
-            const existingImage = await prisma.image.findFirst({
+            const existingMainImage = await prisma.image.findFirst({
                 where: {
                     listingId: listing.id,
                     imageType: imageType as ImageType,
                 },
             });
 
-            if (existingImage) {
+            if (existingMainImage) {
                 return NextResponse.json(
-                    {
-                        error:
-                            imageType === 'MAIN'
-                                ? 'Kohteella on jo pääkuva'
-                                : 'Kohteella on jo pohjakuva',
-                    },
+                    { error: 'Kohteella on jo pääkuva' },
                     { status: 409 }
                 );
             }
@@ -230,23 +224,26 @@ export async function POST(
             );
         }
 
-        const lastOtherImage = await prisma.image.findFirst({
-            where: {
-                listingId: listing.id,
-                imageType: 'OTHER',
-            },
-            orderBy: {
-                sortOrder: 'desc',
-            },
-            select: {
-                sortOrder: true,
-            },
-        });
+        const lastImageOfType =
+            imageType === 'MAIN'
+                ? null
+                : await prisma.image.findFirst({
+                    where: {
+                        listingId: listing.id,
+                        imageType: imageType as ImageType,
+                    },
+                    orderBy: {
+                        sortOrder: 'desc',
+                    },
+                    select: {
+                        sortOrder: true,
+                    },
+                });
 
         const sortOrder =
-            imageType === 'OTHER'
-                ? (lastOtherImage?.sortOrder ?? -1) + 1
-                : 0;
+            imageType === 'MAIN'
+                ? 0
+                : (lastImageOfType?.sortOrder ?? -1) + 1;
 
         const optimized = await optimizeImage(files[0]);
 
