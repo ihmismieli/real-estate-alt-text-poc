@@ -71,7 +71,7 @@ export async function generateImageAltText({
         const response = await client.responses.create({
             model,
             store: false,
-            max_output_tokens: 2000,
+            max_output_tokens: 8000,
             instructions: getAltTextInstructions(imageType),
             input: [
                 {
