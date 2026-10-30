@@ -2,7 +2,7 @@ export const ROOM_IMAGE_PROMPT = `Kuvaile asunnon huone mahdollisimman selkeäst
 
 Tärkein tavoite on kuvata itse tilaa, sen rakennetta ja pintamateriaaleja, ei sitä miten tila on sisustettu.
 
-Kerro tilasta maksimissaan neljällä virkkeellä.
+Kerro tilasta maksimissaan kuudella virkkeellä. Yksinkertaisesta tilasta voi riittää lyhyempi kuvaus.
 
 Kuvaile ensisijaisesti:
 
@@ -11,6 +11,7 @@ Kuvaile ensisijaisesti:
 - lattia-, seinä- ja kattomateriaalit
 - ikkunat ja ovet, jos ne näkyvät
 - rakennukseen kuuluvat kiinteät rakenteet
+- muut olennaiset kiinteät ominaisuudet, kuten patteri tai kiinteä valaistus.
 - kiinteät säilytys- ja pesutilaratkaisut yleisellä tasolla
 
 
@@ -110,7 +111,7 @@ Kuvaile vain konkreettisesti havaittavia rakenteita ja pintoja.
 
 Älä erikseen kerro, että jotakin ei näy. Jos tilassa ei näy ikkunaa, älä mainitse ikkunoita lainkaan.
 
-Älä aloita kuvausta yleisillä tai ympäripyöreillä tilamääritelmillä kuten avoin tila, suorakaiteen muotoinen tila, yhtenäinen tila, avara tila, oleskelutila tai saunaosasto, elleivät ne ole tilan hahmottamisen kannalta selvästi olennaisia.
+Aloita tunnistettavasta huonetyypistä ja tilan selvästi havaittavasta muodosta tai tilavaikutelmasta. Kerro esimerkiksi, että huone on pitkänomainen, kapea tai avara, jos havainto perustuu näkyviin rakenteisiin ja mittasuhteisiin. Jos muoto tai tilavaikutelma jää epäselväksi, jätä se mainitsematta. Kuvaa tämän jälkeen tärkeimmät rakenteet ja pinnat.
 
 Siirry mahdollisimman nopeasti kuvaamaan pintoja, rakenteita ja kiinteitä ominaisuuksia.
 
@@ -150,16 +151,18 @@ väärin:
 "lasiseinä, jonka takana näkyy kylpyhuonetila"
 
 oikein:
-"oikealla on lattiasta kattoon ulottuva tumma lasipintainen rakenne tai kaapisto"
+"Oikealla on lattiasta kattoon ulottuva tumma lasipinta."
 
 Älä tulkitse heijastuksia uusiksi tiloiksi tai rakenteiksi.
 Älä lisää oletuksia tai toiminnallisia yhteenvetoja, kuten “tila muodostaa yhtenäisen märkätilan” tai “peseytymis-, wc-, sauna- ja pyykinhuoltotoiminnot sijaitsevat samassa huonekokonaisuudessa”.
 
 Älä arvioi tilan tyyliä, laatua, tunnelmaa tai käytännöllisyyttä.
 Vältä esimerkiksi ilmauksia kuten moderni, tyylikäs, viihtyisä, hotellimainen, ylellinen, selkeälinjainen, käytännöllinen, kompakti ja viimeistelty.
-Älä käytä tilaa arvioivia tai mahdollisesti negatiivisesti tulkittavia kokomääritelmiä kuten kapea, ahdas, pieni, matala tai sokkeloinen.
+
+Käytä tilan mittasuhteista neutraaleja ja konkreettisia ilmauksia. Suosi esimerkiksi ilmausta ”pitkä ja kapea huone” yleisen arvion ”ahdas huone” sijaan. Älä päättele tarkkaa kokoa, huonekorkeutta tai esteettömyyttä valokuvasta. Älä tulkitse kuvausobjektiivin vääristymää tai vähäistä kalustusta todisteeksi tilan avaruudesta.
 
 Tieto pintamateriaaleista on tärkeämpää kuin yksittäiset esineet.
+Nimeä materiaali vain, jos sen voi tunnistaa riittävän varmasti. Muussa tapauksessa kuvaile näkyvä väri ja kuviointi, esimerkiksi ”vaalea puukuvioinen lattia”. Älä päättele puukuviosta, että lattia on parkettia.
 Kuvaile pintamateriaalien selvästi havaittavat ominaisuudet.
 Älä korvaa tarkempaa näkyvää pintakuvausta liian yleisellä ilmauksella kuten "vaalea pinta", jos väri tai kuviointi on selvästi havaittavissa.
 
@@ -174,7 +177,6 @@ Kuvaile esimerkiksi:
 - miten suuret pinnat ja materiaalit sijoittuvat
 
 Tavoitteena ei ole mahdollisimman lyhyt teksti, vaan hyödyllinen tilakuvaus.
-
 
 Vältä liian tarkkaa objektikohtaista kuvausta, joka ei auta hahmottamaan tilaa tai asunnon rakennetta.
 

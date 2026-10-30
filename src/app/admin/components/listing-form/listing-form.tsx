@@ -96,23 +96,8 @@ export default function ListingForm({
       (image) => image.imageType === 'MAIN'
     );
 
-    const floorPlanImage = selectedImages.filter(
-      (image) => image.imageType === 'FLOOR_PLAN'
-    );
-
     if (mainImage.length > 1) {
       const message = 'Kohteella voi olla vain yksi pääkuva';
-
-      form.setFieldError('images', message);
-
-      return {
-        success: false,
-        message,
-      };
-    }
-
-    if (floorPlanImage.length > 1) {
-      const message = 'Kohteella voi olla vain yksi pohjakuva';
 
       form.setFieldError('images', message);
 
