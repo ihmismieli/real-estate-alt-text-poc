@@ -62,7 +62,7 @@ export async function generateImageAltText({
     try {
         const client = new OpenAI({
             apiKey,
-            timeout: 60_000,
+            timeout: 150_000,
             maxRetries: 0,
 
 
@@ -71,7 +71,7 @@ export async function generateImageAltText({
         const response = await client.responses.create({
             model,
             store: false,
-            max_output_tokens: 8000,
+            max_output_tokens: 15000,
             instructions: getAltTextInstructions(imageType),
             input: [
                 {
