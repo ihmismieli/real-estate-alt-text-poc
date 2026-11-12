@@ -62,7 +62,7 @@ export async function generateImageAltText({
     try {
         const client = new OpenAI({
             apiKey,
-            timeout: 60_000,
+            timeout: 150_000,
             maxRetries: 0,
 
 
